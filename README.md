@@ -10,7 +10,7 @@ The further I went, the more I noticed how much lives outside the editor that I'
 touched: servers, users, permissions, services, networks, deploys. If I want to last in
 this field, that gap has to close.
 
-So I'm climbing. 100 days, one task at a time. **Stand up.**
+So I'm climbing. 100 days, one task at a time. **Stand up! 🙌**
 
 ---
 
