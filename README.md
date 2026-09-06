@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **4 / 100**
+`██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **5 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -29,17 +29,18 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 02 | Temporary user with expiry | [notes](./01-linux/day-02-temporary-user-expiry.md) |
 | 03 | Disable root SSH login | [notes](./01-linux/day-03-secure-root-ssh-access.md) |
 | 04 | Script execution permissions | [notes](./01-linux/day-04-script-execution-permissions.md) |
+| 05 | Install SELinux, disable permanently | [notes](./01-linux/day-05-selinux-installation-and-configuration.md) |
 
 ## Roadmap
 
 <details>
-<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (4/20)</summary>
+<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (5/20)</summary>
 
 - [x] **Day 01** [Linux User Setup with Non-Interactive Shell](./01-linux/day-01-user-non-interactive-shell.md) `2026-09-02`
 - [x] **Day 02** [Temporary User Setup with Expiry](./01-linux/day-02-temporary-user-expiry.md) `2026-09-03`
 - [x] **Day 03** [Secure Root SSH Access](./01-linux/day-03-secure-root-ssh-access.md) `2026-09-04`
 - [x] **Day 04** [Script Execution Permissions](./01-linux/day-04-script-execution-permissions.md) `2026-09-05`
-- [ ] **Day 05** SELinux Installation and Configuration
+- [x] **Day 05** [SELinux Installation and Configuration](./01-linux/day-05-selinux-installation-and-configuration.md) `2026-09-06`
 - [ ] **Day 06** Create a Cron Job
 - [ ] **Day 07** Linux SSH Authentication
 - [ ] **Day 08** Install Ansible
