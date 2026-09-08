@@ -10,10 +10,10 @@ Your task is to disable direct SSH root login on all app servers within the
 
 ## Solution
 
-Repeat on `stapp01`, `stapp02`, `stapp03`:
+Repeat on `stapp01`, `stapp02`, `stapp03`. Each has its own sudo user: `tony`, `steve`, `banner`.
 
 ```bash
-ssh banner@stapp01
+ssh tony@stapp01
 sudo -i
 
 vi /etc/ssh/sshd_config
