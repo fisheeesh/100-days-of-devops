@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **6 / 100**
+`███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **7 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -31,11 +31,12 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 04 | Script execution permissions | [notes](./01-linux/day-04-script-execution-permissions.md) |
 | 05 | Install SELinux, disable permanently | [notes](./01-linux/day-05-selinux-installation-and-configuration.md) |
 | 06 | Create a cron job | [notes](./01-linux/day-06-create-a-cron-job.md) |
+| 07 | Password-less SSH with key pairs | [notes](./01-linux/day-07-linux-ssh-authentication.md) |
 
 ## Roadmap
 
 <details>
-<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (6/20)</summary>
+<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (7/20)</summary>
 
 - [x] **Day 01** [Linux User Setup with Non-Interactive Shell](./01-linux/day-01-user-non-interactive-shell.md) `2026-09-02`
 - [x] **Day 02** [Temporary User Setup with Expiry](./01-linux/day-02-temporary-user-expiry.md) `2026-09-03`
@@ -43,7 +44,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 04** [Script Execution Permissions](./01-linux/day-04-script-execution-permissions.md) `2026-09-05`
 - [x] **Day 05** [SELinux Installation and Configuration](./01-linux/day-05-selinux-installation-and-configuration.md) `2026-09-06`
 - [x] **Day 06** [Create a Cron Job](./01-linux/day-06-create-a-cron-job.md) `2026-09-07`
-- [ ] **Day 07** Linux SSH Authentication
+- [x] **Day 07** [Linux SSH Authentication](./01-linux/day-07-linux-ssh-authentication.md) `2026-09-08`
 - [ ] **Day 08** Install Ansible
 - [ ] **Day 09** MariaDB Troubleshooting
 - [ ] **Day 10** Linux Bash Scripts
