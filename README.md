@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **9 / 100**
+`████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **10 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -34,11 +34,12 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 07 | Password-less SSH with key pairs | [notes](./01-linux/day-07-linux-ssh-authentication.md) |
 | 08 | Install Ansible with pip3 | [notes](./01-linux/day-08-install-ansible.md) |
 | 09 | MariaDB will not start | [notes](./01-linux/day-09-mariadb-troubleshooting.md) |
+| 10 | Bash script to zip and scp an archive | [notes](./01-linux/day-10-linux-bash-scripts.md) |
 
 ## Roadmap
 
 <details>
-<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (9/20)</summary>
+<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (10/20)</summary>
 
 - [x] **Day 01** [Linux User Setup with Non-Interactive Shell](./01-linux/day-01-user-non-interactive-shell.md) `2026-09-02`
 - [x] **Day 02** [Temporary User Setup with Expiry](./01-linux/day-02-temporary-user-expiry.md) `2026-09-03`
@@ -49,7 +50,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 07** [Linux SSH Authentication](./01-linux/day-07-linux-ssh-authentication.md) `2026-09-08`
 - [x] **Day 08** [Install Ansible](./01-linux/day-08-install-ansible.md) `2026-09-09`
 - [x] **Day 09** [MariaDB Troubleshooting](./01-linux/day-09-mariadb-troubleshooting.md) `2026-09-10`
-- [ ] **Day 10** Linux Bash Scripts
+- [x] **Day 10** [Linux Bash Scripts](./01-linux/day-10-linux-bash-scripts.md) `2026-09-11`
 - [ ] **Day 11** Install and Configure Tomcat Server
 - [ ] **Day 12** Linux Network Services
 - [ ] **Day 13** IPtables Installation and Configuration
