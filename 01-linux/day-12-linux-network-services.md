@@ -93,7 +93,7 @@ telnet stapp01 6100
 | `telnet stapp01 6100` | Tests the raw TCP connection with no HTTP involved. If telnet fails, the problem sits below Apache: the service, the port, or the firewall. |
 | `systemctl status httpd` | `failed` is not the same as `inactive`. Something tried to start it and it crashed, so find out why before just starting it again. |
 | `netstat -tulnp` | Lists every listening socket and which process owns it. `-t` TCP, `-u` UDP, `-l` listening only, `-n` numeric (no DNS or service-name lookups), `-p` owning PID and program. `-p` needs sudo to see other users' processes. |
-| `stop` + `disable sendmail` | Two processes cannot listen on the same port. `disable` matters too: otherwise sendmail grabs 6100 again at the next boot, before httpd, and you are back where you started. |
+| `stop` + `disable sendmail` | Two processes cannot listen on the same port. `disable` matters too: otherwise sendmail starts again at the next boot and races httpd for 6100. Whichever binds first wins, so you could end up back where you started. |
 | `start` + `enable httpd` | It was `failed` and `disabled`. Starting fixes it now, enabling makes it survive a reboot. |
 | `iptables -L -n --line-numbers` | Rules are checked top to bottom and the first match wins. You need the numbers to insert in the right spot. |
 | `iptables -I INPUT 4` | `-I` inserts at a position. `-A` appends to the end, below the REJECT, where the rule never gets reached. `-A` also does not take a position, so `-A INPUT 4` is a syntax error. |
