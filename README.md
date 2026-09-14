@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **12 / 100**
+`█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **13 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -37,11 +37,12 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 10 | Bash script to zip and scp an archive | [notes](./01-linux/day-10-linux-bash-scripts.md) |
 | 11 | Install Tomcat, set port, deploy a war | [notes](./01-linux/day-11-install-and-configure-tomcat.md) |
 | 12 | Apache unreachable: port conflict and iptables | [notes](./01-linux/day-12-linux-network-services.md) |
+| 13 | iptables: block a port except for the LBR | [notes](./01-linux/day-13-iptables-installation-and-configuration.md) |
 
 ## Roadmap
 
 <details>
-<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (12/20)</summary>
+<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (13/20)</summary>
 
 - [x] **Day 01** [Linux User Setup with Non-Interactive Shell](./01-linux/day-01-user-non-interactive-shell.md) `2026-09-02`
 - [x] **Day 02** [Temporary User Setup with Expiry](./01-linux/day-02-temporary-user-expiry.md) `2026-09-03`
@@ -55,7 +56,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 10** [Linux Bash Scripts](./01-linux/day-10-linux-bash-scripts.md) `2026-09-11`
 - [x] **Day 11** [Install and Configure Tomcat Server](./01-linux/day-11-install-and-configure-tomcat.md) `2026-09-12`
 - [x] **Day 12** [Linux Network Services](./01-linux/day-12-linux-network-services.md) `2026-09-13`
-- [ ] **Day 13** IPtables Installation and Configuration
+- [x] **Day 13** [IPtables Installation and Configuration](./01-linux/day-13-iptables-installation-and-configuration.md) `2026-09-14`
 - [ ] **Day 14** Linux Process Troubleshooting
 - [ ] **Day 15** Setup SSL for Nginx
 - [ ] **Day 16** Install and Configure Nginx as an LBR

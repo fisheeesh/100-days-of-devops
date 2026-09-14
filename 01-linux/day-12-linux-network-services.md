@@ -102,8 +102,8 @@ telnet stapp01 6100
 ## Notes
 
 - **"No route to host" was not a routing problem.** Rule 5 rejects with `icmp-host-prohibited`, and the client reports that ICMP reply as `No route to host`. The real cause was the firewall. For comparison, `Connection refused` usually means the host answered but nothing is listening, and a hang or timeout usually means a DROP rule.
-- **Rule 3 looks like "accept everything" but is not.** `-L -n` hides the interface column. `sudo iptables -L -n -v` shows it as `in: lo`, loopback only. That is why curl worked on stapp01 but failed from the jump host.
-- **`iptables -I` does not survive a reboot**, or even `systemctl restart iptables`. Save it with `sudo service iptables save`, which writes `/etc/sysconfig/iptables`.
+- **Rule 3 looks like "accept everything" but is not.** `-L -n` hides the interface columns. `sudo iptables -L -n -v` adds `in` and `out` columns, and rule 3 shows `lo` under `in`, so it matches loopback only. That is why curl worked on stapp01 but failed from the jump host.
+- **`iptables -I` does not survive a reboot**, or by default even `systemctl restart iptables`, which reloads the saved file. Save it with `sudo service iptables save`, which writes `/etc/sysconfig/iptables`.
 - httpd's own log names the port conflict directly: `sudo journalctl -u httpd` shows `(98)Address already in use: AH00072: make_sock: could not bind to address [::]:6100`. netstat then tells you who holds it.
 - sendmail only bound `127.0.0.1:6100`, while httpd wanted `[::]:6100` (every address, IPv4 included). They overlap, so the bind still fails.
 - `ss -tulnp` does the same job as netstat and is installed by default. netstat comes from `net-tools`, which is deprecated.
