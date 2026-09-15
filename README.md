@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **13 / 100**
+`█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **14 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -38,6 +38,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 11 | Install Tomcat, set port, deploy a war | [notes](./01-linux/day-11-install-and-configure-tomcat.md) |
 | 12 | Apache unreachable: port conflict and iptables | [notes](./01-linux/day-12-linux-network-services.md) |
 | 13 | iptables: block a port except for the LBR | [notes](./01-linux/day-13-iptables-installation-and-configuration.md) |
+| 14 | Linux Process Troubleshooting | [notes](./01-linux/day-14-linux-process-troubleshooting.md) |
 
 ## Roadmap
 
@@ -57,7 +58,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 11** [Install and Configure Tomcat Server](./01-linux/day-11-install-and-configure-tomcat.md) `2026-09-12`
 - [x] **Day 12** [Linux Network Services](./01-linux/day-12-linux-network-services.md) `2026-09-13`
 - [x] **Day 13** [IPtables Installation and Configuration](./01-linux/day-13-iptables-installation-and-configuration.md) `2026-09-14`
-- [ ] **Day 14** Linux Process Troubleshooting
+- [x] **Day 14** [Linux Process Troubleshooting](./01-linux/day-14-linux-process-troubleshooting.md) `2026-09-15`
 - [ ] **Day 15** Setup SSL for Nginx
 - [ ] **Day 16** Install and Configure Nginx as an LBR
 - [ ] **Day 17** Install and Configure PostgreSQL
