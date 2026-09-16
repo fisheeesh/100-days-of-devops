@@ -8,9 +8,7 @@ Identify the faulty app host and fix the issue. Make sure Apache service is up a
 
 ## Solution
 
-### 1. Identify the Faulty Host
-
-From the jump host, probe port `3003` across all three app servers:
+**1. Identify the faulty host.** From the jump host, probe port `3003` across all three app servers:
 
 ```bash
 curl -m 5 http://stapp01:3003
@@ -20,11 +18,18 @@ curl -m 5 http://stapp03:3003
 
 `stapp02` and `stapp03` respond properly. `stapp01` drops/refuses the connection.
 
----
+A successful `curl` only proves *something* answers on `3003`, not that it is httpd (Day 12 is exactly the case where sendmail held the Apache port). Confirm the other two properly:
 
-### 2. Troubleshoot and Fix `stapp01`
+```bash
+for h in stapp02 stapp03; do
+  ssh tony@$h 'sudo systemctl is-active httpd; sudo systemctl is-enabled httpd; sudo ss -tulnp | grep 3003'
+done
+# expect: active / enabled / httpd bound to :3003
+```
 
-Log in to the failing host:
+If httpd is `active` but `disabled` on either host, run `sudo systemctl enable httpd` there too so the fix survives a reboot on all three.
+
+**2. Troubleshoot and fix `stapp01`.** Log in to the failing host:
 
 ```bash
 ssh tony@stapp01
@@ -91,16 +96,17 @@ curl -I http://stapp01:3003
 | `curl -m 5` | External triage. Identifies the broken host instantly without manually logging into all three nodes. |
 | `journalctl -xeu httpd.service` | Displays targeted systemd unit logs. Surfaces `(98)Address already in use`, pinpointing a port binding collision. |
 | `ss -tulnp \| grep 3003` | Lists listening TCP/UDP sockets with process names and PIDs (`-p`). Discovers `sendmail` holding port `3003`. |
-| `systemctl disable sendmail` | Stopping the service releases the port immediately; disabling prevents it from reclaiming `3003` across reboots. |
+| `systemctl disable sendmail` | Stopping it frees the port now. Disabling stops it starting at the next boot and racing httpd for `3003`, where whichever binds first wins. |
 | `systemctl enable --now httpd` | Starts Apache immediately and registers it to boot targets in one command. |
 
 ## Notes
 
 - `Address already in use` (`EADDRINUSE`, errno 98) is a standard socket binding conflict. Always check listening sockets before assuming corrupted configurations or broken binaries.
+- Same failure as Day 12, different port: sendmail squatting on the port Apache wants. Worth recognising on sight.
 - `ss` flags breakdown:
   - `-t`: TCP sockets
   - `-u`: UDP sockets
   - `-l`: Listening sockets only
-  - `-n`: Numeric IP/ports (prevents slow DNS resolution)
-  - `-p`: Associated process and PID (requires root privileges)
+  - `-n`: Numeric ports (skips the service-name lookup in `/etc/services`; unlike `netstat`, `ss` does not reverse-resolve addresses unless you pass `-r`)
+  - `-p`: Associated process and PID (works unprivileged, but only shows your own processes; needs sudo to attribute sockets owned by other users)
 - If a rogue process is not managed by systemd, retrieve its PID using `sudo ss -tulnp` or `sudo lsof -i :3003` and terminate it directly with `sudo kill -15 <PID>` (or `sudo kill -9 <PID>` if unresponsive).
