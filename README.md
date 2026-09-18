@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **16 / 100**
+`███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **17 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -41,11 +41,12 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 14 | Apache port conflict with sendmail | [notes](./01-linux/day-14-linux-process-troubleshooting.md) |
 | 15 | Nginx with a self-signed TLS cert | [notes](./01-linux/day-15-setup-ssl-for-nginx.md) |
 | 16 | Nginx load balancer across all app servers | [notes](./01-linux/day-16-install-and-configure-nginx-as-an-lbr.md) |
+| 17 | PostgreSQL user, database and grant | [notes](./01-linux/day-17-install-and-configure-postgresql.md) |
 
 ## Roadmap
 
 <details>
-<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (16/20)</summary>
+<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (17/20)</summary>
 
 - [x] **Day 01** [Linux User Setup with Non-Interactive Shell](./01-linux/day-01-user-non-interactive-shell.md) `2026-09-02`
 - [x] **Day 02** [Temporary User Setup with Expiry](./01-linux/day-02-temporary-user-expiry.md) `2026-09-03`
@@ -63,7 +64,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 14** [Linux Process Troubleshooting](./01-linux/day-14-linux-process-troubleshooting.md) `2026-09-15`
 - [x] **Day 15** [Setup SSL for Nginx](./01-linux/day-15-setup-ssl-for-nginx.md) `2026-09-16`
 - [x] **Day 16** [Install and Configure Nginx as an LBR](./01-linux/day-16-install-and-configure-nginx-as-an-lbr.md) `2026-09-17`
-- [ ] **Day 17** Install and Configure PostgreSQL
+- [x] **Day 17** [Install and Configure PostgreSQL](./01-linux/day-17-install-and-configure-postgresql.md) `2026-09-18`
 - [ ] **Day 18** Install and Configure DB Server
 - [ ] **Day 19** Install and Configure Web Application
 - [ ] **Day 20** Configure Nginx + PHP-FPM Using Unix Sock
