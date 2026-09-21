@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **19 / 100**
+`████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **20 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -44,11 +44,12 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 17 | PostgreSQL user, database and grant | [notes](./01-linux/day-17-install-and-configure-postgresql.md) |
 | 18 | MariaDB server, database, user and grant | [notes](./01-linux/day-18-install-and-configure-db-server.md) |
 | 19 | Apache on a custom port serving two sites | [notes](./01-linux/day-19-install-and-configure-web-application.md) |
+| 20 | Nginx and PHP-FPM over a unix socket | [notes](./01-linux/day-20-configure-nginx-php-fpm-unix-socket.md) |
 
 ## Roadmap
 
 <details>
-<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (19/20)</summary>
+<summary><b>Linux</b> &nbsp; days 1 to 20 &nbsp; (20/20)</summary>
 
 - [x] **Day 01** [Linux User Setup with Non-Interactive Shell](./01-linux/day-01-user-non-interactive-shell.md) `2026-09-02`
 - [x] **Day 02** [Temporary User Setup with Expiry](./01-linux/day-02-temporary-user-expiry.md) `2026-09-03`
@@ -69,7 +70,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 17** [Install and Configure PostgreSQL](./01-linux/day-17-install-and-configure-postgresql.md) `2026-09-18`
 - [x] **Day 18** [Install and Configure DB Server](./01-linux/day-18-install-and-configure-db-server.md) `2026-09-20`
 - [x] **Day 19** [Install and Configure Web Application](./01-linux/day-19-install-and-configure-web-application.md) `2026-09-20`
-- [ ] **Day 20** Configure Nginx + PHP-FPM Using Unix Sock
+- [x] **Day 20** [Configure Nginx + PHP-FPM Using Unix Sock](./01-linux/day-20-configure-nginx-php-fpm-unix-socket.md) `2026-09-21`
 
 </details>
 
