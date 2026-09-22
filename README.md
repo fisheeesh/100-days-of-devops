@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **20 / 100**
+`████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **21 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -45,6 +45,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 18 | MariaDB server, database, user and grant | [notes](./01-linux/day-18-install-and-configure-db-server.md) |
 | 19 | Apache on a custom port serving two sites | [notes](./01-linux/day-19-install-and-configure-web-application.md) |
 | 20 | Nginx and PHP-FPM over a unix socket | [notes](./01-linux/day-20-configure-nginx-php-fpm-unix-socket.md) |
+| 21 | Set up a bare Git repository on the storage server | [notes](./02-git/day-21-set-up-git-repository-on-storage-server.md) |
 
 ## Roadmap
 
@@ -75,9 +76,9 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Git</b> &nbsp; days 21 to 34 &nbsp; (0/14)</summary>
+<summary><b>Git</b> &nbsp; days 21 to 34 &nbsp; (1/14)</summary>
 
-- [ ] **Day 21** Set Up Git Repository on Storage Server
+- [x] **Day 21** [Set Up Git Repository on Storage Server](./02-git/day-21-set-up-git-repository-on-storage-server.md) `2026-09-22`
 - [ ] **Day 22** Clone Git Repository on Storage Server
 - [ ] **Day 23** Fork a Git Repository
 - [ ] **Day 24** Git Create Branches
