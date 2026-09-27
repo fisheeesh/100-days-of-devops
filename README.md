@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **25 / 100**
+`██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **26 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -50,6 +50,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 23 | Fork a repo in Gitea | [notes](./02-git/day-23-fork-a-git-repository.md) |
 | 24 | Create a branch from master | [notes](./02-git/day-24-git-create-branches.md) |
 | 25 | Commit on a feature branch and merge it into master | [notes](./02-git/day-25-git-merge-branches.md) |
+| 26 | Add a Git remote and push master to it | [notes](./02-git/day-26-git-manage-remotes.md) |
 
 ## Roadmap
 
@@ -80,14 +81,14 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Git</b> &nbsp; days 21 to 34 &nbsp; (5/14)</summary>
+<summary><b>Git</b> &nbsp; days 21 to 34 &nbsp; (6/14)</summary>
 
 - [x] **Day 21** [Set Up Git Repository on Storage Server](./02-git/day-21-set-up-git-repository-on-storage-server.md) `2026-09-22`
 - [x] **Day 22** [Clone Git Repository on Storage Server](./02-git/day-22-clone-git-repository-on-storage-server.md) `2026-09-23`
 - [x] **Day 23** [Fork a Git Repository](./02-git/day-23-fork-a-git-repository.md) `2026-09-24`
 - [x] **Day 24** [Git Create Branches](./02-git/day-24-git-create-branches.md) `2026-09-25`
 - [x] **Day 25** [Git Merge Branches](./02-git/day-25-git-merge-branches.md) `2026-09-26`
-- [ ] **Day 26** Git Manage Remotes
+- [x] **Day 26** [Git Manage Remotes](./02-git/day-26-git-manage-remotes.md) `2026-09-27`
 - [ ] **Day 27** Git Revert Some Changes
 - [ ] **Day 28** Git Cherry Pick
 - [ ] **Day 29** Manage Git Pull Requests
