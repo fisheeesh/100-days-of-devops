@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **28 / 100**
+`████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **29 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -53,6 +53,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 26 | Add a Git remote and push master to it | [notes](./02-git/day-26-git-manage-remotes.md) |
 | 27 | Revert a commit with a set message | [notes](./02-git/day-27-git-revert-some-changes.md) |
 | 28 | Cherry-pick one commit onto master | [notes](./02-git/day-28-git-cherry-pick.md) |
+| 29 | Open, review and merge a PR in Gitea | [notes](./02-git/day-29-manage-git-pull-requests.md) |
 
 ## Roadmap
 
@@ -83,7 +84,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Git</b> &nbsp; days 21 to 34 &nbsp; (8/14)</summary>
+<summary><b>Git</b> &nbsp; days 21 to 34 &nbsp; (9/14)</summary>
 
 - [x] **Day 21** [Set Up Git Repository on Storage Server](./02-git/day-21-set-up-git-repository-on-storage-server.md) `2026-09-22`
 - [x] **Day 22** [Clone Git Repository on Storage Server](./02-git/day-22-clone-git-repository-on-storage-server.md) `2026-09-23`
@@ -93,7 +94,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 26** [Git Manage Remotes](./02-git/day-26-git-manage-remotes.md) `2026-09-27`
 - [x] **Day 27** [Git Revert Some Changes](./02-git/day-27-git-revert-some-changes.md) `2026-09-28`
 - [x] **Day 28** [Git Cherry Pick](./02-git/day-28-git-cherry-pick.md) `2026-09-29`
-- [ ] **Day 29** Manage Git Pull Requests
+- [x] **Day 29** [Manage Git Pull Requests](./02-git/day-29-manage-git-pull-requests.md) `2026-09-30`
 - [ ] **Day 30** Git Hard Reset
 - [ ] **Day 31** Git Stash
 - [ ] **Day 32** Git Rebase
