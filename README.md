@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░`  **33 / 100**
+`██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░`  **34 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -58,6 +58,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 31 | Restore a stash, commit and push | [notes](./02-git/day-31-git-stash.md) |
 | 32 | Rebase a feature branch onto master | [notes](./02-git/day-32-git-rebase.md) |
 | 33 | Resolve a rebase conflict and preserve both changes | [notes](./02-git/day-33-resolve-git-merge-conflicts.md) |
+| 34 | Create a post-update release-tag hook | [notes](./02-git/day-34-git-hook.md) |
 
 ## Roadmap
 
@@ -88,7 +89,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Git</b> &nbsp; days 21 to 34 &nbsp; (13/14)</summary>
+<summary><b>Git</b> &nbsp; days 21 to 34 &nbsp; (14/14)</summary>
 
 - [x] **Day 21** [Set Up Git Repository on Storage Server](./02-git/day-21-set-up-git-repository-on-storage-server.md) `2026-09-22`
 - [x] **Day 22** [Clone Git Repository on Storage Server](./02-git/day-22-clone-git-repository-on-storage-server.md) `2026-09-23`
@@ -103,7 +104,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 31** [Git Stash](./02-git/day-31-git-stash.md) `2026-10-02`
 - [x] **Day 32** [Git Rebase](./02-git/day-32-git-rebase.md) `2026-10-03`
 - [x] **Day 33** [Resolve Git Merge Conflicts](./02-git/day-33-resolve-git-merge-conflicts.md) `2026-10-04`
-- [ ] **Day 34** Git Hook
+- [x] **Day 34** [Git Hook](./02-git/day-34-git-hook.md) `2026-10-05`
 
 </details>
 
