@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░`  **34 / 100**
+`██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░`  **35 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -59,6 +59,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 32 | Rebase a feature branch onto master | [notes](./02-git/day-32-git-rebase.md) |
 | 33 | Resolve a rebase conflict and preserve both changes | [notes](./02-git/day-33-resolve-git-merge-conflicts.md) |
 | 34 | Create a post-update release-tag hook | [notes](./02-git/day-34-git-hook.md) |
+| 35 | Install Docker CE and start Docker | [notes](./03-docker/day-35-install-docker-packages-and-start-docker-service.md) |
 
 ## Roadmap
 
@@ -109,9 +110,9 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Docker</b> &nbsp; days 35 to 47 &nbsp; (0/13)</summary>
+<summary><b>Docker</b> &nbsp; days 35 to 47 &nbsp; (1/13)</summary>
 
-- [ ] **Day 35** Install Docker Packages and Start Docker Service
+- [x] **Day 35** [Install Docker Packages and Start Docker Service](./03-docker/day-35-install-docker-packages-and-start-docker-service.md) `2026-10-06`
 - [ ] **Day 36** Deploy Nginx Container on Application Server
 - [ ] **Day 37** Copy File to Docker Container
 - [ ] **Day 38** Pull Docker Image
