@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`███████████████░░░░░░░░░░░░░░░░░░░░░░░░░`  **38 / 100**
+`████████████████░░░░░░░░░░░░░░░░░░░░░░░░`  **39 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -63,6 +63,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 36 | Run an nginx:alpine container | [notes](./03-docker/day-36-deploy-nginx-container-on-application-server.md) |
 | 37 | Copy a file into a container | [notes](./03-docker/day-37-copy-file-to-docker-container.md) |
 | 38 | Pull and re-tag a BusyBox image | [notes](./03-docker/day-38-pull-docker-image.md) |
+| 39 | Create an image from a running container | [notes](./03-docker/day-39-create-a-docker-image-from-container.md) |
 
 ## Roadmap
 
@@ -113,13 +114,13 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Docker</b> &nbsp; days 35 to 47 &nbsp; (4/13)</summary>
+<summary><b>Docker</b> &nbsp; days 35 to 47 &nbsp; (5/13)</summary>
 
 - [x] **Day 35** [Install Docker Packages and Start Docker Service](./03-docker/day-35-install-docker-packages-and-start-docker-service.md) `2026-10-06`
 - [x] **Day 36** [Deploy Nginx Container on Application Server](./03-docker/day-36-deploy-nginx-container-on-application-server.md) `2026-10-07`
 - [x] **Day 37** [Copy File to Docker Container](./03-docker/day-37-copy-file-to-docker-container.md) `2026-10-08`
 - [x] **Day 38** [Pull Docker Image](./03-docker/day-38-pull-docker-image.md) `2026-10-09`
-- [ ] **Day 39** Create a Docker Image From Container
+- [x] **Day 39** [Create a Docker Image From Container](./03-docker/day-39-create-a-docker-image-from-container.md) `2026-10-10`
 - [ ] **Day 40** Docker EXEC Operations
 - [ ] **Day 41** Write a Dockerfile
 - [ ] **Day 42** Create a Docker Network
