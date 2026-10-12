@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`████████████████░░░░░░░░░░░░░░░░░░░░░░░░`  **40 / 100**
+`████████████████░░░░░░░░░░░░░░░░░░░░░░░░`  **41 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -65,6 +65,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 38 | Pull and re-tag a BusyBox image | [notes](./03-docker/day-38-pull-docker-image.md) |
 | 39 | Create an image from a running container | [notes](./03-docker/day-39-create-a-docker-image-from-container.md) |
 | 40 | Install and configure Apache inside a container | [notes](./03-docker/day-40-docker-exec-operations.md) |
+| 41 | Build an Ubuntu Apache image from a Dockerfile | [notes](./03-docker/day-41-write-a-dockerfile.md) |
 
 ## Roadmap
 
@@ -115,7 +116,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Docker</b> &nbsp; days 35 to 47 &nbsp; (6/13)</summary>
+<summary><b>Docker</b> &nbsp; days 35 to 47 &nbsp; (7/13)</summary>
 
 - [x] **Day 35** [Install Docker Packages and Start Docker Service](./03-docker/day-35-install-docker-packages-and-start-docker-service.md) `2026-10-06`
 - [x] **Day 36** [Deploy Nginx Container on Application Server](./03-docker/day-36-deploy-nginx-container-on-application-server.md) `2026-10-07`
@@ -123,7 +124,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 38** [Pull Docker Image](./03-docker/day-38-pull-docker-image.md) `2026-10-09`
 - [x] **Day 39** [Create a Docker Image From Container](./03-docker/day-39-create-a-docker-image-from-container.md) `2026-10-10`
 - [x] **Day 40** [Docker EXEC Operations](./03-docker/day-40-docker-exec-operations.md) `2026-10-11`
-- [ ] **Day 41** Write a Dockerfile
+- [x] **Day 41** [Write a Dockerfile](./03-docker/day-41-write-a-dockerfile.md) `2026-10-12`
 - [ ] **Day 42** Create a Docker Network
 - [ ] **Day 43** Docker Ports Mapping
 - [ ] **Day 44** Write a Docker Compose File
