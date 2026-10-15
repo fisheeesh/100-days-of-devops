@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`█████████████████░░░░░░░░░░░░░░░░░░░░░░░`  **43 / 100**
+`██████████████████░░░░░░░░░░░░░░░░░░░░░░`  **44 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -68,6 +68,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 41 | Build an Ubuntu Apache image from a Dockerfile | [notes](./03-docker/day-41-write-a-dockerfile.md) |
 | 42 | Create a macvlan Docker network | [notes](./03-docker/day-42-create-a-docker-network.md) |
 | 43 | Publish an nginx container on host port 8084 | [notes](./03-docker/day-43-docker-ports-mapping.md) |
+| 44 | Run an httpd service with Docker Compose | [notes](./03-docker/day-44-write-a-docker-compose-file.md) |
 
 ## Roadmap
 
@@ -118,7 +119,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Docker</b> &nbsp; days 35 to 47 &nbsp; (9/13)</summary>
+<summary><b>Docker</b> &nbsp; days 35 to 47 &nbsp; (10/13)</summary>
 
 - [x] **Day 35** [Install Docker Packages and Start Docker Service](./03-docker/day-35-install-docker-packages-and-start-docker-service.md) `2026-10-06`
 - [x] **Day 36** [Deploy Nginx Container on Application Server](./03-docker/day-36-deploy-nginx-container-on-application-server.md) `2026-10-07`
@@ -129,7 +130,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 41** [Write a Dockerfile](./03-docker/day-41-write-a-dockerfile.md) `2026-10-12`
 - [x] **Day 42** [Create a Docker Network](./03-docker/day-42-create-a-docker-network.md) `2026-10-13`
 - [x] **Day 43** [Docker Ports Mapping](./03-docker/day-43-docker-ports-mapping.md) `2026-10-14`
-- [ ] **Day 44** Write a Docker Compose File
+- [x] **Day 44** [Write a Docker Compose File](./03-docker/day-44-write-a-docker-compose-file.md) `2026-10-15`
 - [ ] **Day 45** Resolve Dockerfile Issues
 - [ ] **Day 46** Deploy an App on Docker Containers
 - [ ] **Day 47** Docker Python App
