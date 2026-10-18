@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██████████████████░░░░░░░░░░░░░░░░░░░░░░`  **46 / 100**
+`███████████████████░░░░░░░░░░░░░░░░░░░░░`  **47 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -71,6 +71,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 44 | Run an httpd service with Docker Compose | [notes](./03-docker/day-44-write-a-docker-compose-file.md) |
 | 45 | Fix Dockerfile build-context paths | [notes](./03-docker/day-45-resolve-dockerfile-issues.md) |
 | 46 | Deploy a PHP and MariaDB Compose stack | [notes](./03-docker/day-46-deploy-an-app-on-docker-containers.md) |
+| 47 | Build and run a containerized Python app | [notes](./03-docker/day-47-docker-python-app.md) |
 
 ## Roadmap
 
@@ -121,7 +122,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Docker</b> &nbsp; days 35 to 47 &nbsp; (12/13)</summary>
+<summary><b>Docker</b> &nbsp; days 35 to 47 &nbsp; (13/13)</summary>
 
 - [x] **Day 35** [Install Docker Packages and Start Docker Service](./03-docker/day-35-install-docker-packages-and-start-docker-service.md) `2026-10-06`
 - [x] **Day 36** [Deploy Nginx Container on Application Server](./03-docker/day-36-deploy-nginx-container-on-application-server.md) `2026-10-07`
@@ -135,7 +136,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 44** [Write a Docker Compose File](./03-docker/day-44-write-a-docker-compose-file.md) `2026-10-15`
 - [x] **Day 45** [Resolve Dockerfile Issues](./03-docker/day-45-resolve-dockerfile-issues.md) `2026-10-16`
 - [x] **Day 46** [Deploy an App on Docker Containers](./03-docker/day-46-deploy-an-app-on-docker-containers.md) `2026-10-17`
-- [ ] **Day 47** Docker Python App
+- [x] **Day 47** [Docker Python App](./03-docker/day-47-docker-python-app.md) `2026-10-18`
 
 </details>
 
