@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`███████████████████░░░░░░░░░░░░░░░░░░░░░`  **47 / 100**
+`███████████████████░░░░░░░░░░░░░░░░░░░░░`  **48 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -72,6 +72,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 45 | Fix Dockerfile build-context paths | [notes](./03-docker/day-45-resolve-dockerfile-issues.md) |
 | 46 | Deploy a PHP and MariaDB Compose stack | [notes](./03-docker/day-46-deploy-an-app-on-docker-containers.md) |
 | 47 | Build and run a containerized Python app | [notes](./03-docker/day-47-docker-python-app.md) |
+| 48 | Create and verify a Kubernetes pod | [notes](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) |
 
 ## Roadmap
 
@@ -141,9 +142,9 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (0/20)</summary>
+<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (1/20)</summary>
 
-- [ ] **Day 48** Deploy Pods in Kubernetes Cluster
+- [x] **Day 48** [Deploy Pods in Kubernetes Cluster](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) `2026-10-19`
 - [ ] **Day 49** Deploy Applications with Kubernetes Deployments
 - [ ] **Day 50** Set Resource Limits in Kubernetes Pods
 - [ ] **Day 51** Execute Rolling Updates in Kubernetes
