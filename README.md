@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`████████████████████░░░░░░░░░░░░░░░░░░░░`  **50 / 100**
+`████████████████████░░░░░░░░░░░░░░░░░░░░`  **51 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -75,6 +75,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 48 | Create and verify a Kubernetes pod | [notes](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) |
 | 49 | Deploy and verify an HTTPD application | [notes](./04-kubernetes/day-49-deploy-applications-with-kubernetes-deployments.md) |
 | 50 | Set CPU and memory resource requests and limits | [notes](./04-kubernetes/day-50-set-resource-limits-in-kubernetes-pods.md) |
+| 51 | Rolling update to a new image | [notes](./04-kubernetes/day-51-execute-rolling-updates-in-kubernetes.md) |
 
 ## Roadmap
 
@@ -144,12 +145,12 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (3/20)</summary>
+<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (4/20)</summary>
 
 - [x] **Day 48** [Deploy Pods in Kubernetes Cluster](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) `2026-10-19`
 - [x] **Day 49** [Deploy Applications with Kubernetes Deployments](./04-kubernetes/day-49-deploy-applications-with-kubernetes-deployments.md) `2026-10-20`
 - [x] **Day 50** [Set Resource Limits in Kubernetes Pods](./04-kubernetes/day-50-set-resource-limits-in-kubernetes-pods.md) `2026-10-21`
-- [ ] **Day 51** Execute Rolling Updates in Kubernetes
+- [x] **Day 51** [Execute Rolling Updates in Kubernetes](./04-kubernetes/day-51-execute-rolling-updates-in-kubernetes.md) `2026-10-23`
 - [ ] **Day 52** Revert Deployment to Previous Version in Kubernetes
 - [ ] **Day 53** Resolve VolumeMounts Issue in Kubernetes
 - [ ] **Day 54** Kubernetes Shared Volumes
