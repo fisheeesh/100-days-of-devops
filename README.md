@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`█████████████████████░░░░░░░░░░░░░░░░░░░`  **53 / 100**
+`██████████████████████░░░░░░░░░░░░░░░░░░`  **54 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -78,6 +78,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 51 | Rolling update to a new image | [notes](./04-kubernetes/day-51-execute-rolling-updates-in-kubernetes.md) |
 | 52 | Roll back a deployment | [notes](./04-kubernetes/day-52-revert-deployment-to-previous-version.md) |
 | 53 | Fix shared volume mounts for Nginx and PHP-FPM | [notes](./04-kubernetes/day-53-resolve-volumemounts-issue-in-kubernetes.md) |
+| 54 | Share temporary files between Pod containers | [notes](./04-kubernetes/day-54-kubernetes-shared-volumes.md) |
 
 ## Roadmap
 
@@ -147,7 +148,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (6/20)</summary>
+<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (7/20)</summary>
 
 - [x] **Day 48** [Deploy Pods in Kubernetes Cluster](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) `2026-10-19`
 - [x] **Day 49** [Deploy Applications with Kubernetes Deployments](./04-kubernetes/day-49-deploy-applications-with-kubernetes-deployments.md) `2026-10-20`
@@ -155,7 +156,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 51** [Execute Rolling Updates in Kubernetes](./04-kubernetes/day-51-execute-rolling-updates-in-kubernetes.md) `2026-10-23`
 - [x] **Day 52** [Revert Deployment to Previous Version in Kubernetes](./04-kubernetes/day-52-revert-deployment-to-previous-version.md) `2026-10-23`
 - [x] **Day 53** [Resolve VolumeMounts Issue in Kubernetes](./04-kubernetes/day-53-resolve-volumemounts-issue-in-kubernetes.md) `2026-10-25`
-- [ ] **Day 54** Kubernetes Shared Volumes
+- [x] **Day 54** [Kubernetes Shared Volumes](./04-kubernetes/day-54-kubernetes-shared-volumes.md) `2026-10-26`
 - [ ] **Day 55** Kubernetes Sidecar Containers
 - [ ] **Day 56** Deploy Nginx Web Server on Kubernetes Cluster
 - [ ] **Day 57** Print Environment Variables
