@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██████████████████████░░░░░░░░░░░░░░░░░░`  **56 / 100**
+`███████████████████████░░░░░░░░░░░░░░░░░`  **57 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -81,6 +81,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 54 | Share temporary files between Pod containers | [notes](./04-kubernetes/day-54-kubernetes-shared-volumes.md) |
 | 55 | Ship Nginx logs with a native sidecar | [notes](./04-kubernetes/day-55-kubernetes-sidecar-containers.md) |
 | 56 | Expose a three-replica Nginx Deployment | [notes](./04-kubernetes/day-56-deploy-nginx-web-server-on-kubernetes-cluster.md) |
+| 57 | Print a greeting from Pod environment variables | [notes](./04-kubernetes/day-57-print-environment-variables.md) |
 
 ## Roadmap
 
@@ -150,7 +151,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (9/20)</summary>
+<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (10/20)</summary>
 
 - [x] **Day 48** [Deploy Pods in Kubernetes Cluster](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) `2026-10-19`
 - [x] **Day 49** [Deploy Applications with Kubernetes Deployments](./04-kubernetes/day-49-deploy-applications-with-kubernetes-deployments.md) `2026-10-20`
@@ -161,7 +162,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 54** [Kubernetes Shared Volumes](./04-kubernetes/day-54-kubernetes-shared-volumes.md) `2026-10-26`
 - [x] **Day 55** [Kubernetes Sidecar Containers](./04-kubernetes/day-55-kubernetes-sidecar-containers.md) `2026-10-26`
 - [x] **Day 56** [Deploy Nginx Web Server on Kubernetes Cluster](./04-kubernetes/day-56-deploy-nginx-web-server-on-kubernetes-cluster.md) `2026-10-27`
-- [ ] **Day 57** Print Environment Variables
+- [x] **Day 57** [Print Environment Variables](./04-kubernetes/day-57-print-environment-variables.md) `2026-10-28`
 - [ ] **Day 58** Deploy Grafana on Kubernetes Cluster
 - [ ] **Day 59** Troubleshoot Deployment Issues in Kubernetes
 - [ ] **Day 60** Persistent Volumes in Kubernetes
