@@ -41,19 +41,13 @@ grep ^SELINUX= /etc/selinux/config
 
 | Command | Why |
 |:--|:--|
-| `hostnamectl` / `cat /etc/os-release` | Package names and the package manager differ per distro. Confirm the family before reaching for `yum`. |
-| `selinux-policy` | The policy framework itself. Nothing else works without it. |
-| `selinux-policy-targeted` | The actual policy the system loads at boot. `selinux-policy` alone gives you a framework with no rules. |
-| `policycoreutils` | The management tooling: `setenforce`, `restorecon`, `load_policy`. |
-| `ls /etc/selinux/` | Confirms the package landed and there is a `config` file to edit. |
-| `vi /etc/selinux/config` | This file is read at boot, which is what makes the change permanent. `setenforce 0` would only last until the next reboot. |
-| `grep ^SELINUX=` | The file also contains `SELINUXTYPE=` and a commented block listing the valid values. Anchoring on `^SELINUX=` pins the one line that matters. |
+| `hostnamectl` | Package names differ per distro. Confirm the family before reaching for `yum`. |
+| `selinux-policy-targeted` | The policy actually loaded at boot. The framework alone has no rules. |
+| `vi /etc/selinux/config` | Read at boot, which is what makes it permanent. `setenforce 0` lasts until reboot. |
+| `grep ^SELINUX=` | The file also holds `SELINUXTYPE=`. The anchor pins the one line that matters. |
 
 ## Notes
 
-- `setenforce 0` is runtime only and resets on reboot. `/etc/selinux/config` is the permanent one. The task asks for the state *after* the reboot, so the file is the answer.
-- That is also why point 4 says to ignore the current CLI status: `getenforce` and `sestatus` will keep reporting Enforcing until the box actually reboots.
-- Valid values in that file are `enforcing`, `permissive`, `disabled`. `permissive` logs violations without blocking, which is how you'd normally stage this before turning it on for real.
-- On RHEL 9 and CentOS Stream 9, `SELINUX=disabled` in the config is deprecated. The kernel still boots with SELinux enabled and simply loads no policy. The supported way to fully disable it is `grubby --update-kernel ALL --args selinux=0`. KodeKloud validates the config file, so the edit above is the right answer for this task.
-- `yum` is a`dn symlink to f` on CentOS Stream 9. Either works.
-- `policycoreutils-python-utils` is the package that gives you `semanage`, needed later if you ever add port or file-context rules.
+- Valid values: `enforcing`, `permissive`, `disabled`.
+- `getenforce` keeps saying Enforcing until the reboot, which is why point 4 says to ignore it.
+- On RHEL 9 `SELINUX=disabled` is deprecated: the kernel boots with SELinux on and no policy loaded. Fully disabling it needs `grubby --update-kernel ALL --args selinux=0`. KodeKloud checks the file.

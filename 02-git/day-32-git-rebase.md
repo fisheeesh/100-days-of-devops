@@ -65,28 +65,22 @@ git push -u origin feature -f
 
 | Command | Why |
 |:--|:--|
-| `git checkout master` then back | Just to see what `master` has that `feature` does not. It is the reason a rebase is being asked for at all. |
-| `git fetch origin master` | Updates `origin/master` from the server. Rebasing onto a stale `origin/master` would replay the commits onto an old base. |
-| `git rebase origin/master` | Replays `feature`'s commits on top of `master`'s tip, one at a time. The history ends up as a straight line, which is what "no merge commit" means. |
-| `git push -f` | A rebase rewrites the feature commits, so the remote's version and yours no longer share a tip. Force replaces the remote branch with the rebuilt one. |
+| `git fetch origin master` | Rebasing onto a stale `origin/master` replays the commits onto an old base. |
+| `git rebase origin/master` | Replays `feature`'s commits on top of master's tip. The result is a straight line, which is what "no merge commit" means. |
+| `git push -f` | The rebase rewrote the commits, so the remote's branch and yours no longer share a tip. |
 
 ## Rebase vs merge
 
-Merging `master` into `feature` would have worked too, but it creates a merge commit joining the
-two lines of history, which the task forbids. Rebase instead lifts your commits off and replays
-them on the new base, leaving one straight line and no merge commit.
+Merging master into feature works too, but it creates a merge commit, which the task forbids.
+Rebase lifts your commits off and replays them on the new base instead.
 
-Confirmed in a test run: after the rebase, `git log --merges` counted **0** merge commits, the
-feature file was still present, and the feature commit's hash changed from `0de211f` to `0d75832`.
-Same change, new commit, because a commit's identity includes its parent (the same reason a
-cherry-pick gets a new hash on Day 28).
+Confirmed in a test run: `git log --merges` counted **0**, the feature file was still there, and
+the commit's hash changed from `0de211f` to `0d75832`. Same change, new commit, because a commit's
+identity includes its parent (same reason as the cherry-pick on Day 28).
 
 ## Notes
 
-- "Without losing any data" is satisfied by rebase itself. Nothing is dropped, the commits are rebuilt on a newer base.
-- The rejected push is not a mistake. Your `feature` was rewritten, so git sees the remote branch and yours as having diverged and refuses to clobber it.
-- `git push --force-with-lease` is the safer force, as on Day 30. It refuses if someone else pushed to `feature` since your last fetch. Plain `-f` overwrites regardless.
-- Force pushing a rebased branch is normal and expected for a personal feature branch. It is rude on a branch other people are working on, because their clones still hold the old commits.
-- Conflicts stop the rebase partway: fix the files, `git add` them, then `git rebase --continue`. `git rebase --abort` puts the branch back exactly as it was.
-- `git rebase origin/master` and `git rebase master` differ. The first uses what the server has, the second uses your local `master`, which may be behind. Fetching first and rebasing onto `origin/master` is the safer habit.
-- `git log --oneline --graph --all` draws the branches, which makes "straight line" versus "merge" obvious at a glance.
+- The rejected push is not a mistake. Your branch was rewritten, so git sees the two as diverged.
+- `--force-with-lease` is the safer force: it refuses if someone else pushed since your last fetch.
+- Conflicts stop the rebase partway: fix, `git add`, `git rebase --continue`. `--abort` restores the branch exactly.
+- `git rebase master` uses your local master, which may be behind. `origin/master` after a fetch is the safer habit.

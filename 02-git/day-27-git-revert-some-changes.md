@@ -55,18 +55,13 @@ git diff 35e7c3a HEAD
 
 | Command | Why |
 |:--|:--|
-| `sudo -i` | A root shell. The repo belongs to root, so this avoids both prefixing every command with sudo and the dubious-ownership refusal from Day 22. |
-| `git log --oneline` | Gives you the two hashes that matter: `HEAD`, the commit to undo, and the `initial commit` the task names as the target state. |
-| `git revert HEAD -n` | Applies the **inverse** of HEAD to the working tree and stages it without committing. `-n` is `--no-commit`. Without it git opens an editor and writes its own `Revert "..."` message. |
-| `git add .` | Already staged by the revert, so this is redundant, but harmless. It earns its place when a revert stops on a conflict and leaves something unstaged. |
-| `git commit -m "revert ecommerce"` | The reason `-n` was used. The task demands an exact lowercase message, and this is the only way to set it. |
-| `git diff <initial> HEAD` | The real proof. Empty output means the files now match the initial commit, which is what "revert to the previous commit" actually means. |
+| `git log --oneline` | The two hashes that matter: `HEAD` and the `initial commit` you are returning to. |
+| `git revert HEAD -n` | Applies the **inverse** of HEAD and stages it without committing. `-n` is `--no-commit`. |
+| `git commit -m "revert ecommerce"` | Why `-n` was used. The task demands an exact lowercase message. |
+| `git diff <initial> HEAD` | Empty output means the files match the initial commit. That is the real proof. |
 
 ## Notes
 
-- **`-m` is not the message flag on `git revert`.** It is `--mainline`, the parent number to pick when reverting a merge commit. `git revert -m "revert ecommerce" HEAD` fails with `option 'mainline' expects a number greater than zero`. That is exactly why the `-n` then `commit -m` route exists.
-- **revert is not reset.** `revert` adds a new commit that undoes an older one, so nothing leaves the history and anyone who already pulled is unaffected. `reset --hard` moves the branch pointer backwards and discards commits, which rewrites history and breaks every other clone. The task says "revert repo HEAD to last commit", but it wants the safe one.
-- After this the log still holds all three commits. The bad commit stays as a record; the undo sits on top of it.
-- If git answers `Please tell me who you are`, set an identity for root first: `git config --global user.email "you@example.com"` and the matching `user.name`.
-- If later commits touched the same lines, the revert stops on a conflict. Fix the files, `git add` them, then commit with the required message. `-n` makes that flow natural, since you were committing by hand anyway.
-- The task does not ask you to push.
+- **`-m` is not the message flag on revert.** It is `--mainline`, for merge commits, and fails with `option 'mainline' expects a number greater than zero`.
+- revert is not reset. Revert adds an undo commit and keeps the history; reset erases it. All three commits stay in the log.
+- On a conflict: fix the files, `git add` them, then commit with the required message.

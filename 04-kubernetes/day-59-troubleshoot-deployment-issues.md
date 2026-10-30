@@ -55,29 +55,23 @@ kubectl get pods
 
 | Command | Why |
 |:--|:--|
-| `kubectl get pods` | The STATUS column tells you which kind of problem you have before you read a single log line. |
-| `kubectl describe pod <name>` | The `Events` at the bottom carry the actual error text. `describe deployment` only shows replica counts and conditions, so it says the rollout is stuck without saying why. |
-| `kubectl get configmap` | Checks the name the deployment asks for against what exists. A missing ConfigMap and a misspelled reference look identical from the pod's side. |
-| `kubectl edit deployment` | Editing the deployment updates the pod template, which triggers a fresh rollout automatically. Deleting the broken pods would not help, since the ReplicaSet recreates them from the same bad template. |
-| `kubectl rollout status` | Blocks until the new pods are actually ready, rather than catching them mid-restart. |
+| `kubectl get pods` | The STATUS column names the category of failure before you read a single log line. |
+| `kubectl describe pod <name>` | The `Events` carry the actual error. `describe deployment` only says the rollout is stuck, not why. |
+| `kubectl get configmap` | A missing ConfigMap and a misspelled reference look identical from the pod's side. |
+| `kubectl edit deployment` | Changing the template triggers a fresh rollout. Deleting pods does nothing: the ReplicaSet rebuilds them from the same bad template. |
 
 ## Reading the status
 
-The failure mode is usually written on the pod:
-
 | Status | What it means | Where to look |
 |:--|:--|:--|
-| `ImagePullBackOff` / `ErrImagePull` | Image name or tag is wrong, or the registry is unreachable | `describe pod` Events |
-| `ContainerCreating` (stuck) | A volume cannot be mounted: missing ConfigMap, Secret or PVC | `describe pod` Events |
-| `CrashLoopBackOff` | The container starts, then exits | `kubectl logs <pod>` |
-| `Pending` | Nothing could schedule it: resources, nodeSelector, taints | `describe pod`, then `kubectl describe node` |
-| `Running` but `0/1` READY | Readiness probe failing | `describe pod` Events and `kubectl logs` |
+| `ImagePullBackOff` / `ErrImagePull` | Image name or tag wrong, or registry unreachable | `describe pod` Events |
+| `ContainerCreating` (stuck) | A volume cannot mount: missing ConfigMap, Secret or PVC | `describe pod` Events |
+| `CrashLoopBackOff` | Container starts, then exits | `kubectl logs <pod>` |
+| `Pending` | Cannot be scheduled: resources, nodeSelector, taints | `describe pod`, `describe node` |
+| `Running` but `0/1` | Readiness probe failing | `describe pod` Events, `kubectl logs` |
 
 ## Notes
 
-- Both bugs here are one character each, `alpin` for `alpine` and `cofig` for `config`. Kubernetes cannot tell a typo from a thing that genuinely does not exist, so the error is always "not found" rather than "did you mean".
-- `kubectl logs` is no use for `ImagePullBackOff` or a stuck `ContainerCreating`, because the container never started. There is nothing to log yet. Events are the only source.
-- `kubectl get events --sort-by=.metadata.creationTimestamp` gives a whole-namespace timeline, useful when you do not yet know which object is broken.
-- A pod can hit more than one problem at once, as here. Fix the image and the pod moves from `ImagePullBackOff` to a stuck `ContainerCreating` on the volume. Re-read the events after each fix instead of assuming you are done.
-- `kubectl set image deployment/redis-deployment <container>=redis:alpine` fixes the image without an editor, but the ConfigMap reference still needs `edit` (or a patch), so one `edit` for both is simpler here.
-- Deleting the pods achieves nothing. The ReplicaSet rebuilds them from the same broken template. The template is what has to change.
+- `kubectl logs` is useless for `ImagePullBackOff` or a stuck `ContainerCreating`: the container never started, so there is nothing to log. Events are the only source.
+- This pod had two faults at once. Fix the image and it moves to a stuck `ContainerCreating` on the volume. Re-read the events after each fix.
+- `kubectl get events --sort-by=.metadata.creationTimestamp` gives a namespace-wide timeline when you do not know which object is broken.

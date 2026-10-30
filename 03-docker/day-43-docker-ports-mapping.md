@@ -37,17 +37,14 @@ curl -I http://localhost:8084
 
 ## Why
 
-| Option or command | Why |
+| Option | Why |
 |:--|:--|
-| `docker pull nginx:alpine-perl` | Downloads the exact nginx variant requested by the task instead of the default `latest` tag. |
-| `-d` | Runs nginx in detached mode so the container remains in the background. |
-| `--name apps` | Assigns the exact container name required by the ticket. |
-| `-p 8084:80` | Publishes host port `8084` and forwards its traffic to nginx on container port `80`. The order is `HOST:CONTAINER`. |
-| `docker ps` | Confirms that `apps` is still running and displays its published port. |
-| `curl` | Proves that nginx is reachable through the host-side port mapping. |
+| `nginx:alpine-perl` | The exact variant requested, not the default `latest`. |
+| `-p 8084:80` | Publishes host 8084 to nginx on 80. The order is `HOST:CONTAINER`. |
+| `docker ps` | Confirms it is still running and shows the published port. |
 
 ## Notes
 
-- `EXPOSE 80` in the nginx image documents its listening port, but does not publish it. The `-p` option creates the host mapping.
-- Omitting `-d` attaches nginx to the terminal. Exiting with `Ctrl+C` would stop the container and fail the running-state requirement.
-- Port `8084` must be free on the host. If another process already owns it, Docker reports `address already in use` and does not start `apps`.
+- `EXPOSE 80` in the image is documentation. `-p` is what actually publishes the port.
+- Without `-d`, nginx holds the terminal and Ctrl-C stops the container.
+- Port 8084 must be free on the host, or docker refuses with `address already in use`.

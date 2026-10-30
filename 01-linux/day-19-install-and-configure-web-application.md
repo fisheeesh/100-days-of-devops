@@ -76,18 +76,14 @@ curl http://localhost:8083/apps/
 
 | Command | Why |
 |:--|:--|
-| `scp -r` | `-r` recurses into the directory. Without it scp refuses and says the source is a directory. |
-| `Listen 8083` in `httpd.conf` | The listening port lives in the config and is only read at startup, so the edit does nothing until the service restarts. |
-| `apachectl configtest` | Parses the config without applying it. Same habit as `nginx -t` on Day 15 and 16: a broken config plus a restart takes the site down. |
-| `grep DocumentRoot` | Read the document root instead of assuming it. Every URL path is resolved relative to it, so `/var/www/html/beta` is what serves `/beta/`. |
-| `sudo mv` | `/var/www/html` is owned by root. Without sudo the move fails with `Permission denied`. |
-| Trailing slash in `/beta/` | It is a directory, so Apache looks for `index.html` inside it via `DirectoryIndex`. |
+| `scp -r` | Without `-r` scp refuses a directory. |
+| `Listen 8083` in `httpd.conf` | Read only at startup, so the edit does nothing until the service restarts. |
+| `grep DocumentRoot` | Every URL path resolves relative to it, so `/var/www/html/beta` is what serves `/beta/`. |
+| `sudo mv` | `/var/www/html` is root-owned. Without sudo the move fails with `Permission denied`. |
 
 ## Notes
 
-- `curl localhost` failing after the restart is the proof the port change took effect: nothing listens on 80 any more. That is expected, not a mistake.
-- **403 Forbidden instead of the page, with SELinux enforcing:** `mv` keeps the SELinux label the files had in the home directory, so httpd is refused. `ls -Z /var/www/html` shows it and `sudo restorecon -Rv /var/www/html` relabels. `cp` would have picked up the destination's label instead. Same trap as the cert in Day 15.
-- **httpd refuses to start after the port change, with SELinux enforcing:** a non-standard port needs registering first, `sudo semanage port -a -t http_port_t -p tcp 8083`.
-- The files have to be readable by the `apache` user. If the backup arrived with odd modes, `sudo chmod -R a+rX /var/www/html/beta` fixes it (`X` sets execute on directories only).
-- Part d tests from the app server itself, so the firewall is not involved. Reaching it from the jump host would also need port 8083 open (Day 13).
-- `apachectl configtest` and `httpd -t` are the same check.
+- `curl localhost` failing after the restart proves the port change took: nothing listens on 80 any more.
+- **403 Forbidden with SELinux enforcing:** `mv` keeps the home-directory label, so httpd is refused. `restorecon -Rv /var/www/html` fixes it.
+- **httpd will not start with SELinux enforcing:** a non-standard port needs `semanage port -a -t http_port_t -p tcp 8083`.
+- `apachectl configtest` before the restart, same habit as `nginx -t`.

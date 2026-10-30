@@ -55,14 +55,12 @@ git push -f origin master
 
 | Command | Why |
 |:--|:--|
-| `git log --oneline` | Gets the hash of `add data.txt file`, since the task names the commit by message, not by id. |
-| `git reset --hard <hash>` | Moves the branch pointer, the staging area and the working tree to that commit in one go. The later commits become unreachable and the files they added are deleted. |
-| `git push origin master` (the failed one) | Worth running, because the rejection explains itself. The remote still holds the extra commits, so your branch is not ahead of it and git refuses to lose them. |
-| `git push -f origin master` | Replaces the remote branch with yours. Following the hint and pulling would restore exactly the commits you just deleted. |
+| `git log --oneline` | Gets the hash of `add data.txt file`, since the task names the commit by message. |
+| `git reset --hard <hash>` | Moves the branch pointer, the staging area and the working tree at once. Later commits become unreachable. |
+| `git push origin master` (the failed one) | The rejection explains itself: the remote still holds commits you no longer have. |
+| `git push -f origin master` | Replaces the remote branch. Pulling, as the hint suggests, would restore the commits you just deleted. |
 
 ## The three reset modes
-
-What each one throws away, confirmed by running them:
 
 | Mode | Commits | Staging area | Files on disk |
 |:--|:--|:--|:--|
@@ -70,17 +68,12 @@ What each one throws away, confirmed by running them:
 | `--mixed` (default) | removed | changes kept, **unstaged** | untouched |
 | `--hard` | removed | wiped | wiped |
 
-`--soft` cancels the commits but keeps the file changes from them, left staged, so a single
-`git commit` re-records the lot as one commit. That is how you squash several commits into one.
-`--hard` is the only one that also clears the work tree, which is what this task asks for.
-
-In the test run the extra file showed as `A junk.txt` (staged) after `--soft`, as `?? junk.txt`
-(untracked) after `--mixed`, and was gone entirely after `--hard`.
+`--soft` leaves the changes staged, so one `git commit` re-records them as a single commit. That is
+how you squash. `--hard` is the only one that clears the work tree, which is what this task wants.
 
 ## Notes
 
-- The rejected push is git protecting a shared branch from losing commits, not a mistake on your part. "Behind its remote counterpart" is literally true: the remote has commits you no longer do.
-- `git push --force-with-lease` is the safer force. It refuses if someone else pushed since your last fetch, where `-f` overwrites no matter what.
-- Force pushing rewrites shared history. Anyone who already pulled still has the old commits and will push them back unless they reset too. Fine on a test repo like this, risky on a real branch.
-- Reset is not revert (Day 27). Revert adds a new commit that undoes an old one and keeps the history; reset erases it. This task explicitly wanted the history gone.
-- Escape hatch: `git reflog` still lists the discarded commits for a couple of weeks, so `git reset --hard <old-sha>` brings them back right up until git garbage collects them.
+- The rejected push is git protecting a shared branch. "Behind its remote counterpart" is literally true.
+- `git push --force-with-lease` is the safer force: it refuses if someone else pushed since your last fetch.
+- Force pushing rewrites shared history. Fine on a test repo, risky on a branch other people use.
+- `git reflog` still lists the discarded commits for a couple of weeks, so a hard reset is recoverable.

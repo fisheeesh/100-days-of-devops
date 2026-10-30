@@ -105,19 +105,14 @@ curl http://stlb01:80
 
 | Command | Why |
 |:--|:--|
-| `ss -tulnp \| grep httpd` | The Apache port changes between lab runs and part c forbids touching it, so read it off the box. That number is what goes into the upstream. |
-| `curl http://stapp0N:8087` from the jump host | Proves every backend answers from outside its own box before nginx is involved. If one fails here, the LBR will fail too. |
-| `upstream stapp { ... }` | Names a pool of backends. It lives inside `http { }`, alongside the `server` blocks, never inside one. |
-| `proxy_pass http://stapp;` | `stapp` here is the upstream name, not a hostname. Every request under `/` gets forwarded to that pool. |
-| `nginx.conf`, not `conf.d/` | Part b says the main file only. Day 15 used `conf.d/` on purpose; here the same config in `conf.d/` would work identically and still fail the check. |
-| `nginx -t` | Also resolves every upstream hostname. A typo like `stapp4` fails here with `host not found in upstream` instead of breaking the live site. |
-| `systemctl reload nginx` | Re-reads the config without dropping connections. `nginx -s reload` is the same thing. |
+| `ss -tulnp \| grep httpd` | The Apache port changes between runs and part c forbids changing it, so read it off the box. |
+| `upstream stapp { ... }` | Names a pool of backends. It lives inside `http { }`, never inside a `server` block. |
+| `proxy_pass http://stapp;` | `stapp` is the upstream name, not a hostname. |
+| `nginx.conf`, not `conf.d/` | Part b says the main file only. The same config in `conf.d/` works and still fails the check. |
 
 ## Notes
 
-- `curl https://stlb01:80` does not work. nginx on port 80 speaks plain HTTP, so curl expecting TLS fails with an SSL error (exit code 35). The scheme and the port have to agree.
-- Default balancing is round-robin: each request goes to the next server in turn. Every backend serves the same page here, so curl output looks identical. Watch `/var/log/httpd/access_log` on the app servers to see requests spread across all three.
-- If a backend dies, nginx marks it failed and skips it for a while (defaults `max_fails=1`, `fail_timeout=10s`), so the site stays up on the other two. That failover is the "high availability" the task is about.
-- `502 Bad Gateway` means nginx is fine and it cannot reach a backend. Check in this order: httpd down on an app server, wrong port in the upstream, a firewall on the app servers not letting the LBR in (Day 13), SELinux.
-- SELinux enforcing on the LBR blocks nginx from opening connections to backends. `/var/log/nginx/error.log` shows `Permission denied` while connecting to upstream. Fix with `sudo setsebool -P httpd_can_network_connect 1`.
-- By default nginx sends the upstream name (`stapp`) as the `Host` header, not `stlb01`. Apache here has no virtual hosts so it does not matter. An app that routes on `Host` needs `proxy_set_header Host $host;`.
+- `curl https://stlb01:80` fails with an SSL error. Port 80 is plain HTTP; the scheme and port have to agree.
+- Balancing is round-robin by default. Watch `/var/log/httpd/access_log` on the app servers to see it spread.
+- A dead backend is marked failed and skipped (`max_fails=1`, `fail_timeout=10s`). That is the high availability the task is about.
+- `502 Bad Gateway` means nginx is fine and cannot reach a backend: httpd down, wrong port, app-server firewall, then SELinux (`setsebool -P httpd_can_network_connect 1`).

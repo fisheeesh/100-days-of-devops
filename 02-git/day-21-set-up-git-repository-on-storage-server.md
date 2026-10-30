@@ -47,18 +47,11 @@ sudo ls -lah /opt/games.git
 
 | Command | Why |
 |:--|:--|
-| `ssh natasha@ststor01` | Connects to the storage server, which is the host where the repository must be created. |
-| `yum install -y git` | Installs Git through the package manager required by the task. `-y` automatically confirms the installation prompt. |
-| `git --version` | Confirms that the Git executable is installed and available in `PATH`. |
-| `git init --bare /opt/games.git` | Creates a repository containing only Git's internal data, with no checked-out working tree. Supplying the absolute path also avoids accidentally creating it in the wrong directory. |
-| `rev-parse --is-bare-repository` | Asks Git itself whether the target is a bare repository. The expected result is `true`. |
-| `ls -lah /opt/games.git` | Confirms that the exact directory exists and contains Git's repository structure. |
+| `git init --bare /opt/games.git` | A bare repo is git's database with no working tree. The absolute path stops it landing in the wrong directory. |
+| `rev-parse --is-bare-repository` | Asks git itself instead of guessing. Expected `true`. |
 
 ## Notes
 
-- A **bare repository** stores Git's internal database directly in the repository directory. That is why `/opt/games.git` contains entries such as `objects`, `refs`, `HEAD`, and `config` instead of normal application files.
-- It has no working tree, so files cannot be checked out and edited directly inside `/opt/games.git`. Make changes in a regular clone, commit them there, and push the commits back to the bare repository.
-- Bare repositories are commonly used as central repositories. Developers or other servers clone from them and use them as remotes for `fetch`, `pull`, and `push` operations.
-- The `.git` suffix is a convention for bare repositories. In this task it is also part of the required name, so `/opt/games.git` must be used exactly.
-- The repository is empty immediately after `git init --bare`. Its `objects` and `refs` directories receive project history only after someone pushes commits to it.
-- Because the repository was created with `sudo`, it is owned by `root`. A real shared server would also need an appropriate Unix group and write permissions for the developers who are allowed to push.
+- A bare repo holds `objects`, `refs`, `HEAD` and `config` at the top level instead of project files.
+- No working tree, so you cannot edit inside it. Clone it, commit there, push back.
+- The `.git` suffix is convention, and part of the required name here.

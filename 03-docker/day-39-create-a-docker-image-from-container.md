@@ -28,12 +28,11 @@ docker image ls beta:datacenter
 
 | Command | Why |
 |:--|:--|
-| `docker ps --filter name=ubuntu_latest` | Confirms that the source container exists and is running before creating the image. |
-| `docker commit ubuntu_latest beta:datacenter` | Captures the container's current filesystem changes as a new image with repository `beta` and tag `datacenter`. |
-| `docker image ls beta:datacenter` | Verifies that the image was created with the exact required name and tag. |
+| `docker commit ubuntu_latest beta:datacenter` | Captures the container's filesystem changes as a new image with the required name and tag. |
+| `docker image ls beta:datacenter` | Confirms the exact repository and tag the task asked for. |
 
 ## Notes
 
-- The source container name is `ubuntu_latest`. The spelling `ubuntn_latest` would fail with `No such container`.
-- `docker commit` saves changes in the container's writable layer. Data stored in mounted volumes is not included in the image.
-- Docker pauses the container briefly during the commit by default to reduce the chance of capturing inconsistent data.
+- The container is `ubuntu_latest`. `ubuntn_latest` fails with `No such container`.
+- `commit` saves the container's writable layer. Data in mounted volumes is **not** included.
+- Docker pauses the container briefly during the commit to avoid capturing a half-written state.

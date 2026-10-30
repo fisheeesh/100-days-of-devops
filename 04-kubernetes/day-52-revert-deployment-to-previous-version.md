@@ -46,18 +46,14 @@ kubectl get deployment nginx-deployment -o jsonpath='{.spec.template.spec.contai
 
 | Command | Why |
 |:--|:--|
-| `kubectl rollout history deployment/...` | Lists the revisions Kubernetes kept. You need to see there **is** a previous revision before trying to go back to one. |
-| `--revision=1` | Prints that revision's pod template, so you can confirm which image you are about to return to instead of trusting the revision number. |
-| `kubectl rollout undo deployment/...` | Rolls back to the immediately previous revision. `--to-revision=N` targets a specific one when "previous" is not what you want. |
-| `kubectl rollout status` | A rollback is itself a rolling update, so it is not instant. This waits for it to finish. |
-| `kubectl get pods` and the `jsonpath` | Confirms the pods are `Running` and the image is genuinely the old one. The history table alone does not prove the pods came up. |
+| `kubectl rollout history deployment/...` | Confirms there **is** a previous revision before you try to go back to one. |
+| `--revision=1` | Prints that revision's pod template, so you can see which image you are returning to. |
+| `kubectl rollout undo deployment/...` | Goes back one revision. `--to-revision=N` targets a specific one. |
+| `kubectl rollout status` | A rollback is a rolling update too, so it is not instant. |
 
 ## Notes
 
-- The command is `kubectl rollout undo` (easy to typo as `roullout`), and the deployment name is `nginx-deployment`. A typo'd name fails with `Error from server (NotFound)`, which at least tells you clearly.
-- **Rolling back does not delete the bad revision, it adds a new one.** That is why revision 1 vanished from the list and revision 3 appeared in its place: Kubernetes re-applied the old pod template as the newest revision. Revision numbers only ever go up.
-- A rollback is a normal rolling update under the hood. Kubernetes still has the old ReplicaSet, so it scales that back up and drains the current one, respecting `maxSurge` and `maxUnavailable` just like Day 51.
-- `CHANGE-CAUSE` is `<none>` unless something recorded it. `--record` is deprecated; the current way is to set the annotation yourself: `kubectl annotate deployment/nginx-deployment kubernetes.io/change-cause="roll back to nginx:1.18"`.
-- How far back you can go is limited by `revisionHistoryLimit` (default 10). Older ReplicaSets beyond that are garbage collected and those revisions are gone.
-- `kubectl rollout undo --dry-run=server deployment/nginx-deployment` shows what the rollback would produce without applying it.
-- Running `undo` twice in a row just flips between the two most recent revisions, rather than walking further back through history.
+- **Rolling back adds a revision, it does not delete one.** Revision 1 became revision 3, which is why it vanished from the top of the list. Numbers only go up.
+- Running `undo` twice just flips between the two most recent revisions. Use `--to-revision=N` to go deeper.
+- `revisionHistoryLimit` (default 10) caps how far back you can go.
+- `CHANGE-CAUSE` is `<none>` unless recorded. `--record` is deprecated; use `kubectl annotate ... kubernetes.io/change-cause="..."`.

@@ -83,21 +83,14 @@ curl http://stapp01:6400
 
 | Command | Why |
 |:--|:--|
-| `iptables-services` | Ships `iptables.service`, the thing that loads `/etc/sysconfig/iptables` at boot. The `iptables` package alone gives you the command, but nothing that restores rules after a reboot. |
-| `systemctl enable --now iptables` | `enable` is half of requirement 3. At boot the service loads the saved rules file. |
-| `iptables -F` | The service starts with the stock rules, which end in `REJECT all`. That blocks 6400 for the LBR as well, plus every other port. Flush and build exactly what the task asks for. |
-| `ACCEPT` the LBR **before** `DROP` | First match wins. The LBR's packets hit rule 4 and are accepted before rule 5 ever sees them. Swap the order and the LBR is blocked too. `-A` appends, so the order you type the commands is the order of the rules. |
-| `-j DROP` | Silently discards the packet, so the client hangs until it times out. `REJECT` would refuse immediately. Both count as "block". |
-| `iptables-save \| sudo tee` | Writes the live rules into the file the service loads at boot. `tee` because in `sudo iptables-save > file` the redirect runs as your user, not root, and fails with permission denied. |
-| `systemctl restart iptables` | Tests persistence without a reboot. A restart throws away the live rules and reloads the file, so if the rules are still there, the save worked. |
+| `iptables-services` | Ships `iptables.service`, which loads `/etc/sysconfig/iptables` at boot. The `iptables` package alone does not. |
+| `iptables -F` | The stock rules end in `REJECT all`, which would block the LBR too. Flush and build exactly what the task wants. |
+| `ACCEPT` the LBR **before** `DROP` | First match wins. `-A` appends, so the order you type is the order of the rules. |
+| `iptables-save \| sudo tee` | `sudo iptables-save > file` runs the redirect as you, not root, and fails. |
 
 ## Notes
 
-- With the INPUT policy at ACCEPT (check the `Chain INPUT (policy ACCEPT)` header), rules 1 to 3 change nothing: anything unmatched is accepted anyway. Only rules 4 and 5 do the work. Rules 1 to 3 still earn their place, because they stop you locking yourself out if someone later sets `-P INPUT DROP`.
-- `-F` flushes rules but does not reset policies. If the policy were already DROP, flushing over ssh would cut your own session. Check the header before flushing a remote box.
-- `-s stlb01` is resolved to an IP once, when the rule is added. That is why the listing shows `10.244.49.48`, and the saved file stores the IP, not the name. If the LBR's IP ever changes, the rule is stale.
-- Rule 1 shows as `all 0.0.0.0/0` because `-L -n` hides the interface column. `-v` shows `lo` under `in`. Same trap as Day 12.
-- `-m state` is the older name for `-m conntrack --ctstate`. Both work.
-- Persistence needs both halves: the saved file **and** the enabled service. Either one alone and the rules are gone after a reboot.
-- `firewalld` and `iptables.service` conflict, so starting one stops the other. If firewalld is on the box, `sudo systemctl disable --now firewalld` so it does not come back at boot.
-- The task says each app host, so this is three boxes.
+- With the INPUT policy at ACCEPT, rules 1 to 3 change nothing. They matter only if someone later sets `-P INPUT DROP`.
+- `-s stlb01` resolves to an IP once, when the rule is added. The saved file stores the IP, so a changed LBR address leaves it stale.
+- Persistence needs both halves: the saved file **and** the enabled service.
+- Test it without rebooting: `systemctl restart iptables` drops the live rules and reloads the file.

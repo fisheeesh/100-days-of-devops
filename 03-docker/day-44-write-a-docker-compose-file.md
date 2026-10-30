@@ -60,20 +60,16 @@ curl -I http://localhost:8088
 
 ## Why
 
-| Compose field or command | Why |
+| Field | Why |
 |:--|:--|
-| `services` | Top-level map containing the containers managed by this Compose application. |
-| `image: httpd:latest` | Uses the requested Apache HTTP Server image and tag. No image build is needed. |
-| `container_name: httpd` | Overrides Compose's generated name and creates the exact container name required by the task. |
-| `"8088:80"` | Publishes host port `8088` to the web server on container port `80`. The order is `HOST:CONTAINER`. |
-| `/opt/sysops:/usr/local/apache2/htdocs` | Bind mounts the existing website directory over the image's document root, so Apache serves the supplied host content. |
-| `docker compose ... config` | Parses and renders the Compose model, catching YAML or field errors before container creation. |
-| `docker compose ... up -d` | Creates and starts the service in the background. |
+| `container_name: httpd` | Overrides Compose's generated name to the exact one the task wants. |
+| `"8088:80"` | Host 8088 to the web server on 80. The order is `HOST:CONTAINER`. |
+| `/opt/sysops:/usr/local/apache2/htdocs` | Bind mounts the existing site over the image's document root. |
+| `docker compose config` | Catches YAML and field errors before anything is created. |
 
 ## Notes
 
+- A bind mount does not copy. It presents the same host directory inside the container, so edits on either side are the same files.
+- `--build` is pointless here: the file has `image:` and no `build:` section.
+- Modern Compose does not need a top-level `version` field.
 - SSH syntax is `ssh steve@stapp02`, not `ssh steve:stapp02`.
-- Do not run `chown -R` on `/opt/docker`; it changes existing ownership beyond the task. `sudo vi` creates the required file without altering the directory or unrelated files.
-- `--build` is unnecessary because this Compose file has an `image` field and no `build` section.
-- The bind mount does not copy `/opt/sysops`. It presents that same host directory at Apache's document root, so edits on either side would affect the shared content.
-- Modern Docker Compose does not require a top-level `version` field.

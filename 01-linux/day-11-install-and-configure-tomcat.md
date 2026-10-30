@@ -61,16 +61,13 @@ curl http://stapp03:8086
 
 | Command | Why |
 |:--|:--|
-| `scp /tmp/ROOT.war banner@stapp03:~/` | The war sits on the jump host, tomcat runs on stapp03. Home directory first, because `banner` cannot scp straight into a root-owned path. |
-| `vi /etc/tomcat/server.xml` | The HTTP `Connector` port is what `curl` hits. That file also has `8005` (shutdown) and `8009` (AJP). Changing those does nothing for this task and breaks other things. |
-| `systemctl enable --now tomcat` | It ships stopped and disabled. `--now` starts it and enables it for boot in one step. Do this after the edit, since the port is only read at startup. |
-| `mv ROOT.war .../webapps/` | Tomcat's `Host` runs with `autoDeploy="true"` and `unpackWARs="true"`, so it spots the new war and unpacks it into `ROOT/` without a restart. |
-| The name **ROOT** | This is the whole point of part c. A war deployed as `ROOT.war` serves at `/`. Name it `app.war` and it serves at `/app`, so the base URL would still 404. |
+| `vi /etc/tomcat/server.xml` | The HTTP `Connector` port is what curl hits. The file also has `8005` (shutdown) and `8009` (AJP). |
+| `systemctl enable --now tomcat` | Ships stopped and disabled. The port is only read at startup, so do this after the edit. |
+| `mv ROOT.war .../webapps/` | The Host runs `autoDeploy="true"` and `unpackWARs="true"`, so it unpacks into `ROOT/` with no restart. |
+| The name **ROOT** | A war named `ROOT.war` serves at `/`. Name it `app.war` and the base URL still 404s. |
 
 ## Notes
 
-- `/usr/share/tomcat/webapps` is a symlink to `/var/lib/tomcat/webapps`. RHEL keeps static files under `/usr/share` and changing data under `/var/lib`. Either path works.
-- If a `ROOT/` directory is already there from the stock install, remove it and the old `ROOT.war` before dropping yours in, otherwise Tomcat can keep serving the old content.
-- `mv` as root leaves the war owned by `root:root`. Mode 644 is world-readable so Tomcat can still read it, but `sudo chown tomcat:tomcat` on the war is tidier.
-- If the page does not appear, read `/var/log/tomcat/catalina.*.log`. Deployment failures land there, not in `systemctl status`, which will happily say `active (running)` while the app failed to deploy.
-- `curl localhost:8086` proves Tomcat is up. `curl http://stapp03:8086` from the jump host is what the task actually checks, because it also proves nothing is blocking the port from outside.
+- `/usr/share/tomcat/webapps` is a symlink to `/var/lib/tomcat/webapps`. Either path works.
+- If a `ROOT/` directory already exists from the stock install, remove it first or Tomcat keeps serving the old content.
+- `systemctl status` says `active (running)` even when the app failed to deploy. Real errors are in `/var/log/tomcat/catalina.*.log`.

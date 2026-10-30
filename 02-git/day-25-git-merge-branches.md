@@ -85,21 +85,14 @@ sudo git ls-remote --heads origin master datacenter
 
 | Command | Why |
 |:--|:--|
-| `git checkout -b datacenter master` | Creates `datacenter` at the commit currently referenced by `master` and switches to it. Naming `master` explicitly guarantees the correct starting point regardless of the branch that was previously checked out. |
-| `cp /tmp/index.html .` | Copies the supplied file into the repository's working tree. The final `.` means the current directory, `/usr/src/kodekloudrepos/blog`. |
-| `git status --short` | Shows `?? index.html` before staging, proving that Git sees the new untracked file. No output after the commit means the working tree is clean. |
-| `git add index.html` | Places the new file in Git's staging area so it will be included in the next commit. |
-| `git commit -m "Add index.html"` | Records the staged file in the history of the currently checked-out `datacenter` branch. |
-| `git push -u origin datacenter` | Creates `datacenter` on the remote and sets `origin/datacenter` as its upstream, making later pushes and pulls possible without repeating the remote and branch names. |
-| `git merge datacenter` | Moves the committed change into `master`. Because `master` has not diverged, Git can normally perform a fast-forward merge without creating an unnecessary merge commit. |
-| `git push origin master` | Updates the remote `master` branch after the local merge. Pushing `datacenter` earlier does not update `master`; the two remote branches must be pushed separately. |
-| `git ls-remote --heads` | Reads branch references directly from `origin`, proving that both required branches exist there and point to the expected commit. |
+| `git checkout -b datacenter master` | Creates the branch at master's commit, whatever branch you were standing on. |
+| `git add` then `git commit` | Copying the file into the directory is not enough: `add` stages, `commit` records. |
+| `git push -u origin datacenter` | Creates the branch on the remote and sets its upstream. |
+| `git ls-remote --heads` | Reads the refs from `origin` itself, the only real proof both branches landed. |
 
 ## Notes
 
-- The correct clone path is `/usr/src/kodekloudrepos/blog`. The shorter path `/usr/src/kodekoudrepos` is a typo and does not exist.
-- The repository is root-owned in this lab, so `sudo` is needed for the copy and Git commands. Otherwise the copy can fail with `Permission denied`, and Git can reject the repository because of dubious ownership.
-- A fast-forward is still a merge. Since `master` has no new commits after `datacenter` branches from it, Git only advances the `master` pointer to the commit already on `datacenter`.
-- `git add` stages content, while `git commit` saves that staged snapshot to the current branch. Copying the file into the directory alone does not put it in Git history.
-- A commit is local until it is pushed. This task explicitly requires both remote branches, so completing only `git push origin datacenter` or only `git push origin master` is not enough.
-- `git status` verifies the local working tree. `git ls-remote` is the stronger final check for this task because it verifies the state stored in the bare `origin` repository.
+- A fast-forward is still a merge. Master had no new commits, so git just moves the pointer.
+- Both remote branches are required. Pushing only one of them is not enough.
+- The repo is root-owned, so the copy and the git commands need sudo.
+- The path is `/usr/src/kodekloudrepos/blog`. `kodekoudrepos` is a typo and does not exist.

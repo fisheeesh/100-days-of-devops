@@ -60,21 +60,16 @@ curl -I http://localhost:6200
 
 ## Why
 
-| Instruction or command | Why |
+| Instruction | Why |
 |:--|:--|
-| `FROM ubuntu:24.04` | Sets the exact base image and tag required by the task. |
-| `apt-get update` | Downloads the package indexes needed to locate `apache2` during the image build. |
-| `apt-get install -y apache2` | Installs Apache without waiting for interactive confirmation. |
-| `Listen 6200` | Changes Apache's listening socket from port `80` to `6200` without binding it to a specific address. |
-| `<VirtualHost *:6200>` | Moves the default virtual host to the same port while leaving its document root and other settings unchanged. |
-| Removing `/var/lib/apt/lists/*` | Deletes package-index files that are no longer needed, reducing the final image layer size. |
-| `EXPOSE 6200` | Documents that containers created from the image are expected to accept traffic on port `6200`. |
-| `CMD ... FOREGROUND` | Keeps Apache in the foreground as the container's main process, so the container remains running. |
-| `-p 6200:6200` | Publishes host port `6200` to container port `6200`, allowing the host-side `curl` test to reach Apache. |
+| `apt-get install -y apache2` | `-y` because a build has nobody to answer the prompt. |
+| `Listen 6200` + `<VirtualHost *:6200>` | Both have to change. The port in `ports.conf` alone leaves the default site on 80. |
+| Removing `/var/lib/apt/lists/*` | Drops the package indexes from the layer, which are dead weight in the image. |
+| `EXPOSE 6200` | Documentation only. It does not publish anything. |
+| `CMD ... FOREGROUND` | Apache must be the container's foreground process, or the container exits immediately. |
 
 ## Notes
 
-- `/opt/docker/Dockerfile` is a file, so `cd /opt/docker/Dockerfile` fails with `Not a directory`. Change into `/opt/docker`, then edit `Dockerfile`.
-- `EXPOSE` is image metadata; it does not publish the port. Port publishing happens at runtime with `docker run -p 6200:6200`.
-- `-e` sets environment variables and cannot publish ports. The supplied test command must use lowercase `-p`.
-- Apache must run in the foreground. Starting it as a background service would let the container's main process exit, which stops the container.
+- `/opt/docker/Dockerfile` is a file. `cd` into `/opt/docker` and edit `Dockerfile` there.
+- `EXPOSE` does not publish the port. That happens at run time with `-p 6200:6200`.
+- `-e` sets environment variables and cannot publish ports. The test command needs lowercase `-p`.

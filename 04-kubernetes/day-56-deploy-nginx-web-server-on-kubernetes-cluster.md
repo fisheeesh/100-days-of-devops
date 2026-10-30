@@ -90,24 +90,15 @@ kubectl get service nginx-service \
 
 ## Why
 
-| Field or command | Why |
+| Field | Why |
 |:--|:--|
-| `kind: Deployment` | Maintains the requested number of Nginx pods and replaces failed ones. |
-| `replicas: 3` | Provides the three replicas required for availability and scaling. |
-| `selector.matchLabels` | Defines the pods managed by the Deployment. |
 | Pod template label `app: nginx-app` | Must match both the Deployment selector and the Service selector. |
-| `nginx:latest` | Uses the exact Nginx image and explicitly required tag. |
-| `type: NodePort` | Exposes the Service on a port on each Kubernetes node. |
-| `port` and `targetPort` | Forward Service traffic on port 80 to Nginx port 80 in the selected pods. |
-| `nodePort: 30011` | Reserves the exact externally reachable node port requested. |
+| `type: NodePort` | Opens a port on every node, which is what makes it reachable from outside. |
+| `port` and `targetPort` | Service port 80 forwards to nginx on 80 in the matched pods. |
+| `nodePort: 30011` | The exact external port the task fixes. |
 
 ## Notes
 
-- `template.metadata.name` is not needed. The Deployment and its ReplicaSet generate unique Pod
-  names automatically.
-- A NodePort is normally reached at `http://<node-address>:30011`; `localhost:30011` only works
-  when the command runs on a Kubernetes node and the network setup permits it.
-- A Service routes only to Pods whose labels match its selector. If `kubectl get endpoints
-  nginx-service` shows no addresses, check the `app: nginx-app` labels first.
-- `nginx:latest` is required for this exercise. In production, prefer an immutable version or
-  digest to make deployments reproducible.
+- A Service only routes to pods whose labels match its selector. If `kubectl get endpoints nginx-service` is empty, check the labels first.
+- Reach a NodePort at `http://<node-ip>:30011`. `localhost` only works from a node.
+- Leave out `template.metadata.name`; pod names are generated.

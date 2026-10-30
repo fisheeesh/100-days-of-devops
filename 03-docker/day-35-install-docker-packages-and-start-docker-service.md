@@ -42,14 +42,11 @@ sudo systemctl is-active docker
 
 | Command | Why |
 |:--|:--|
-| `dnf install dnf-plugins-core` | Installs `dnf config-manager`, which is needed to add Docker's package repository. |
-| `dnf config-manager --add-repo ...` | Adds Docker's official CentOS repository, where the `docker-ce` packages are published. |
-| `dnf install ...` | Installs Docker Engine, its CLI and runtime, Buildx, and the Docker Compose plugin. |
-| `systemctl start docker` | Starts the Docker daemon as required by the task. |
-| `docker compose version` | Confirms that `docker-compose-plugin` installed the current space-separated `docker compose` command. |
-| `systemctl is-active docker` | Returns `active` only when the Docker service is running. |
+| `dnf install dnf-plugins-core` | Provides `dnf config-manager`, needed to add Docker's repo. |
+| `dnf config-manager --add-repo ...` | `docker-ce` is not in the CentOS repos, only Docker's own. |
+| `docker compose version` | Confirms the plugin installed the space-separated `docker compose` command. |
 
 ## Notes
 
-- `docker-compose-plugin` is the package name; `docker compose` is the command it provides.
-- The task only asks to start Docker, so `systemctl start docker` is sufficient. `enable --now` would additionally configure it to start automatically after reboot.
+- `docker-compose-plugin` is the package; `docker compose` is the command it gives you.
+- The task only says start, so `systemctl start docker` is enough. `enable --now` would also survive a reboot.

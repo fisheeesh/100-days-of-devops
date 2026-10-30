@@ -62,21 +62,14 @@ kubectl get pod print-envars-greeting
 
 ## Why
 
-| Field or command | Why |
+| Field | Why |
 |:--|:--|
-| `env` | Defines the three named environment variables in the container. |
-| `command` | Overrides the image default command and runs the exact required shell expression. |
-| `$(GREETING)` syntax | Kubernetes expands container environment-variable references in `command` and `args` before starting the container. |
-| `/bin/sh -c` | Lets the container execute the resulting `echo` command. |
-| `spec.restartPolicy: Never` | Prevents Kubernetes from restarting the successfully completed command or repeatedly retrying it after failure. |
-| `kubectl logs -f` | Streams the greeting from the container's standard output. |
+| `$(GREETING)` syntax | Kubernetes expands these in `command` and `args` before the container starts. Not shell `$NAME`. |
+| `/bin/sh -c` | Gives the container a shell to run the `echo` in. |
+| `restartPolicy: Never` | Stops Kubernetes restarting a command that already completed. |
+| `kubectl logs -f` | Streams the output from the container. |
 
 ## Notes
 
-- `restartPolicy` belongs under the Pod's `spec`, not under an individual container. A
-  container-level `restartPolicy` is invalid here.
-- `bash` is the exact image requested; no tag was specified in the task.
-- The `$(NAME)` references are deliberately not shell `$NAME` references. They use Kubernetes
-  command/argument expansion, as required by the question.
-- A completed Pod still retains its logs until the Pod is deleted or log retention expires, so
-  `kubectl logs print-envars-greeting` also works after `-f` exits.
+- `restartPolicy` belongs under the Pod's `spec`, not under a container.
+- A completed Pod keeps its logs, so plain `kubectl logs print-envars-greeting` works afterwards too.

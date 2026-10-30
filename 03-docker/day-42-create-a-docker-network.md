@@ -38,18 +38,14 @@ docker network inspect blog
 
 ## Why
 
-| Option or command | Why |
+| Option | Why |
 |:--|:--|
-| `--driver macvlan` | Creates the network with the exact driver required by the task. Macvlan gives attached containers their own MAC addresses on the parent network. |
-| `--subnet 192.168.0.0/24` | Defines the address space available to the Docker network. |
-| `--ip-range 192.168.0.0/24` | Defines the pool from which Docker assigns container addresses. The range must belong to the configured subnet. |
-| `blog` | Sets the exact network name checked by the task. |
-| `docker network inspect blog` | Shows the saved driver and IPAM configuration, proving that all three requirements were applied. |
+| `--driver macvlan` | Gives attached containers their own MAC address on the parent network. |
+| `--subnet` / `--ip-range` | Subnet is the address space, ip-range is the pool docker allocates from. The range must sit inside the subnet. |
+| `docker network inspect blog` | Shows the stored driver and IPAM config, proving all three requirements landed. |
 
 ## Notes
 
-- The correct option is `--ip-range`. The spelling `--iip-range` is invalid and causes Docker to reject the command.
-- No gateway or parent interface was provided by the lab, so neither is invented here. A real
-  macvlan connected to a physical LAN normally also needs environment-specific gateway and parent
-  interface values.
-- Creating the network does not attach any containers to it; that happens later with `docker run --network blog` or `docker network connect blog <container>`.
+- The flag is `--ip-range`. `--iip-range` is rejected.
+- Creating a network attaches nothing. That happens with `docker run --network blog` or `docker network connect`.
+- A real macvlan on a physical LAN also needs a gateway and a parent interface. The lab gave neither, so neither is invented here.

@@ -66,19 +66,16 @@ docker image ls mylab:latest
 
 ## Why
 
-| Command or instruction | Why |
+| Command | Why |
 |:--|:--|
-| `find . -maxdepth 2 -type f` | Shows the real paths and spellings of every supplied file before the Dockerfile is changed. |
-| `docker build ... .` | Reproduces the failure and uses `/opt/docker` as the build context because `.` is evaluated from that directory. |
-| `COPY certs/server.crt ...` | Reads the certificate from `/opt/docker/certs/server.crt` and places it at the existing destination inside the image. |
-| `COPY certs/server.key ...` | Copies the supplied private key from its actual build-context location. |
-| `COPY html/index.html ...` | Copies the existing website file into Apache's document root without changing its contents. |
-| Second `docker build` | A successful clean completion is the required proof that the Dockerfile issues are fixed. |
+| `find . -maxdepth 2 -type f` | Shows the real paths and spellings before editing anything. |
+| `docker build ... .` | The `.` is the build context, which is what `COPY` paths are relative to. |
+| `COPY certs/server.crt ...` | The fix: point the Dockerfile at where the files actually are. |
+| Second `docker build` | A clean build is the proof the task wanted. |
 
 ## Notes
 
-- `COPY` source paths are resolved relative to the build context, not relative to arbitrary host filesystem paths. With `docker build .` from `/opt/docker`, the correct sources are `certs/...` and `html/...`.
-- Do not move or edit `index.html`, the certificate, or the key just to match incorrect Dockerfile paths. Fix the Dockerfile references instead.
-- Do not replace or upgrade the base image. The task explicitly requires all already-valid configuration to remain intact.
-- If this lab variant uses `RUN cp certs/...`, replace those file-transfer lines with `COPY`. A `RUN` command executes inside an image layer and cannot read host build-context files until they have been copied into the image.
-- Starting a container is not required to validate this task. The platform destroys existing containers and performs its own image build after **FINISH**.
+- `COPY` sources are relative to the **build context**, not to arbitrary host paths. From `/opt/docker` with `docker build .`, that means `certs/...` and `html/...`.
+- Fix the Dockerfile, do not move the supplied files to match it.
+- `RUN cp certs/...` cannot work: `RUN` executes inside a layer and cannot see host files until they are copied in.
+- Do not change the base image. The task says leave valid configuration intact.

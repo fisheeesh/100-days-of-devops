@@ -149,22 +149,16 @@ Finally, open Gitea and verify the result:
 
 | Command | Why |
 |:--|:--|
-| `git push origin master` | Reproduces the problem instead of guessing. The `fetch first` rejection proves that the remote contains work missing from Max's local branch. |
-| `git pull --rebase origin master` | Fetches the latest remote `master`, places Max's local commit aside, updates to Sarah's commit, and then replays Max's commit on top. This integrates both histories without creating a merge commit. |
-| `git status` | During the stopped rebase, it identifies `story-index.txt` as unmerged and tells you the exact recovery command to run next. |
-| Editing `story-index.txt` | Git cannot decide which titles to keep. The correct resolution combines both contributors' work, fixes `Mooose`, and removes the marker lines. |
-| `git add story-index.txt` | Tells Git that the file has been resolved. Merely saving the file does not clear its unmerged state. |
-| `git rebase --continue` | Resumes the paused rebase and rebuilds Max's commit using the resolved file. A separate `git commit` is unnecessary in this rebase workflow. |
-| `git push origin master` | Publishes the successfully rebased `master`. This push is now a fast-forward from the remote's point of view. |
-| `git show origin/master:story-index.txt` | Reads the file from the remote-tracking branch after the push, confirming what Git recorded rather than only checking the working-tree copy. |
+| `git push origin master` (the failed one) | Reproduces the problem. `fetch first` proves the remote holds work Max does not have. |
+| `git pull --rebase origin master` | Replays Max's commit on top of Sarah's, integrating both without a merge commit. |
+| Editing `story-index.txt` | Git cannot pick between two independently added files. The resolution keeps both names and fixes `Mooose`. |
+| `git add story-index.txt` | Marks it resolved. Saving the file alone does not clear the unmerged state. |
+| `git rebase --continue` | Rebuilds the commit with the resolved file. No separate `git commit` needed. |
 
 ## Notes
 
-- The rejected push is Git protecting Sarah's commit from being overwritten. Do not force-push here; the requirement is to preserve both developers' work.
-- `add/add` means both sides independently added a file at the same path with different content. Git has no shared earlier version it can use to choose between them.
-- Conflict markers come as a set: `<<<<<<<`, `=======`, and `>>>>>>>`. All three must be removed. Leaving even the separator line behind produces an invalid final file and can fail validation.
-- Do not blindly choose only "ours" or "theirs." Sarah's version has the corrected spelling, while Max's version adds the fourth title. The required result is a deliberate combination of both.
-- During a rebase, the meaning of `ours` and `theirs` can feel reversed because Max's commit is being replayed on top of the updated remote branch. Editing the file directly is clearer for this conflict.
-- Seeing the same conflict in `git status` immediately after editing is normal. Git considers it unresolved until `git add story-index.txt` records the resolution.
-- If the resolution goes wrong, `git rebase --abort` restores the repository to exactly where it was before `git pull --rebase`, allowing you to start again safely.
-- The typo and all four titles belong in `story-index.txt`; editing `story-blog.txt` is not part of the required resolution.
+- The rejected push is git protecting Sarah's commit. Do not force here: the task needs both developers' work.
+- `add/add` means both sides added the same path with different content, so git has no common version to fall back on.
+- Remove all three markers: `<<<<<<<`, `=======`, `>>>>>>>`. A leftover separator makes the file invalid.
+- Do not take only "ours" or "theirs". Sarah has the spelling fix, Max has the fourth title. The answer is both.
+- `git rebase --abort` puts everything back exactly as it was if the resolution goes wrong.

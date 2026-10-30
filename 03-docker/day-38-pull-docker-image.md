@@ -36,12 +36,11 @@ docker image inspect --format '{{.Id}}' busybox:musl busybox:blog
 
 | Command | Why |
 |:--|:--|
-| `docker pull busybox:musl` | Downloads the exact `musl` variant. Omitting the tag would pull `busybox:latest`, which is not the requested image. |
-| `docker tag busybox:musl busybox:blog` | Adds `busybox:blog` as another local name for the image already identified by `busybox:musl`. |
-| `docker image ls busybox` | Shows both repository-and-tag entries and their image IDs. |
-| `docker image inspect` | Confirms that both names resolve to the same underlying image object. |
+| `docker pull busybox:musl` | Without the tag you get `busybox:latest`, not the requested image. |
+| `docker tag busybox:musl busybox:blog` | Adds a second local name for the image that is already there. |
+| `docker image inspect` | Confirms both names resolve to the same image ID. |
 
 ## Notes
 
-- Re-tagging does not copy or rebuild the image. Both tags point to the same image ID and layers.
-- The new `busybox:blog` tag is local to `App Server 3`; creating it does not push anything to a registry.
+- Re-tagging copies nothing. Both tags point at the same image ID and the same layers.
+- `busybox:blog` is local to this server. Creating a tag pushes nothing to a registry.

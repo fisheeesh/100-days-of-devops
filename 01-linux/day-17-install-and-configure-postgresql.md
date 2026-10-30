@@ -51,18 +51,14 @@ Verify and get around:
 
 | Command | Why |
 |:--|:--|
-| `sudo su - postgres` | Local connections use `peer` authentication: PostgreSQL asks the OS who you are and only lets you in as the role with the same name. The `postgres` OS user maps to the `postgres` superuser, which is allowed to create roles and databases. |
-| `CREATE USER ... WITH PASSWORD` | `CREATE USER` is `CREATE ROLE` with `LOGIN` switched on, which is why it answers `CREATE ROLE`. The password is a string, so it goes in single quotes. |
-| `CREATE DATABASE` | Creates the database, owned by whoever ran it. Here that is `postgres`, not the new user. |
-| `GRANT ALL PRIVILEGES ON DATABASE` | "All" on a database is exactly three privileges: `CONNECT`, `CREATE` (new schemas) and `TEMPORARY`. That is the `CTc` you see in `\l`. |
-| `\du` / `\l` | Confirms the role exists and the grant landed, without having to log in as the new user. |
+| `sudo su - postgres` | Local logins use `peer` auth: PostgreSQL only lets you in as the role matching your OS user. |
+| `CREATE USER ... WITH PASSWORD` | `CREATE USER` is `CREATE ROLE` plus `LOGIN`, which is why it answers `CREATE ROLE`. |
+| `GRANT ALL PRIVILEGES ON DATABASE` | "All" on a database is three privileges: `CONNECT`, `CREATE` (schemas) and `TEMPORARY`. That is the `CTc` in `\l`. |
+| `\du` / `\l` | Confirms the role exists and the grant landed, without logging in as the new user. |
 
 ## Notes
 
-- `\lu` is not a psql command; it errors with `invalid command \lu`. Roles are `\du`.
-- On PostgreSQL 15 and newer, `ALL ON DATABASE` does **not** let the user create tables. The `public` schema stopped allowing `CREATE` for everyone in 15, so `CREATE TABLE` as `kodekloud_aim` fails with `permission denied for schema public`. If the app needs to create its own tables, make the user the owner: `ALTER DATABASE kodekloud_db4 OWNER TO kodekloud_aim;`, or `CREATE DATABASE kodekloud_db4 OWNER kodekloud_aim;` from the start. On 14 and older the grant alone is enough. `SELECT version();` tells you which you are on.
-- Every SQL statement needs a `;`. Without one psql waits for more input, and the prompt changes from `postgres=#` to `postgres-#`.
-- Unquoted names are folded to lowercase: `CREATE USER Kodekloud_Aim` creates `kodekloud_aim`. Only double quotes keep the case.
-- None of this needs a restart, which is why the task can forbid one. Roles and grants apply immediately. Even editing `pg_hba.conf` only needs a reload.
-- `sudo -u postgres psql` gets you in with one command, and `sudo -u postgres psql -c "..."` runs a single statement without an interactive session.
-- `psql -U kodekloud_aim` from your own shell fails with `Peer authentication failed`, because your OS user is not `kodekloud_aim`. The auth method is refusing you, not the password.
+- `\lu` is not a command; it errors with `invalid command \lu`. Roles are `\du`.
+- On PostgreSQL 15+, `ALL ON DATABASE` does **not** allow `CREATE TABLE`: the `public` schema stopped granting that. The app needs to own the database (`ALTER DATABASE ... OWNER TO ...`).
+- Every statement needs a `;`. Without one the prompt changes from `postgres=#` to `postgres-#` and waits.
+- Unquoted names fold to lowercase. Only double quotes keep the case.

@@ -49,19 +49,14 @@ git push origin master
 
 | Command | Why |
 |:--|:--|
-| `git log --all --oneline --grep="..."` | Searches commit messages across every branch, so you get the hash straight from the task's description without checking out `feature` to look for it. |
-| `git checkout master` | Cherry-pick applies a commit **onto whatever branch you are standing on**. Being on master is what puts the change there. |
-| `git cherry-pick <hash>` | Replays that one commit's changes onto the current branch. Everything else on `feature`, including the unfinished work, stays behind. |
-| `git log --oneline` afterwards | Confirms the commit landed and, just as importantly, that nothing else tagged along. |
-| `git push origin master` | The task asks for it, and `origin/master` in the log only catches up once you push. |
+| `git log --all --oneline --grep="..."` | Finds the commit by its message without checking out `feature` to hunt for it. |
+| `git checkout master` | Cherry-pick applies onto whatever branch you are standing on. |
+| `git cherry-pick <hash>` | Replays that one commit. The rest of `feature`, including the unfinished work, stays behind. |
+| `git push origin master` | `origin/master` only catches up once you push. |
 
 ## Notes
 
-- The command is `git cherry-pick`, hyphenated. Typing `git cherry pick <hash>` runs a **different real command**, `git cherry`, which fails with `fatal: unknown commit pick`. The error points at the word `pick`, so it reads like a bad hash when the problem is the missing hyphen.
-- Cherry-pick creates a **new commit**. In a test run, `abdabb7` on `feature` became `9decd8e` on `master` with the same change. A commit's identity includes its parent, so replaying it somewhere else produces a different hash. The same change now exists as two separate commits.
-- The in-progress `WIP` commit on `feature` did not follow. That is exactly the difference between cherry-picking one commit and merging the whole branch.
-- `feature` is untouched and still holds the original commit. Git copes when that branch is merged later.
-- `-x` appends `(cherry picked from commit <full sha>)` to the message. Worth using on a shared repo so the copy can be traced back.
-- On a conflict: fix the files, `git add` them, then `git cherry-pick --continue`. `git cherry-pick --abort` puts everything back.
-- `-n` stages the change without committing, the same idea as the revert on Day 27.
-- The repos under `/usr/src/kodekloudrepos` are root-owned, so `sudo -i` saves prefixing every command (Day 27), or use `safe.directory` (Day 22).
+- It is `git cherry-pick`, hyphenated. `git cherry pick <hash>` runs the real `git cherry` command and fails with `fatal: unknown commit pick`, which reads like a bad hash.
+- Cherry-pick makes a **new commit**: `abdabb7` on feature became `9decd8e` on master. A commit's identity includes its parent.
+- The WIP commit on `feature` did not follow. That is the difference from merging the whole branch.
+- On a conflict: fix, `git add`, `git cherry-pick --continue`. `--abort` puts it back.

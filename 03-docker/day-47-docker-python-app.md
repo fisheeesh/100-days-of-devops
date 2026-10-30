@@ -74,20 +74,16 @@ curl http://localhost:8094/
 
 ## Why
 
-| Instruction or command | Why |
+| Instruction | Why |
 |:--|:--|
-| `FROM python:3.12-slim` | Supplies Python 3.12 in a smaller Debian-based image. |
-| `WORKDIR /app` | Creates and selects the directory used by the remaining build steps and the runtime command. |
-| First `COPY` | Copies only `requirements.txt` before dependency installation, allowing Docker to reuse the dependency layer when application code changes. |
-| `pip install --no-cache-dir` | Installs the declared dependencies without retaining pip's download cache in the image. |
-| `COPY src/ .` | Copies `server.py` and the rest of the application into `/app`. Without this step, the runtime command cannot find the script. |
-| `EXPOSE 3000` | Documents the port on which the application listens inside the container. |
-| JSON-form `CMD` | Starts `python server.py` as the container's main process without an extra shell. |
-| `-p 8094:3000` | Publishes host port `8094` and forwards requests to the application on container port `3000`. |
+| `COPY requirements.txt` before the rest | Docker caches that layer, so changing application code does not reinstall dependencies. |
+| `pip install --no-cache-dir` | Keeps pip's download cache out of the image. |
+| `COPY src/ .` | Without it the runtime command cannot find `server.py`. |
+| `-p 8094:3000` | Publishes host 8094 to the app on 3000. |
 
 ## Notes
 
-- `CMD ["python", "server.py"]` uses JSON syntax, so its strings require double quotes. Single quotes make the JSON form invalid.
-- `EXPOSE 3000` does not publish the port. The `docker run -p` option creates the host-to-container mapping.
-- The application must listen on `0.0.0.0:3000` inside the container. If `server.py` binds only to `127.0.0.1`, the host port mapping cannot reach it.
-- If the container is absent from `docker ps`, inspect `docker ps -a` and `docker logs pythonapp_nautilus` to see why the Python process exited.
+- `CMD ["python", "server.py"]` is JSON, so the strings need double quotes. Single quotes break it.
+- `EXPOSE 3000` documents the port; `-p` is what publishes it.
+- The app must listen on `0.0.0.0:3000`. Bound to `127.0.0.1` it is unreachable through the port mapping.
+- Missing from `docker ps`? Check `docker ps -a` and `docker logs pythonapp_nautilus`.

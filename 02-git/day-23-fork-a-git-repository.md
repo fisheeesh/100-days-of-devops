@@ -29,13 +29,12 @@ No terminal work on this one. In the Gitea web UI:
 
 | | What it is | Where it lives |
 |:--|:--|:--|
-| **Fork** | Your own copy of someone else's repo, under your account. You can push to it; the original stays untouched. | On the Git server |
-| **Clone** (Day 22) | A copy of a repo on a machine, with its history on disk. | On your machine |
-| **Branch** | A separate line of work inside one repo. No second repo, no second owner. | Inside a repo |
+| **Fork** | Your own copy of someone else's repo. You can push to it, the original stays untouched. | On the Git server |
+| **Clone** (Day 22) | A copy of a repo with its history on disk. | On your machine |
+| **Branch** | A separate line of work inside one repo. | Inside a repo |
 
 ## Notes
 
-- Forking happens entirely on the server. Nothing is downloaded. Working on it means cloning your fork afterwards.
-- Gitea records where the fork came from, which is what lets you open a pull request back to `sarah/story-blog` later (Day 29).
-- `jon` can push to `jon/story-blog` but not to `sarah/story-blog`. That is the whole point: forking is how you contribute to a repo you do not have write access to.
-- A fork is a snapshot at that moment and does not follow the original. To pick up later changes you add the original as a second remote, conventionally named `upstream`, and fetch from it.
+- Forking happens entirely on the server. Nothing is downloaded; you clone your fork afterwards.
+- `jon` can push to `jon/story-blog` but not `sarah/story-blog`. That is the whole point of forking.
+- A fork is a snapshot and does not follow the original. Add the original as `upstream` to pull later changes.

@@ -24,17 +24,17 @@ sudo chage -l jim
 
 | Command | Why |
 |:--|:--|
-| `useradd -e YYYY-MM-DD` | Sets the **account** expiry date. On that date the account is disabled, no login at all. |
-| `chage -l jim` | Reads back the ageing info. `/etc/shadow` stores expiry as days-since-epoch, so reading the file raw is useless. Look for `Account expires`. |
+| `useradd -e YYYY-MM-DD` | Sets **account** expiry. On that date the whole account is disabled. |
+| `chage -l jim` | `/etc/shadow` stores expiry as days since epoch. `chage -l` renders it as a date. |
 
 ## Notes
 
-- Account expiry ≠ password expiry. `-e` disables the whole account; `chage -E` changes it after the fact.
-- Username must be lowercase. Linux is case-sensitive and `Jim` would fail the check.
+- Account expiry, not password expiry. `chage -E` changes it afterwards.
+- Lowercase matters: `Jim` and `jim` are two different users.
 
 ## Handy
 
 ```bash
-sudo !!              # re-run the last command with sudo, no retyping
-<command> | grep kw  # narrow long output to the line you want
+sudo !!              # re-run the last command with sudo
+<command> | grep kw  # narrow long output
 ```

@@ -54,19 +54,13 @@ sudo ansible --version
 
 | Command | Why |
 |:--|:--|
-| `which pip3` | The task says pip3 only. Confirm it exists before anything else. |
-| `sudo pip3 install` | `sudo` makes it a system-wide install under `/usr/local/`, which is what "all users can run it" means. `pip3 install --user` would land in `~/.local/bin` for `thor` alone and fail the requirement. |
-| `==4.7.0` | Pins the exact version. Without it pip installs the newest release, which is a different major series entirely. |
-| `which ansible` | Tells you where the binary actually landed. That path is what you need for the next step. |
-| `pip3 show ansible` | `ansible --version` does not print the package version. This is the only command that shows `4.7.0`. |
-| `sudo visudo` | sudo discards your `PATH` and uses `secure_path` from sudoers instead. `/usr/local/bin` is not in the default `secure_path`, which is why `ansible` works but `sudo ansible` does not. |
-| `visudo`, never `vi /etc/sudoers` | visudo syntax-checks the file before saving. A broken sudoers locks everyone out of sudo, and you cannot use sudo to fix it. |
+| `sudo pip3 install` | System-wide under `/usr/local/`, which is what "all users" means. `--user` would be thor only. |
+| `==4.7.0` | Pins the version. Without it pip takes the newest, a different major series. |
+| `pip3 show ansible` | `ansible --version` does not print the package version. Only this shows `4.7.0`. |
+| `sudo visudo` | sudo ignores your `PATH` and uses `secure_path`, which is why `ansible` works but `sudo ansible` does not. |
 
 ## Notes
 
-- The version confusion is the whole trap here. `ansible` 4.7.0 is the **community package**, a bundle of collections. `ansible --version` reports the **ansible-core** version underneath it, which is 2.11.x for the 4.x line. Both numbers are right, they name different things. Check the one the task asked for with `pip3 show ansible`.
-- pip will warn about running as root. Expected: a system-wide install is exactly the requirement.
-- Do not reach for `dnf install ansible`. The task says pip3 only, and the repo version will not be 4.7.0.
-- `secure_path` exists so that a tampered user `PATH` cannot trick root into running a planted binary. Adding `/usr/local/bin` is normal practice, just know you are widening that surface.
-- If `which ansible` shows a different directory, put that directory in `secure_path` instead. Do not copy `/usr/local/bin` blindly.
-- Verify as another user if you want to be sure it is really global: `sudo su - <someone> -c 'ansible --version'`.
+- `ansible` 4.7.0 is the community bundle; `ansible --version` reports ansible-core 2.11.x. Both are correct, they name different things.
+- `visudo`, never `vi /etc/sudoers`. A broken sudoers locks everyone out and you cannot sudo to fix it.
+- If `which ansible` shows a different directory, put that one in `secure_path`.

@@ -78,18 +78,14 @@ docker ps --filter name=kkloud
 
 | Command | Why |
 |:--|:--|
-| `docker exec kkloud <command>` | Runs a command inside the already-running `kkloud` container without replacing its main process. The container name is required before the command. |
-| `apt update` | Refreshes the container's package index so `apt` can locate the current `apache2` package. |
-| `Listen 3001` | Makes Apache accept connections on port `3001`. With no IP before the port, Apache listens on all available interfaces. |
-| `<VirtualHost *:3001>` | Moves the default site to the same port. The `*` matches every local interface, including loopback and the container IP. |
-| `apache2ctl configtest` | Checks the configuration for syntax errors before the running service is restarted. |
-| `service apache2 restart` | Applies the new port configuration and leaves Apache running. |
-| `curl` through the container IP | Proves Apache is reachable on `3001` through a non-loopback interface, satisfying the all-interface requirement. |
-| Final `docker ps` | Confirms that configuring the service did not stop the `kkloud` container. |
+| `docker exec kkloud <command>` | Runs inside the running container without replacing its main process. The name comes before the command. |
+| `Listen 3001` | No IP before the port means all interfaces. `Listen 127.0.0.1:3001` would bind loopback only and fail the requirement. |
+| `<VirtualHost *:3001>` | The default site has to move to the same port. Editing `ports.conf` alone is not enough. |
+| `apache2ctl configtest` | Catches syntax errors before the restart. |
+| `curl` via the container IP | Proves it answers on a non-loopback interface, which is what the task asks. |
 
 ## Notes
 
-- `docker exec -it sh` is incomplete. The correct interactive form is `docker exec -it kkloud sh`; the solution uses one-shot commands, so `-it` is unnecessary.
-- Editing only `/etc/apache2/ports.conf` is not enough. The default site's `<VirtualHost>` declaration must use the same port.
-- `Listen 127.0.0.1:3001` would bind only to loopback and fail the requirement. `Listen 3001` listens on all container interfaces.
-- These changes live in the container's writable layer. Removing and recreating the container from its original image would discard them.
+- `docker exec -it sh` is incomplete; it needs the container name: `docker exec -it kkloud sh`.
+- These changes live in the container's writable layer. Recreating the container from the image loses them.
+- `-it` is unnecessary for one-shot commands like these.

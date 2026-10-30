@@ -87,21 +87,13 @@ sudo git status
 
 | Command | Why |
 |:--|:--|
-| `git remote -v` | Lists every remote with its fetch and push URLs. Running it before and after the change proves that `dev_media` was added without replacing the existing `origin`. |
-| `git remote add dev_media /opt/xfusioncorp_media.git` | Stores the name `dev_media` as an alias for the new bare repository path. Future commands can use the short name instead of repeating the full path. |
-| `git remote get-url dev_media` | Reads back the configured URL and catches spelling or path mistakes before anything is pushed. |
-| `git checkout master` | Ensures that the file is committed to the branch named in the requirement, rather than whichever branch happened to be checked out. |
-| `cp /tmp/index.html .` | Copies the supplied file into the repository's working tree. The final `.` means the current directory, `/usr/src/kodekloudrepos/media`. |
-| `git add index.html` | Stages the copied file so its content will be included in the next commit. |
-| `git commit -m "Add index.html"` | Records the staged file in the local `master` branch history. |
-| `git push dev_media master` | Sends the local `master` branch to the new remote named `dev_media`. Pushing to `origin` would update `/opt/media.git`, which is not the requested destination. |
-| `git ls-remote --heads dev_media master` | Reads `master` directly from the new remote, proving that the push reached `/opt/xfusioncorp_media.git`. |
+| `git remote add dev_media <path>` | Stores a name for the new repo's path. Nothing is copied yet. |
+| `git remote -v` before and after | Proves `dev_media` was added without replacing `origin`. |
+| `git push dev_media master` | Pushing to `origin` would update `/opt/media.git`, the wrong destination. |
+| `git ls-remote --heads dev_media master` | Reads master from the new remote, proving the push arrived. |
 
 ## Notes
 
-- A **remote** is a local name for another Git repository. It is not necessarily on another machine; both remotes in this task are paths on the same storage server.
-- `origin` is only the conventional name Git assigns to the source of a clone. It is not a special Git keyword. The newly required remote is named `dev_media`, so the correct destination is `git push dev_media master`.
-- Adding `dev_media` does not copy commits by itself. It only records the URL. Data moves when commands such as `fetch`, `pull`, or `push` use that remote.
-- The command intentionally omits `-u`. The local `master` branch may already track `origin/master`, and this one-time push should not silently change its upstream to `dev_media/master`.
-- If `index.html` already exists, `cp` replaces its contents and `git status --short` shows `M index.html` instead of `?? index.html`. Either is valid as long as the supplied file is staged and committed.
-- The repository is root-owned in this lab, so `sudo` is used for the copy and Git commands. Without it, Git may report dubious ownership or the copy may fail with `Permission denied`.
+- A remote is just a local name for another repo. Both of these are paths on the same box.
+- `origin` is a convention, not a keyword. The task names `dev_media`, so that is where it goes.
+- No `-u` on purpose: master may already track `origin/master`, and this push should not change that.

@@ -90,15 +90,13 @@ ssh natasha@ststor01 ls -lah /archives/
 
 | Command | Why |
 |:--|:--|
-| `yum install -y zip` | Not installed by default, and the script is not allowed to use sudo, so it has to happen beforehand. |
-| `ssh-keygen` + `ssh-copy-id` as `steve` | The key must belong to whoever **runs** the script. A key set up for `thor` on the jump host does nothing for `steve` on stapp02. |
-| `chown -R steve:steve /archives` | No sudo inside the script, so `steve` needs write access to `/archives` on his own. |
-| `#!/bin/bash` | Pins the interpreter. Without it, which shell runs the file depends on who calls it, and cron can end up using `sh`. |
-| `zip -r` | `-r` means recursive. Without it, zip grabs only the empty directory and skips everything inside. With it, zip goes into the directory and picks up every file and subfolder. |
+| keys set up as `steve` | The key must belong to whoever **runs** the script, not to thor on the jump host. |
+| `chown -R steve:steve /archives` | No sudo inside the script, so steve needs write access himself. |
+| `#!/bin/bash` | Pins the interpreter. Without it cron can end up running the file with `sh`. |
+| `zip -r` | Recursive. Without `-r` zip takes the directory and skips everything in it. |
 
 ## Notes
 
-- `${SSH_HOST}`, not `{$SSH_HOST}`. The second one expands to the literal `{ststor01}` and scp fails with `hostname contains invalid characters`. One character apart, easy to miss.
-- `chown` takes a user, `chmod` takes a mode. `chmod -R steve /archives` just errors with `invalid file mode`.
-- If the script asks for a password, the key is not set up for the user actually running it.
-- Running it again does not replace the zip, it updates the existing archive in place. Files deleted from the source stay inside. Remove the old archive first if you need a clean one each run.
+- `${SSH_HOST}`, not `{$SSH_HOST}`. The second expands to a literal `{ststor01}` and scp fails.
+- `chown` takes a user, `chmod` takes a mode.
+- Re-running updates the existing zip in place, so deleted files stay inside. Remove it first for a clean archive.

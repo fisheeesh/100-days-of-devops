@@ -90,21 +90,14 @@ telnet stapp01 6100
 
 | Command | Why |
 |:--|:--|
-| `telnet stapp01 6100` | Tests the raw TCP connection with no HTTP involved. If telnet fails, the problem sits below Apache: the service, the port, or the firewall. |
-| `systemctl status httpd` | `failed` is not the same as `inactive`. Something tried to start it and it crashed, so find out why before just starting it again. |
-| `netstat -tulnp` | Lists every listening socket and which process owns it. `-t` TCP, `-u` UDP, `-l` listening only, `-n` numeric (no DNS or service-name lookups), `-p` owning PID and program. `-p` needs sudo to see other users' processes. |
-| `stop` + `disable sendmail` | Two processes cannot listen on the same port. `disable` matters too: otherwise sendmail starts again at the next boot and races httpd for 6100. Whichever binds first wins, so you could end up back where you started. |
-| `start` + `enable httpd` | It was `failed` and `disabled`. Starting fixes it now, enabling makes it survive a reboot. |
-| `iptables -L -n --line-numbers` | Rules are checked top to bottom and the first match wins. You need the numbers to insert in the right spot. |
-| `iptables -I INPUT 4` | `-I` inserts at a position. `-A` appends to the end, below the REJECT, where the rule never gets reached. `-A` also does not take a position, so `-A INPUT 4` is a syntax error. |
-| `--dport 6100` only | "Without compromising security" means opening the one port. Flushing the rules or deleting the REJECT would also make curl work, and would defeat the point of the task. |
+| `telnet stapp01 6100` | Raw TCP, no HTTP. If telnet fails the problem is below Apache: service, port or firewall. |
+| `netstat -tulnp` | Every listening socket and who owns it. `-t` TCP, `-u` UDP, `-l` listening, `-n` numeric, `-p` PID. |
+| `stop` + `disable sendmail` | Two processes cannot hold one port. Without `disable` it restarts at boot and races httpd. |
+| `iptables -I INPUT 4` | `-I` inserts at a position. `-A` appends below the REJECT where it is never reached. |
 
 ## Notes
 
-- **"No route to host" was not a routing problem.** Rule 5 rejects with `icmp-host-prohibited`, and the client reports that ICMP reply as `No route to host`. The real cause was the firewall. For comparison, `Connection refused` usually means the host answered but nothing is listening, and a hang or timeout usually means a DROP rule.
-- **Rule 3 looks like "accept everything" but is not.** `-L -n` hides the interface columns. `sudo iptables -L -n -v` adds `in` and `out` columns, and rule 3 shows `lo` under `in`, so it matches loopback only. That is why curl worked on stapp01 but failed from the jump host.
-- **`iptables -I` does not survive a reboot**, or by default even `systemctl restart iptables`, which reloads the saved file. Save it with `sudo service iptables save`, which writes `/etc/sysconfig/iptables`.
-- httpd's own log names the port conflict directly: `sudo journalctl -u httpd` shows `(98)Address already in use: AH00072: make_sock: could not bind to address [::]:6100`. netstat then tells you who holds it.
-- sendmail only bound `127.0.0.1:6100`, while httpd wanted `[::]:6100` (every address, IPv4 included). They overlap, so the bind still fails.
-- `ss -tulnp` does the same job as netstat and is installed by default. netstat comes from `net-tools`, which is deprecated.
-- `systemctl disable --now sendmail` and `enable --now httpd` do each pair in one command.
+- **"No route to host" was the firewall, not routing.** Rule 5 rejects with `icmp-host-prohibited` and the client reports that as `No route to host`.
+- **Rule 3 is not "accept everything".** `-L -n` hides the interface column; `-v` shows `lo` under `in`. That is why curl worked on the box but not from the jump host.
+- `iptables -I` is lost on reboot. `sudo service iptables save` writes `/etc/sysconfig/iptables`.
+- `journalctl -u httpd` names the conflict directly: `(98)Address already in use`.

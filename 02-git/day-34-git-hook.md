@@ -131,23 +131,17 @@ git status
 
 | Command or code | Why |
 |:--|:--|
-| `/opt/beta.git/hooks/post-update` | Receive-side hooks belong in the bare repository that accepts pushes. A hook placed in the working clone would run only for local operations and would not react to pushes received by `origin`. |
-| `for ref in "$@"` | Git passes every updated ref to `post-update` as a separate argument. The loop handles a push that updates more than one branch or tag. |
-| `if [ "$ref" = "refs/heads/master" ]` | Restricts release creation to pushes that actually update `master`. A feature-branch-only push must not create a release tag. |
-| `date +%Y-%m-%d` | Produces the required ISO-style date used in a tag such as `release-2026-10-05`. The value is calculated when the push reaches the server. |
-| `git show-ref --verify --quiet` | Checks whether today's tag already exists. This makes the hook safe when `master` is pushed more than once on the same date. |
-| `git tag "$tag_name" "$ref"` | Creates a lightweight tag on the newly updated `master` commit explicitly. Using only `git tag "$tag_name"` would rely on the bare repository's `HEAD` pointing to the correct branch. |
-| `chmod +x` | Git ignores a hook that is not executable. This changes only the new hook file's executable bit, not the repository or directory permissions prohibited by the task. |
-| `sh -n` | Parses the shell script without executing it. It catches syntax errors without creating the release tag before the real push test. |
-| `git push origin master` | Publishes the merge and triggers the server's `post-update` hook after the remote ref has been updated. |
-| `git fetch origin --tags` | Downloads the server-created tag into the working clone. A normal push does not automatically copy a tag created afterward by a remote hook back to the client. |
+| `/opt/beta.git/hooks/post-update` | Receive-side hooks belong in the bare repo that accepts pushes. One in a clone would never see them. |
+| `if [ "$ref" = "refs/heads/master" ]` | `post-update` gets every updated ref as an argument. Without the check, a feature-branch push would also tag. |
+| `git show-ref --verify --quiet` | Checks whether today's tag exists, so a second push on the same day does not fail. |
+| `git tag "$tag_name" "$ref"` | Tags the commit that was just pushed. Without the ref it relies on the bare repo's `HEAD`. |
+| `chmod +x` | Git silently ignores a hook that is not executable. |
+| `git fetch origin --tags` | A tag created by a server hook does not come back on its own. |
 
 ## Notes
 
-- `post-update` runs once after all refs in a successful receive operation are updated. Its arguments are ref names such as `refs/heads/master`; it does not receive old and new commit IDs like `post-receive` does.
-- The hook must be installed before pushing the merge. If the push happens first, there is no master update left to trigger the required test.
-- The tag is created directly inside `/opt/beta.git`, so a separate `git push --tags` is not needed. The hook has already written the tag to the remote repository.
-- `git fetch -a` means `git fetch --append`; it is not the command for retrieving every remote or specifically retrieving tags. Use `git fetch origin --tags` here.
-- A second master push on the same day cannot create another tag with the same name. The existence check leaves the original daily release tag unchanged and lets the hook exit successfully.
-- This script creates a lightweight tag. The task asks only for the name, not an annotated tag with a message and tagger metadata.
-- No `chown`, recursive `chmod`, or directory permission changes are necessary. The task is performed entirely as `natasha`; only the new hook itself receives its required executable bit.
+- `post-update` runs once after all refs are updated, and receives ref names only. `post-receive` is the one that gets old and new commit IDs.
+- Install the hook **before** pushing the merge. Push first and there is no master update left to trigger it.
+- The tag is written directly inside `/opt/beta.git`, so no `git push --tags` is needed.
+- `git fetch -a` is `--append`, not "all tags". Use `git fetch origin --tags`.
+- This is a lightweight tag. The task asks for the name only, not an annotated tag.

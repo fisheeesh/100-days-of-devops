@@ -31,15 +31,11 @@ ls -lah /tmp
 
 | Command | Why |
 |:--|:--|
-| `ls -lah /tmp` | Read the current mode before touching it. Here it was `----------`, so the fix is adding bits, not editing them. |
-| `chmod a+rx` | `a` is all three classes at once (user, group, other), which is what "all users" in the task means. `+` adds bits without clearing the ones already set. |
-| `r` as well as `x` | A shell script is not run directly by the kernel. The shell has to open and read the file to interpret it, so execute alone is not enough. |
-| `sudo` | The file is owned by `root`, and only the owner or root can change a file's mode. |
-| `ls -lah /tmp` again | Confirms `-r-xr-xr-x`. This is what the validator reads. |
+| `ls -lah /tmp` | Mode was `----------`, so the fix is adding bits, not editing them. |
+| `chmod a+rx` | `a` is user, group and other at once. `+` adds without clearing what is set. |
+| `r` as well as `x` | The shell has to read a script to interpret it. `x` alone gives Permission denied. |
 
 ## Notes
 
-- `a+rx` vs `chmod 555`: both land on the same mode here, but `+` is additive and `555` sets absolutely, wiping anything already there. Additive is the safer habit.
-- A compiled binary only needs `x`. Scripts need `r+x`. Easy one to get bitten by.
-- Nobody gets write. The task only asked for execute, and `/tmp` is world-writable enough as it is.
-- The task text says App Server 1 in the first sentence and App Server 3 in the second. Go with wherever the file actually is; `ls /tmp` tells you.
+- A compiled binary runs with `x` alone. Scripts need `r` too.
+- The task says App Server 1 in one sentence and App Server 3 in the next. Go where the file is.

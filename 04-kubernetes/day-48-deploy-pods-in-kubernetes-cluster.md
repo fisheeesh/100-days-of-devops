@@ -65,20 +65,15 @@ kubectl get pod pod-httpd \
 
 ## Why
 
-| Field or command | Why |
+| Field | Why |
 |:--|:--|
-| `apiVersion: v1` | Pods belong to Kubernetes' core `v1` API. |
-| `kind: Pod` | Requests a standalone Pod rather than a Deployment or another controller. |
-| `metadata.name` | Sets the exact pod name `pod-httpd`. |
-| `metadata.labels.app` | Attaches the required `app=httpd_app` label to the pod. Labels belong under pod metadata, not inside the container definition. |
-| `containers[].name` | Sets the required container name independently of the pod name. |
-| `image: httpd:latest` | Uses the exact repository and tag required by the task. |
-| `kubectl wait` | Confirms the container started successfully instead of only confirming that the API accepted the manifest. |
-| JSONPath verification | Reads the three exact values from the live Kubernetes object without unrelated output. |
+| `metadata.labels.app` | Labels belong under **pod** metadata, not inside the container definition. |
+| `containers[].name` | The container name is set separately from the pod name. The task fixes both. |
+| `kubectl wait` | Confirms the container actually started, not just that the API accepted the YAML. |
+| JSONPath check | Reads the three required values straight out of the live object. |
 
 ## Notes
 
-- Run these commands on the jump host. Its kubeconfig is already prepared, so no SSH connection to a cluster node is required.
-- `kubectl run pod-httpd --image=httpd:latest --labels=app=httpd_app` creates the correct pod and label, but names its container `pod-httpd`. It therefore misses the required `httpd-container` name unless additional overrides are used.
-- `kubectl apply` is safe to run again with the same manifest; it updates the existing object instead of failing because the name already exists.
-- A standalone pod is not managed by a Deployment. If it is deleted, Kubernetes does not create a replacement.
+- `kubectl run pod-httpd --image=httpd:latest --labels=app=httpd_app` gets the pod and label right but names the container `pod-httpd`, missing the required `httpd-container`.
+- A standalone pod has no controller. Delete it and nothing replaces it.
+- `kubectl apply` is safe to re-run; it updates instead of failing on a duplicate name.

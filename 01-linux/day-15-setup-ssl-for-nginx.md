@@ -111,22 +111,14 @@ curl -Ik https://stapp03/
 
 | Command | Why |
 |:--|:--|
-| `mkdir /etc/nginx/ssl` + `mv` | `/tmp` is world-writable and gets cleaned out. Anything nginx needs at startup has to live somewhere stable. |
-| `chmod 600` on the key only | The private key is the secret. The certificate is public by design and gets sent to every client during the handshake, so `644` on it is correct, not sloppy. |
-| `conf.d/nautilus.conf` | `nginx.conf` has `include /etc/nginx/conf.d/*.conf;` inside its `http` block, so any `.conf` file dropped there is picked up. You never edit the main file. |
-| `ssl_certificate` + `ssl_certificate_key` | Both are required. The cert proves who you are, the key does the handshake maths. One without the other fails the config test. |
-| `nginx -t` | Parses the config without applying it. Reloading a broken config is how you take a live site down. |
-| `systemctl reload nginx` | Reload re-reads the config and keeps existing connections. Restart drops them. `nginx -s reload` does the same job, so running reload *and* restart is one step too many. |
-| `curl -k` | The cert is self-signed, so no CA vouches for it and curl refuses by default with error 60. `-k` skips that check. `-I` sends a HEAD request, so you get status and headers only. |
+| `chmod 600` on the key only | The key is the secret. The cert is sent to every client during the handshake, so `644` on it is correct. |
+| `conf.d/nautilus.conf` | `nginx.conf` includes `conf.d/*.conf` inside its `http` block, so you never edit the main file. |
+| `nginx -t` | Parses without applying. Reloading a broken config takes the site down. |
+| `curl -k` | Self-signed means no CA vouches for it, so curl refuses with error 60. `-k` skips the check, `-I` sends HEAD. |
 
 ## Notes
 
-- Error 60 is not a broken config, it is curl doing its job. Self-signed means no trusted CA signed the cert. That is exactly why the task's own test command is `curl -Ik`.
-- `mv` keeps the SELinux label from `/tmp`. If SELinux is enforcing, nginx can be denied the key even with the modes right. `ls -Z` shows the label, `sudo restorecon -Rv /etc/nginx/ssl` fixes it.
-- nginx 1.25.1 deprecated `listen ... http2`. On newer builds you write `http2 on;` as its own directive instead. The `listen` form above is right for the version on this box, which is why `nginx -t` passed clean.
-- `echo 'Welcome!' | sudo tee /usr/share/nginx/html/index.html` replaces the file in one line. The vi route (`gg` then `dG` then insert) does the same thing.
-- If `curl -k https://localhost` works on the box but the jump host hangs, it is the firewall on 443, not nginx. Same shape as Day 12 and Day 13.
-- Check a cert and key are actually a pair before debugging anything else. Matching hashes mean they belong together:
-  `sudo openssl x509 -noout -modulus -in /etc/nginx/ssl/nautilus.crt | openssl md5`
-  `sudo openssl rsa  -noout -modulus -in /etc/nginx/ssl/nautilus.key | openssl md5`
-- The document root in the server block (`/usr/share/nginx/html`) has to match where you write `index.html`. Change one and you change both.
+- Error 60 is curl doing its job, not a broken config. That is why the task's own test is `curl -Ik`.
+- `mv` keeps the SELinux label from `/tmp`. If SELinux is enforcing, nginx is denied the key even with the modes right: `restorecon -Rv /etc/nginx/ssl`.
+- nginx 1.25.1 deprecated `listen ... http2` in favour of a separate `http2 on;` directive.
+- Reload and restart do the same job here. Running both is one step too many.

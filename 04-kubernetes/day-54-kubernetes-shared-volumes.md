@@ -75,22 +75,15 @@ kubectl exec volume-share-devops -c volume-container-devops-2 -- \
 
 ## Why
 
-| Field or command | Why |
+| Field | Why |
 |:--|:--|
-| `emptyDir: {}` | Creates an initially empty directory on the node for the lifetime of this Pod. |
-| `volume-share` | The same named volume is referenced by both containers, so it is the shared storage. |
-| Different `mountPath` values | Each container can expose the same volume at the path required by its application. |
-| `debian:latest` | Uses the exact image and explicitly specified tag requested. |
-| `command: ["sleep", "infinity"]` | Keeps the otherwise idle Debian containers running for the test. |
-| `kubectl exec -c ...` | Selects the intended container because this Pod contains two containers. |
+| `emptyDir: {}` | An empty directory on the node that lives as long as the Pod. |
+| One `volume-share` in both containers | Mounting the same named volume is what makes it shared. |
+| Different `mountPath` values | Each container sees the same directory at whatever path it needs. |
+| `kubectl exec -c ...` | Names the container, since the Pod has two. |
 
 ## Notes
 
-- The two paths are different container-local views of the same `volume-share` directory. A file
-  written to `/tmp/official/official.txt` is therefore available as `/tmp/games/official.txt`.
-- `emptyDir` data remains while the Pod runs, including when an individual container restarts, but
-  it is deleted when the Pod is removed or permanently moved to another node.
-- `emptyDir` uses node storage by default. It can consume memory instead with
-  `emptyDir: { medium: Memory }`, but that is not required here.
-- `kubectl run ... --dry-run=client -o yaml` is useful for a starter manifest, but it cannot
-  generate this complete multi-container volume configuration by itself.
+- Both paths are views of one directory, so `/tmp/official/official.txt` appears as `/tmp/games/official.txt`.
+- `emptyDir` survives a container restart but dies with the Pod.
+- `command: ["sleep", "infinity"]` keeps otherwise idle containers alive for the test.

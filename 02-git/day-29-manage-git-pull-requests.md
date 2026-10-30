@@ -56,15 +56,12 @@ Everything else is in the Gitea UI:
 
 | Command | Why |
 |:--|:--|
-| `git branch -a` | Shows the story branch exists on the remote (`remotes/origin/story/fox-and-grapes`). If it is not there, max never pushed and there is nothing to open a PR from. |
-| `git log --oneline` | Confirms the history is what the task describes before you go near the UI. |
-| `git log -1 --format='%an <%ae>%n%s'` | Prints author name, email and subject directly, which is exactly the "validate author info, commit message" step, rather than eyeballing full log output. |
+| `git branch -a` | Confirms the story branch exists on the remote. If it does not, there is nothing to open a PR from. |
+| `git log -1 --format='%an <%ae>%n%s'` | Author, email and subject directly, which is the "validate author info" step. |
 
 ## Notes
 
-- A pull request is a **forge** feature (Gitea, GitHub, GitLab), not a git one. There is no `git pull-request` command. What Gitea runs at the end is an ordinary git merge, performed on the server.
-- The direction is the part people get backwards. Base is `master` (destination), compare is `story/fox-and-grapes` (source). Swapping them proposes merging master into the story branch, which is not what is wanted.
-- The reviewer step is the actual point of the task. The rule is nobody pushes to `master` directly, so the review is the gate the change has to pass. On a real protected branch max could not approve his own PR.
-- Gitea offers merge commit, rebase and squash. A plain merge commit is the right default here.
-- After the merge, `master` on the server holds the story. The clone in max's home is still behind until `git pull`.
-- Day 23 was the other route into a repo: fork it when you have no write access, then open a PR from the fork. Here max can push a branch to the same repo, so no fork is needed.
+- A pull request is a **forge** feature, not a git one. What Gitea runs at the end is an ordinary merge on the server.
+- Direction is what people get backwards: base is `master` (destination), compare is `story/fox-and-grapes` (source).
+- The reviewer step is the point of the task. Nobody pushes to master, so review is the gate.
+- Day 23 was the other route: fork when you have no write access. Here max can push a branch to the same repo.

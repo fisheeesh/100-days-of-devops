@@ -75,21 +75,14 @@ kubectl rollout status deployment/httpd --timeout=60s
 
 ## Why
 
-| Field or command | Why |
+| Field | Why |
 |:--|:--|
-| `apiVersion: apps/v1` | Deployments belong to the stable `apps/v1` API. |
-| `kind: Deployment` | Creates a controller that maintains the requested pods. |
-| `metadata.name: httpd` | Sets the exact Deployment name required by the task. |
-| `replicas: 1` | Runs one application pod; three replicas are unnecessary because the task does not request them. |
-| `selector.matchLabels` | Tells the Deployment which pods it manages. |
-| `template.metadata.labels` | Labels the created pods. These labels must match the Deployment selector. |
-| `image: httpd:latest` | Uses the explicitly required image and tag. |
-| `kubectl rollout status` | Confirms the Deployment successfully created a ready pod. |
+| `apiVersion: apps/v1` | Deployments live in `apps/v1`, not core `v1`. |
+| `selector.matchLabels` | Tells the Deployment which pods are its own. Must match the template labels or the API rejects it. |
+| `kubectl rollout status` | Confirms the Deployment actually produced a ready pod. |
 
 ## Notes
 
-- Run all commands on the jump host; its kubeconfig is already configured for the cluster.
-- A Deployment provides self-healing behavior. If its pod is deleted, the Deployment creates a replacement.
-- `template.metadata.name` should be omitted. A Deployment generates unique pod names from its own name and ReplicaSet hash.
-- Extra Deployment labels such as `type: frontend` are valid but are not required for this task.
-- `kubectl apply` is useful when keeping a reusable manifest; `kubectl create deployment` is the shortest valid solution for this requirement.
+- A Deployment self-heals: delete its pod and it makes another. That is the difference from Day 48.
+- Leave out `template.metadata.name`. Pods are named from the Deployment and ReplicaSet hash.
+- `kubectl create deployment httpd --image=httpd:latest` is the shortest valid answer; the manifest is worth keeping if you want it reusable.

@@ -29,11 +29,11 @@ grep kareem /etc/passwd
 
 | Command | Why |
 |:--|:--|
-| `ls -l /sbin/nologin` | `useradd` won't reject a bad shell path, so you'd get a broken account. On RHEL `/sbin` is a symlink to `/usr/sbin`, so both paths work. |
-| `useradd -s <shell>` | `-s` sets the login shell. Without it you get the default from `/etc/default/useradd` (usually `/bin/bash`). |
-| `grep kareem /etc/passwd` | The check is on field 7 of the passwd entry, which is exactly what the validator reads. |
+| `ls -l /sbin/nologin` | `useradd` accepts any string as a shell. Check the path exists or you get a broken account. |
+| `useradd -s` | Without `-s` you get `/bin/bash` from `/etc/default/useradd`. |
+| `grep kareem /etc/passwd` | Field 7 is the login shell. That is what the validator reads. |
 
 ## Notes
 
-- `/sbin/nologin` refuses the login and prints a message. `/bin/false` just exits 1, no message. Either is non-interactive; `nologin` is the conventional choice.
-- Non-interactive = the account can own files and run services, but nobody can get a shell with it. Standard for service/agent accounts.
+- `/sbin/nologin` refuses and prints a message. `/bin/false` just exits 1. Either works.
+- The point: an account that can own files and run a service, but never get a shell.

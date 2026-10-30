@@ -116,20 +116,14 @@ curl http://stapp03:8096/index.php
 
 | Command | Why |
 |:--|:--|
-| `root /var/www/html;` | Requirement a. The stock nginx root is `/usr/share/nginx/html`, so without this the app's files are never found and you get 404. |
-| Raw PHP in the first `curl` | Proof of what nginx does on its own: it serves `.php` as a plain file. PHP only runs once a handler is wired up. Seeing the source is the expected halfway point, not a bug. |
-| `dnf module reset` then `enable php:remi-8.2` | The distro ships its own php module stream. Reset clears that choice so the Remi 8.2 stream can be selected; without the reset the enable is refused. |
-| `listen = ` in `www.conf` | This is the socket php-fpm creates. Requirement b names the exact path, so it has to match what nginx dials. |
-| `mkdir -p /var/run/php-fpm` | php-fpm will not create a missing parent directory for its socket; it fails to start instead. |
-| `include fastcgi.conf;` | It sets `SCRIPT_FILENAME` to `$document_root$fastcgi_script_name` for you. `fastcgi_params` (the other file nginx ships) does **not**, and leaving it out gives php-fpm nothing to run: `File not found`. |
-| `try_files $uri =404;` | Only hands real files to PHP. Without it a request for a non-existent `.php` path still gets passed to php-fpm. |
-| `nginx -t` before reload | Parses the config without applying it. Same habit as Day 15, 16 and 19. |
+| `root /var/www/html;` | The stock nginx root is `/usr/share/nginx/html`, so without this the app's files are never found. |
+| Raw PHP in the first `curl` | nginx alone serves `.php` as a plain file. Seeing the source is the expected halfway point. |
+| `dnf module reset` then `enable php:remi-8.2` | The distro ships its own php stream. Without the reset the enable is refused. |
+| `include fastcgi.conf;` | Sets `SCRIPT_FILENAME` for you. `fastcgi_params` does not, and php-fpm answers `File not found`. |
 
 ## Notes
 
-- `sudo nginx -s reload` and `sudo systemctl reload nginx` are the same thing. Running a reload *and* a restart is one step too many.
-- `502 Bad Gateway` means nginx is fine and it could not talk to php-fpm. Check in order: is php-fpm running, does the socket path in `www.conf` match `fastcgi_pass` exactly, and can the nginx user open the socket. `/var/log/nginx/error.log` names which one.
-- On a permission error, set the socket's owner in `www.conf`: `listen.owner = nginx`, `listen.group = nginx`, `listen.mode = 0660`. RHEL's stock `www.conf` usually ships `listen.acl_users = apache,nginx`, which already covers it.
-- `/var/run` is a symlink to `/run`, which is a tmpfs and is wiped on reboot. The php-fpm unit recreates its directory on start (`RuntimeDirectory=`), so the socket comes back on its own.
-- A blank page or a download instead of text usually means the `location ~ \.php$` block never matched. `curl -I` shows the `Content-Type` nginx decided on.
-- If SELinux is enforcing and you get 502 with a permission error in the log, that is the next suspect. Same family of problem as Days 15 and 19.
+- `mkdir -p /var/run/php-fpm` first: php-fpm will not create the parent directory for its socket, it fails to start.
+- `502 Bad Gateway` means nginx could not reach php-fpm. Check in order: php-fpm running, socket path matches `fastcgi_pass`, nginx can open the socket. `/var/log/nginx/error.log` says which.
+- On a permission error set `listen.owner`/`listen.group` to `nginx` in `www.conf`. RHEL's stock file usually ships `listen.acl_users = apache,nginx` already.
+- `try_files $uri =404;` keeps non-existent `.php` paths from reaching php-fpm at all.

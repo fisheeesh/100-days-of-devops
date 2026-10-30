@@ -32,15 +32,13 @@ systemctl status sshd
 
 | Command | Why |
 |:--|:--|
-| `sudo -i` | Root shell, so you stop prefixing every command. `sshd_config` is `0600 root:root`, so a normal user can't even read it. |
-| `vi /etc/ssh/sshd_config` | `PermitRootLogin no` blocks root from authenticating over SSH. Admins log in as themselves, then `sudo`, so actions are attributable. |
-| `sshd -t` | Syntax check. Restarting on a broken config kills sshd and you lose the box. |
-| `systemctl restart sshd` | Config is read at startup, so the edit does nothing until the service reloads. |
-| `systemctl status sshd` | Confirms it actually came back up. |
+| `PermitRootLogin no` | Admins log in as themselves then `sudo`, so the audit log names a person. |
+| `sshd -t` | Syntax check. Restarting on a broken config locks you out of the box. |
+| `systemctl restart sshd` | Config is only read at startup. Existing sessions survive the restart. |
 
 ## Notes
 
-- `ssh_config` = **client** side, this box connecting out. `sshd_config` = **server** side, others connecting in. You want the `d` one.
-- First matching directive wins in `sshd_config`. If `PermitRootLogin yes` already exists, edit that line, don't append a second one.
-- `sshd_config.d/*.conf` drop-ins can override the main file if it has an `Include` line at the top. Check there if the setting won't take.
-- Values: `yes` · `no` · `prohibit-password` (keys only) · `forced-commands-only`.
+- `ssh_config` is the client side, `sshd_config` the server side. You want the `d`.
+- First match wins. Edit the existing `PermitRootLogin` line, do not append a second.
+- `sshd_config.d/*.conf` drop-ins override the main file if it has an `Include`.
+- Values: `yes` · `no` · `prohibit-password` · `forced-commands-only`.

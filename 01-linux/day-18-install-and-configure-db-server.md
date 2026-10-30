@@ -59,20 +59,17 @@ SHOW DATABASES;
 
 | Command | Why |
 |:--|:--|
-| `sudo mariadb` | On MariaDB 10.4 and newer, `root@localhost` logs in with `unix_socket`: if you are root on the OS, you are root in the database. No password. Same idea as PostgreSQL's `peer` login on Day 17. |
-| `'kodekloud_cap'@'localhost'` | A MariaDB account is a name **plus** the host it may connect from. `localhost` means this box only. The same name at a different host is a separate account with its own password and grants. |
-| `ON kodekloud_db5.*` | `.*` is every table in that database, including ones created later. Unlike the Day 17 PostgreSQL grant, this really does cover creating, reading and dropping tables. Other databases stay off limits. |
-| `SHOW GRANTS` | The only reliable check. A user holding nothing but `USAGE` can log in and do nothing else, which looks fine until the app tries to read a table. |
+| `sudo mariadb` | On 10.4+ `root@localhost` uses `unix_socket`: OS root is database root, no password. |
+| `'kodekloud_cap'@'localhost'` | An account is a name **plus** the host it may connect from. Same name, different host is a different account. |
+| `ON kodekloud_db5.*` | Every table in that database, including future ones. Other databases stay off limits. |
+| `SHOW GRANTS` | The only reliable check. A user with only `USAGE` can log in and do nothing. |
 
 ## Notes
 
-- A `GRANT` to a user that does not exist fails. A typo like `'kodekloud_cp'` (missing the `a`) gives `ERROR 1133: Can't find any matching row in the user table`, because `NO_AUTO_CREATE_USER` is in 10.5's default `sql_mode`. The real user is left with `USAGE` only and gets `ERROR 1044: Access denied` on `kodekloud_db5`. When you paste several statements at once, that error scrolls past easily, so always finish with `SHOW GRANTS`.
-- `FLUSH PRIVILEGES` is only needed when you edit the `mysql.*` tables by hand. `CREATE USER` and `GRANT` take effect immediately.
-- `'localhost'` is enough for this check, but the application will connect from the app servers over the network, which does not match `localhost`. A real deployment also needs `'kodekloud_cap'@'%'` (or the app servers' host) with its own `CREATE USER` and `GRANT`.
-- Creating only the `'%'` account has its own trap: if an anonymous `''@'localhost'` account exists, local logins as `kodekloud_cap` match that first and get `Access denied`. `SELECT user, host FROM mysql.user;` shows what exists.
-- Quote the name and the host separately. `'kodekloud_cap'@'localhost'` is right. `'kodekloud_cap@localhost'` creates a user literally named `kodekloud_cap@localhost`.
-- `-p` with nothing after it makes the client prompt for the password, so it stays out of your shell history.
-- `mariadb` and `mysql` are the same client on 10.5.
+- A `GRANT` to a user that does not exist fails with `ERROR 1133: Can't find any matching row in the user table`. A typo leaves the real user on `USAGE` only, so always finish with `SHOW GRANTS`.
+- `FLUSH PRIVILEGES` is only for hand-edited `mysql.*` tables. `CREATE USER` and `GRANT` apply immediately.
+- `'localhost'` passes the check, but the app connects over the network. A real deployment also needs `'kodekloud_cap'@'%'`.
+- Quote name and host separately. `'kodekloud_cap@localhost'` creates a user literally called that.
 
 | | PostgreSQL (Day 17) | MariaDB (Day 18) |
 |:--|:--|:--|

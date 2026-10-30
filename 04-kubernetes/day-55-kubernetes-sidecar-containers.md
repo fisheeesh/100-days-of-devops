@@ -74,22 +74,15 @@ kubectl logs -f webserver -c sidecar-container
 
 ## Why
 
-| Field or command | Why |
+| Field | Why |
 |:--|:--|
-| `initContainers` | Holds the sidecar definition; an init container with `restartPolicy: Always` is Kubernetes' native sidecar form. |
-| `restartPolicy: Always` | Keeps the sidecar running alongside the main application container instead of allowing it to finish before Nginx starts. |
-| `shared-logs` | Makes the same temporary log directory available to both containers. |
-| `/var/log/nginx` | Replaces Nginx's log directory with the shared volume, so the sidecar can read the log files. |
-| `while true; do ... sleep 30; done` | Repeatedly reads both log files on the required 30-second interval. |
-| `kubectl logs -f ... -c sidecar-container` | Follows only the sidecar container's standard output in a multi-container Pod. |
+| `initContainers` + `restartPolicy: Always` | Kubernetes' native sidecar form. Without the restart policy it would finish before nginx starts. |
+| `shared-logs` on `/var/log/nginx` | Replaces nginx's log directory with the shared volume so the sidecar can read it. |
+| `while true; do ... sleep 30; done` | The 30-second interval the task asks for. |
+| `kubectl logs -c sidecar-container` | Follows only the sidecar's output in a two-container Pod. |
 
 ## Notes
 
-- This is a native sidecar, not a regular application container: it belongs under
-  `initContainers` and needs `restartPolicy: Always`.
-- The first iteration can report that one or both log files do not yet exist; Nginx creates them
-  when it starts, and the loop continues to retry every 30 seconds.
-- `emptyDir` is temporary storage. The log files disappear when the Pod is deleted, which matches
-  the requirement to avoid persistent storage.
-- The sidecar currently writes its output to Kubernetes container logs. A production log agent
-  would normally forward that output to the chosen log-aggregation service.
+- A native sidecar goes under `initContainers`, not alongside the app container.
+- The first loop may report the log files missing. nginx creates them at startup and the loop retries.
+- `emptyDir` is temporary, which is exactly what "no persistent storage" asks for.

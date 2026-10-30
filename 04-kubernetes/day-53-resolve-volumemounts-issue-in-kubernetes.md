@@ -77,18 +77,16 @@ Open the **Website** button to confirm the PHP application responds.
 
 ## Why
 
-| Command or setting | Why |
+| Setting | Why |
 |:--|:--|
-| `nginx-config` | The ConfigMap shows Nginx's configured document root: `/var/www/html`. |
-| `shared-files` | An `emptyDir`-style shared volume only shares files when containers mount the same volume. |
-| `/var/www/html` in both containers | Gives Nginx and PHP-FPM the same view of the PHP files. |
-| `kubectl replace --force` | Deletes and recreates the Pod because its volume mounts are immutable. |
-| `kubectl wait` | Ensures the replacement Pod is ready before copying the application file. |
-| `kubectl cp ... -c nginx-container` | Targets the required Nginx container and its actual document root. |
+| `nginx-config` | The ConfigMap shows the real document root: `/var/www/html`. |
+| Same volume mounted in both containers | A shared volume only shares when both containers mount it at the path they actually use. |
+| `kubectl replace --force` | Volume mounts are immutable, so the pod has to be recreated. |
+| `kubectl cp ... -c nginx-container` | Names the container explicitly, since the pod has two. |
 
 ## Notes
 
-- The pod name is exactly `nginx-phpfpm`—not `nginx-php-fpm`.
-- Do not alter the `nginx-config` ConfigMap for this fix. It correctly points Nginx at `/var/www/html`; it is the PHP-FPM mount path that is wrong.
-- Removing generated metadata and `status` is necessary when turning output from `kubectl get -o yaml` into a createable manifest.
-- `kubectl replace --force` briefly removes the Pod. For production workloads, use a Deployment or another controller so replacement is managed and availability can be maintained.
+- The pod is `nginx-phpfpm`, not `nginx-php-fpm`.
+- Do not touch `nginx-config`. It is already correct; the PHP-FPM mount path is the broken part.
+- Strip generated metadata and `status` when turning `kubectl get -o yaml` output into a manifest you can re-create.
+- `replace --force` deletes the pod. Real workloads want a Deployment so replacement is managed.

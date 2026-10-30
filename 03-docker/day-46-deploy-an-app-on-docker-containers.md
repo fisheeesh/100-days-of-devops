@@ -95,25 +95,17 @@ docker exec mysql_blog sh -c \
 
 ## Why
 
-| Compose field or command | Why |
+| Field | Why |
 |:--|:--|
-| `php:8.3-apache` | Provides PHP together with Apache listening on container port `80`. |
-| `container_name` | Creates the exact `php_blog` and `mysql_blog` names required by the task. |
-| `"6000:80"` | Publishes the PHP/Apache site on host port `6000`. |
-| `/var/www/html:/var/www/html` | Makes the existing host application files available at the PHP Apache image's document root. |
-| `mariadb:latest` | Uses the requested MariaDB image. |
-| `"3306:3306"` | Publishes MariaDB's container port on the same host port. |
-| `MYSQL_DATABASE` | Creates `database_blog` during first-time database initialization. |
-| `MYSQL_USER` and `MYSQL_PASSWORD` | Create the required non-root application account and grant it access to `database_blog`. |
-| `MYSQL_ROOT_PASSWORD` | Supplies the mandatory root credential needed by the MariaDB image during initial startup. Without a root-password option, initialization fails. |
-| `/var/lib/mysql:/var/lib/mysql` | Stores database files in the required host directory so they persist beyond container replacement. |
-| `docker compose ... config` | Catches YAML, interpolation, and Compose-model errors before deployment. |
+| `container_name` | Creates the exact `php_blog` and `mysql_blog` names the task checks for. |
+| `MYSQL_ROOT_PASSWORD` | Mandatory for the MariaDB image. Without a root password option, initialisation fails outright. |
+| `MYSQL_DATABASE` / `MYSQL_USER` / `MYSQL_PASSWORD` | Create the database and the non-root account on first start. |
+| `/var/lib/mysql:/var/lib/mysql` | Keeps the database files on the host so they survive the container. |
+| `docker compose config` | Catches YAML and interpolation errors before deploying. |
 
 ## Notes
 
-- The required filename is `docker-compose.yml`. The spelling `docker-comopse.yml` is incorrect and will not be found when the platform redeploys the stack.
-- Compose automatically places both services on the same project network. The web container can address the database by its service name, `db`, on port `3306`; it should not use `localhost` for the database connection.
-- The MariaDB initialization variables apply only when `/var/lib/mysql` is empty. If that host directory already contains an initialized database, changing these variables does not recreate its users or databases.
-- The passwords are literal strings because they are quoted. Without quotes, `#` begins a YAML comment.
-- Plaintext Compose credentials are acceptable for this lab only. A production deployment should use Docker secrets or another secret manager.
-- The bind mounts point at existing host data. Do not delete or rewrite `/var/www/html` or `/var/lib/mysql` while preparing the Compose file.
+- Compose puts both services on one network, so PHP reaches the database at the **service name** `db`, not `localhost`.
+- The `MYSQL_*` variables only apply when `/var/lib/mysql` is empty. On an already initialised directory they do nothing.
+- Quote the passwords. Unquoted, a `#` starts a YAML comment and silently truncates the value.
+- The filename must be `docker-compose.yml`.

@@ -43,18 +43,13 @@ sudo git status --short
 
 | Command | Why |
 |:--|:--|
-| `sudo` on every git command | The repo belongs to root and you are natasha. Same situation as Day 22, where the fix was `safe.directory`. Either works: `sudo` runs git as the owner, `safe.directory` tells git to trust a path it does not own. |
-| `git branch -a` | Lists local and remote-tracking branches, so you see what is already there before adding to it. `-a` means all. |
-| `git checkout master` | A new branch starts wherever `HEAD` currently is. Landing on `master` first is what makes it branch **from master**, which is the actual requirement. |
-| `git checkout -b <name>` | Creates the branch and switches onto it in one step. |
-| `git branch -v` | Shows the commit each branch points at. Matching SHAs are the proof, rather than trusting that the command did the right thing. |
+| `git branch -a` | What already exists, local and remote-tracking. |
+| `git checkout master` | A new branch starts at `HEAD`. Landing on master is what makes it branch **from master**. |
+| `git branch -v` | Shows the commit each branch points at. Matching SHAs are the proof. |
 
 ## Notes
 
-- Creating a branch changes nothing in the working tree. `git status` stays clean, which is how requirement 2 is satisfied without thinking about it. A branch is only a movable pointer to a commit, which is why this is instant even on a huge repo.
-- Same result, fewer steps, from whatever branch you happen to be on:
-  - `sudo git checkout -b xfusioncorp_official master`
-  - `sudo git switch -c xfusioncorp_official master` (git 2.23+, `switch` only changes branches, while `checkout` also does file restores)
-  - `sudo git branch xfusioncorp_official master` creates it without switching to it
-- You are left standing on the new branch. Harmless here. `sudo git checkout master` puts the repo back the way you found it if you would rather leave it on master.
-- The branch is local to this repo. Publishing it would need `git push origin xfusioncorp_official`, which this task does not ask for.
+- Creating a branch touches no files, so `git status` stays clean. That is requirement 2 satisfied.
+- One step instead of two: `git checkout -b xfusioncorp_official master`, or `git switch -c ...` on git 2.23+.
+- The repo is root-owned, so every git command needs `sudo` (or `safe.directory`, Day 22).
+- The branch is local. Publishing it would need `git push origin xfusioncorp_official`.

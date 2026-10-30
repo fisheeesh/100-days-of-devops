@@ -93,20 +93,14 @@ curl -I http://stapp01:3003
 
 | Command | Why |
 |:--|:--|
-| `curl -m 5` | External triage. Identifies the broken host instantly without manually logging into all three nodes. |
-| `journalctl -xeu httpd.service` | Displays targeted systemd unit logs. Surfaces `(98)Address already in use`, pinpointing a port binding collision. |
-| `ss -tulnp \| grep 3003` | Lists listening TCP/UDP sockets with process names and PIDs (`-p`). Discovers `sendmail` holding port `3003`. |
-| `systemctl disable sendmail` | Stopping it frees the port now. Disabling stops it starting at the next boot and racing httpd for `3003`, where whichever binds first wins. |
-| `systemctl enable --now httpd` | Starts Apache immediately and registers it to boot targets in one command. |
+| `curl -m 5` from the jump host | Finds the broken host without logging into all three. |
+| `journalctl -xeu httpd.service` | Surfaces `(98)Address already in use`, which names the problem as a port conflict. |
+| `ss -tulnp \| grep 3003` | Shows which process holds the port. `-t` TCP, `-u` UDP, `-l` listening, `-n` numeric, `-p` PID. |
+| `systemctl disable sendmail` | Stopping frees the port now. Disabling stops it racing httpd at the next boot. |
 
 ## Notes
 
-- `Address already in use` (`EADDRINUSE`, errno 98) is a standard socket binding conflict. Always check listening sockets before assuming corrupted configurations or broken binaries.
-- Same failure as Day 12, different port: sendmail squatting on the port Apache wants. Worth recognising on sight.
-- `ss` flags breakdown:
-  - `-t`: TCP sockets
-  - `-u`: UDP sockets
-  - `-l`: Listening sockets only
-  - `-n`: Numeric ports (skips the service-name lookup in `/etc/services`; unlike `netstat`, `ss` does not reverse-resolve addresses unless you pass `-r`)
-  - `-p`: Associated process and PID (works unprivileged, but only shows your own processes; needs sudo to attribute sockets owned by other users)
-- If a rogue process is not managed by systemd, retrieve its PID using `sudo ss -tulnp` or `sudo lsof -i :3003` and terminate it directly with `sudo kill -15 <PID>` (or `sudo kill -9 <PID>` if unresponsive).
+- Same failure as Day 12, different port: sendmail squatting on Apache's port.
+- `ss -p` works unprivileged but only shows your own processes. Use sudo to attribute other users' sockets.
+- A successful `curl` only proves something answers on the port, not that it is httpd. Check `is-active` and the socket owner on the other two hosts as well.
+- For a process systemd does not manage: `sudo lsof -i :3003`, then `kill -15`, and `-9` only if it ignores that.
