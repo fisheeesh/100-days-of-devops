@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`████████████████████████░░░░░░░░░░░░░░░░`  **59 / 100**
+`████████████████████████░░░░░░░░░░░░░░░░`  **60 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -84,6 +84,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 57 | Print a greeting from Pod environment variables | [notes](./04-kubernetes/day-57-print-environment-variables.md) |
 | 58 | Deploy Grafana behind a NodePort | [notes](./04-kubernetes/day-58-deploy-grafana-on-kubernetes-cluster.md) |
 | 59 | Troubleshoot a broken deployment | [notes](./04-kubernetes/day-59-troubleshoot-deployment-issues.md) |
+| 60 | Serve Nginx from a persistent volume | [notes](./04-kubernetes/day-60-persistent-volumes-in-kubernetes.md) |
 
 ## Roadmap
 
@@ -153,7 +154,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (12/20)</summary>
+<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (13/20)</summary>
 
 - [x] **Day 48** [Deploy Pods in Kubernetes Cluster](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) `2026-10-19`
 - [x] **Day 49** [Deploy Applications with Kubernetes Deployments](./04-kubernetes/day-49-deploy-applications-with-kubernetes-deployments.md) `2026-10-20`
@@ -167,7 +168,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 57** [Print Environment Variables](./04-kubernetes/day-57-print-environment-variables.md) `2026-10-28`
 - [x] **Day 58** [Deploy Grafana on Kubernetes Cluster](./04-kubernetes/day-58-deploy-grafana-on-kubernetes-cluster.md) `2026-10-29`
 - [x] **Day 59** [Troubleshoot Deployment Issues in Kubernetes](./04-kubernetes/day-59-troubleshoot-deployment-issues.md) `2026-10-30`
-- [ ] **Day 60** Persistent Volumes in Kubernetes
+- [x] **Day 60** [Persistent Volumes in Kubernetes](./04-kubernetes/day-60-persistent-volumes-in-kubernetes.md) `2026-11-01`
 - [ ] **Day 61** Init Containers in Kubernetes
 - [ ] **Day 62** Manage Secrets in Kubernetes
 - [ ] **Day 63** Deploy Iron Gallery App on Kubernetes
