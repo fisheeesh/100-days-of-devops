@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`████████████████████████░░░░░░░░░░░░░░░░`  **61 / 100**
+`█████████████████████████░░░░░░░░░░░░░░░`  **62 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -86,6 +86,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 59 | Troubleshoot a broken deployment | [notes](./04-kubernetes/day-59-troubleshoot-deployment-issues.md) |
 | 60 | Serve Nginx from a persistent volume | [notes](./04-kubernetes/day-60-persistent-volumes-in-kubernetes.md) |
 | 61 | Prepare shared data with an init container | [notes](./04-kubernetes/day-61-init-containers-in-kubernetes.md) |
+| 62 | Mount a generic Secret in a Pod | [notes](./04-kubernetes/day-62-manage-secrets-in-kubernetes.md) |
 
 ## Roadmap
 
@@ -155,7 +156,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (14/20)</summary>
+<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (15/20)</summary>
 
 - [x] **Day 48** [Deploy Pods in Kubernetes Cluster](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) `2026-10-19`
 - [x] **Day 49** [Deploy Applications with Kubernetes Deployments](./04-kubernetes/day-49-deploy-applications-with-kubernetes-deployments.md) `2026-10-20`
@@ -171,7 +172,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 59** [Troubleshoot Deployment Issues in Kubernetes](./04-kubernetes/day-59-troubleshoot-deployment-issues.md) `2026-10-30`
 - [x] **Day 60** [Persistent Volumes in Kubernetes](./04-kubernetes/day-60-persistent-volumes-in-kubernetes.md) `2026-11-01`
 - [x] **Day 61** [Init Containers in Kubernetes](./04-kubernetes/day-61-init-containers-in-kubernetes.md) `2026-11-01`
-- [ ] **Day 62** Manage Secrets in Kubernetes
+- [x] **Day 62** [Manage Secrets in Kubernetes](./04-kubernetes/day-62-manage-secrets-in-kubernetes.md) `2026-11-02`
 - [ ] **Day 63** Deploy Iron Gallery App on Kubernetes
 - [ ] **Day 64** Fix Python App Deployed on Kubernetes Cluster
 - [ ] **Day 65** Deploy Redis Deployment on Kubernetes
