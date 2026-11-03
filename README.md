@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`█████████████████████████░░░░░░░░░░░░░░░`  **62 / 100**
+`█████████████████████████░░░░░░░░░░░░░░░`  **63 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -87,6 +87,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 60 | Serve Nginx from a persistent volume | [notes](./04-kubernetes/day-60-persistent-volumes-in-kubernetes.md) |
 | 61 | Prepare shared data with an init container | [notes](./04-kubernetes/day-61-init-containers-in-kubernetes.md) |
 | 62 | Mount a generic Secret in a Pod | [notes](./04-kubernetes/day-62-manage-secrets-in-kubernetes.md) |
+| 63 | Deploy Iron Gallery with its database | [notes](./04-kubernetes/day-63-deploy-iron-gallery-app-on-kubernetes.md) |
 
 ## Roadmap
 
@@ -156,7 +157,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (15/20)</summary>
+<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (16/20)</summary>
 
 - [x] **Day 48** [Deploy Pods in Kubernetes Cluster](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) `2026-10-19`
 - [x] **Day 49** [Deploy Applications with Kubernetes Deployments](./04-kubernetes/day-49-deploy-applications-with-kubernetes-deployments.md) `2026-10-20`
@@ -173,7 +174,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 60** [Persistent Volumes in Kubernetes](./04-kubernetes/day-60-persistent-volumes-in-kubernetes.md) `2026-11-01`
 - [x] **Day 61** [Init Containers in Kubernetes](./04-kubernetes/day-61-init-containers-in-kubernetes.md) `2026-11-01`
 - [x] **Day 62** [Manage Secrets in Kubernetes](./04-kubernetes/day-62-manage-secrets-in-kubernetes.md) `2026-11-02`
-- [ ] **Day 63** Deploy Iron Gallery App on Kubernetes
+- [x] **Day 63** [Deploy Iron Gallery App on Kubernetes](./04-kubernetes/day-63-deploy-iron-gallery-app-on-kubernetes.md) `2026-11-03`
 - [ ] **Day 64** Fix Python App Deployed on Kubernetes Cluster
 - [ ] **Day 65** Deploy Redis Deployment on Kubernetes
 - [ ] **Day 66** Deploy MySQL on Kubernetes
