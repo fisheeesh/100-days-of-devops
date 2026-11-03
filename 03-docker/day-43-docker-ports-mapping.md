@@ -2,12 +2,16 @@
 
 ## Question
 
-The Nautilus DevOps team plans to host an application in an nginx-based container. Complete the
-following task on `Application Server 2` in `Stratos Datacenter`:
+The Nautilus DevOps team is planning to host an application on a nginx-based container. There are
+number of tickets already been created for similar tasks. One of the tickets has been assigned to
+set up a nginx container on `Application Server 2` in `Stratos Datacenter`. Please perform the
+task as per details mentioned below:
 
-1. Pull the `nginx:alpine-perl` image.
-2. Create a container named `apps` from that image.
-3. Map host port `8084` to container port `80` and leave the container running.
+a. Pull `nginx:alpine-perl` docker image on `Application Server 2`.
+
+b. Create a container named `apps` using the image you pulled.
+
+c. Map host port `8084` to container port `80`. Please keep the container in running state.
 
 ## Solution
 

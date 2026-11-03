@@ -2,15 +2,15 @@
 
 ## Question
 
-The Nautilus DevOps team is beginning to use Kubernetes for application management. Create a pod
-with the following configuration:
+The Nautilus DevOps team is diving into Kubernetes for application management. One team member has
+a task to create a pod according to the details below:
 
-1. Name the pod `pod-httpd`.
-2. Use the exact image `httpd:latest`.
-3. Set label `app=httpd_app`.
-4. Name the container `httpd-container`.
+1. Create a pod named `pod-httpd` using the `httpd` image with the `latest` tag. Ensure to specify
+   the tag as `httpd:latest`.
+2. Set the `app` label to `httpd_app`, and name the container as `httpd-container`.
 
-> `kubectl` on the jump host is already configured to communicate with the Kubernetes cluster.
+> `Note`: The `kubectl` utility on the `jump-host` has been configured to work with the Kubernetes
+> cluster.
 
 ## Solution
 

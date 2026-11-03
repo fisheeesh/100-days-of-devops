@@ -2,18 +2,23 @@
 
 ## Question
 
-A Python application must be containerized and deployed on `App Server 3`. The application files,
-including `requirements.txt` and `server.py`, are already under `/python_app/src/`. Complete the
-following task:
+A python app needed to be Dockerized, and then it needs to be deployed on `App Server 3`. We have
+already copied a `requirements.txt` file (having the app dependencies) under `/python_app/src/`
+directory on `App Server 3`. Further complete this task as per details mentioned below:
 
-1. Create `/python_app/Dockerfile` that:
-   - Uses a Python base image.
-   - Installs dependencies from `requirements.txt`.
-   - Exposes port `3000`.
-   - Runs `server.py` with `CMD`.
-2. Build an image named `nautilus/python-app`.
-3. Create a container named `pythonapp_nautilus` and map host port `8094` to container port `3000`.
-4. Verify the application from `App Server 3` with `curl`.
+1. Create a `Dockerfile` under `/python_app` directory:
+   - Use any `python` image as the base image.
+   - Install the dependencies using `requirements.txt` file.
+   - Expose the port `3000`.
+   - Run the `server.py` script using `CMD`.
+2. Build an image named `nautilus/python-app` using this Dockerfile.
+3. Once image is built, create a container named `pythonapp_nautilus`:
+   - Map port `3000` of the container to the host port `8094`.
+4. Once deployed, you can test the app using `curl` command on `App Server 3`.
+
+```bash
+curl http://localhost:8094/
+```
 
 ## Solution
 

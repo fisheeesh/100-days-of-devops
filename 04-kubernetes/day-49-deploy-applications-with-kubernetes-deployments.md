@@ -2,13 +2,14 @@
 
 ## Question
 
-The Nautilus DevOps team is using Kubernetes for application management. Create a Deployment with
-the following configuration:
+The Nautilus DevOps team is delving into Kubernetes for app management. One team member needs to
+create a deployment following these details:
 
-1. Name the Deployment `httpd`.
-2. Deploy the `httpd` application using the exact image `httpd:latest`.
+Create a deployment named `httpd` to deploy the application `httpd` using the image `httpd:latest`
+(ensure to specify the tag)
 
-> `kubectl` on the jump host is already configured to communicate with the Kubernetes cluster.
+> `Note:` The `kubectl` utility on the `jump-host` has been configured to work with the Kubernetes
+> cluster.
 
 ## Solution
 

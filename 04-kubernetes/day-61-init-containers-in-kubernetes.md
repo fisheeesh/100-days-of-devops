@@ -2,20 +2,26 @@
 
 ## Question
 
-The Nautilus DevOps team needs to use an init container to prepare data before an application
-container starts. Create a Deployment with these requirements:
+There are some applications that need to be deployed on Kubernetes cluster and these apps have
+some pre-requisites where some configurations need to be changed before deploying the app
+container. Some of these changes cannot be made inside the images so the DevOps team has come up
+with a solution to use init containers to perform these tasks during deployment. Below is a sample
+scenario that the team is going to test first.
 
-1. Name the Deployment `ic-deploy-devops`, set replicas to `1`, and use label `app: ic-devops`
-   for the Deployment, selector, and Pod template.
-2. Create init container `ic-msg-devops` using `ubuntu:latest`. It must run
-   `/bin/bash -c 'echo Init Done - Welcome to xFusionCorp Industries > /ic/ecommerce'` and mount
-   volume `ic-volume-devops` at `/ic`.
-3. Create main container `ic-main-devops` using `ubuntu:latest`. It must run
-   `/bin/bash -c 'while true; do cat /ic/ecommerce; sleep 5; done'` and mount the same volume at
-   `/ic`.
-4. Create `ic-volume-devops` as an `emptyDir` volume.
+1. Create a `Deployment` named as `ic-deploy-devops`.
+2. Configure `spec` as replicas should be `1`, labels `app` should be `ic-devops`, template's
+   metadata lables `app` should be the same `ic-devops`.
+3. The `initContainers` should be named as `ic-msg-devops`, use image `ubuntu` with `latest` tag
+   and use command `'/bin/bash'`, `'-c'` and
+   `'echo Init Done - Welcome to xFusionCorp Industries > /ic/ecommerce'`. The volume mount should
+   be named as `ic-volume-devops` and mount path should be `/ic`.
+4. Main container should be named as `ic-main-devops`, use image `ubuntu` with `latest` tag and
+   use command `'/bin/bash'`, `'-c'` and `'while true; do cat /ic/ecommerce; sleep 5; done'`. The
+   volume mount should be named as `ic-volume-devops` and mount path should be `/ic`.
+5. Volume to be named as `ic-volume-devops` and it should be an emptyDir type.
 
-> `kubectl` on the jump host is already configured to communicate with the Kubernetes cluster.
+> `Note:` The `kubectl` utility on the `jump-host` has been configured to work with the Kubernetes
+> cluster.
 
 ## Solution
 

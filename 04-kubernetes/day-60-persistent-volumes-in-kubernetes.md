@@ -2,19 +2,25 @@
 
 ## Question
 
-The Nautilus DevOps team is preparing a Kubernetes template to deploy a web application that stores
-its application code on persistent storage. Complete the following requirements:
+The Nautilus DevOps team is working on a Kubernetes template to deploy a web application on the
+cluster. There are some requirements to create/use persistent volumes to store the application
+code, and the template needs to be designed accordingly. Please find more details below:
 
-1. Create a PersistentVolume named `pv-nautilus` with storage class `manual`, capacity `4Gi`,
-   access mode `ReadWriteOnce`, and a `hostPath` volume at `/mnt/dba`.
-2. Create a PersistentVolumeClaim named `pvc-nautilus` with storage class `manual`, a `2Gi`
-   storage request, and access mode `ReadWriteOnce`.
-3. Create a Pod named `pod-nautilus` with a container named `container-nautilus` using
-   `nginx:latest`. Mount the claim `pvc-nautilus` at the Nginx document root.
-4. Create a NodePort Service named `web-nautilus` that exposes the web server on node port
-   `30008`.
+1. Create a `PersistentVolume` named as `pv-datacenter`. Configure the `spec` as storage class
+   should be `manual`, set capacity to `4Gi`, set access mode to `ReadWriteOnce`, volume type
+   should be `hostPath` and set path to `/mnt/dba` (this directory is already created, you might
+   not be able to access it directly, so you need not to worry about it).
+2. Create a `PersistentVolumeClaim` named as `pvc-datacenter`. Configure the `spec` as storage
+   class should be `manual`, request `2Gi` of the storage, set access mode to `ReadWriteOnce`.
+3. Create a `pod` named as `pod-datacenter`, mount the persistent volume you created with claim
+   name `pvc-datacenter` at document root of the web server, the container within the pod should
+   be named as `container-datacenter` using image `nginx` with `latest` tag only (remember to
+   mention the tag i.e `nginx:latest`).
+4. Create a node port type service named `web-datacenter` using node port `30008` to expose the
+   web server running within the pod.
 
-> `kubectl` on the jump host is already configured to communicate with the Kubernetes cluster.
+> `Note:` The `kubectl` utility on the `jump-host` has been configured to work with the Kubernetes
+> cluster.
 
 ## Solution
 

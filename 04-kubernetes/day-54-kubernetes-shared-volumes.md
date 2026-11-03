@@ -2,17 +2,29 @@
 
 ## Question
 
-Create a Pod that shares temporary data between two containers:
+We are working on an application that will be deployed on multiple containers within a pod on
+Kubernetes cluster. There is a requirement to share a volume among the containers to save some
+temporary data. The Nautilus DevOps team is developing a similar template to replicate the
+scenario. Below you can find more details about it.
 
-1. Name the Pod `volume-share-devops`.
-2. Use two `debian:latest` containers named `volume-container-devops-1` and
-   `volume-container-devops-2`; keep both running with a sleep command.
-3. Create an `emptyDir` volume named `volume-share`.
-4. Mount it at `/tmp/official` in the first container and `/tmp/games` in the second.
-5. Create `official.txt` containing `Welcome to xFusionCorp Industries` through the first mount,
-   then confirm it is visible through the second mount.
+1. Create a pod named `volume-share-devops`.
+2. For the first container, use image `debian` with `latest` tag only and remember to mention the
+   tag i.e `debian:latest`, container should be named as `volume-container-devops-1`, and run a
+   `sleep` command for it so that it remains in running state. Volume `volume-share` should be
+   mounted at path `/tmp/official`.
+3. For the second container, use image `debian` with the `latest` tag only and remember to mention
+   the tag i.e `debian:latest`, container should be named as `volume-container-devops-2`, and
+   again run a `sleep` command for it so that it remains in running state. Volume `volume-share`
+   should be mounted at path `/tmp/games`.
+4. Volume name should be `volume-share` of type `emptyDir`.
+5. After creating the pod, exec into the first container i.e `volume-container-devops-1`, and just
+   for testing create a file `official.txt` with the content `Welcome to xFusionCorp Industries`
+   under the mounted path of first container i.e `/tmp/official`.
+6. The file `official.txt` should be present under the mounted path `/tmp/games` on the second
+   container `volume-container-devops-2` as well, since they are using a shared volume.
 
-> `kubectl` on the jump host is already configured to communicate with the Kubernetes cluster.
+> `Note:` The `kubectl` utility on the `jump-host` has been configured to work with the Kubernetes
+> cluster.
 
 ## Solution
 

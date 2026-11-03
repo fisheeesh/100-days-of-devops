@@ -2,19 +2,20 @@
 
 ## Question
 
-The Nautilus DevOps team is planning to set up a Grafana tool to collect and analyze analytics
-from some applications. They are planning to deploy it on a Kubernetes cluster. Below you can find
+The Nautilus DevOps teams is planning to set up a Grafana tool to collect and analyze analytics
+from some applications. They are planning to deploy it on Kubernetes cluster. Below you can find
 more details.
 
-1. Create a deployment named `grafana-deployment-xfusion` using any grafana image for the Grafana
-   app. Set other parameters as per your choice.
-2. Create a `NodePort` type service with nodePort `32000` to expose the app.
+1.) Create a deployment named `grafana-deployment-xfusion` using any grafana image for Grafana
+app. Set other parameters as per your choice.
 
-You do not need to make any configuration changes inside the Grafana app once deployed; just make
-sure you can access the Grafana login page.
+2.) Create `NodePort` type service with nodePort `32000` to expose the app.
 
-> **Note:** The `kubectl` utility on the `jump-host` has been configured to work with the
-> Kubernetes cluster.
+`You do not need to make any configuration changes inside the Grafana app once deployed; just make
+sure you can access the Grafana login page.`
+
+> `Note:` The `kubectl` utility on the `jump-host` has been configured to work with the Kubernetes
+> cluster.
 
 ## Solution
 

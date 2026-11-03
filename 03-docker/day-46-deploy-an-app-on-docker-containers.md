@@ -2,29 +2,45 @@
 
 ## Question
 
-The Nautilus application development team wants to test a complete containerized application
-stack. On `App Server 2` in `Stratos Datacenter`, create the exact file
-`/opt/finance/docker-compose.yml` with two services:
+The Nautilus Application development team recently finished development of one of the apps that
+they want to deploy on a containerized platform. The Nautilus Application development and DevOps
+teams met to discuss some of the basic pre-requisites and requirements to complete the deployment.
+The team wants to test the deployment on one of the app servers before going live and set up a
+complete containerized stack using a docker compose file. Below are the details of the task:
 
-### Web service
+1. On `App Server 2` in `Stratos Datacenter` create a docker compose file
+   `/opt/finance/docker-compose.yml` (should be named exactly).
+2. The compose should deploy two services (web and DB), and each service should deploy a container
+   as per details below:
 
-1. Name the container `php_blog`.
-2. Use the `php` image with an Apache tag.
-3. Map host port `6000` to container port `80`.
-4. Bind mount host directory `/var/www/html` at `/var/www/html` in the container.
+`For web service:`
 
-### Database service
+a. Container name must be `php_blog`.
 
-1. Name the container `mysql_blog`.
-2. Use a `mariadb` image, preferably `latest`.
-3. Map host port `3306` to container port `3306`.
-4. Bind mount host directory `/var/lib/mysql` at `/var/lib/mysql` in the container.
-5. Create database `database_blog` and configure a non-root user with a complex password.
+b. Use image `php` with any `apache` tag.
 
-After starting the stack, the application must be reachable on port `6000`.
+c. Map `php_blog` container's port `80` with host port `6000`.
 
-> When **FINISH** is clicked, all existing containers are destroyed and the stack is deployed
-> again from this Compose file.
+d. Map `php_blog` container's `/var/www/html` volume with host volume `/var/www/html`.
+
+`For DB service:`
+
+a. Container name must be `mysql_blog`.
+
+b. Use image `mariadb` with any tag (preferably `latest`).
+
+c. Map `mysql_blog` container's port `3306` with host port `3306`.
+
+d. Map `mysql_blog` container's `/var/lib/mysql` volume with host volume `/var/lib/mysql`.
+
+e. Set MYSQL_DATABASE=`database_blog` and use any custom user ( except root ) with some complex
+password for DB connections.
+
+3. After running docker-compose up you can access the app with curl command
+   `curl <server-ip or hostname>:6000/`
+
+> `Note:` Once you click on `FINISH` button, all currently running/stopped containers will be
+> destroyed and stack will be deployed again using your compose file.
 
 ## Solution
 

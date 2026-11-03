@@ -8,8 +8,8 @@ to the previous version.
 
 There exists a deployment named `nginx-deployment`; initiate a rollback to the previous revision.
 
-> **Note:** The `kubectl` utility on the `jump-host` has been configured to work with the
-> Kubernetes cluster.
+> `Note:` The `kubectl` utility on the `jump-host` has been configured to work with the Kubernetes
+> cluster.
 
 ## Solution
 

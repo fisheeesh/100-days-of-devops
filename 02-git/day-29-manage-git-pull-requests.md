@@ -2,25 +2,66 @@
 
 ## Question
 
-`Max` wants to push some new changes to one of the repositories, but we don't want people pushing
-directly to `master`, since that is the final version of the code. It should only ever hold
-content that has been reviewed and approved. So let's do it the right way:
+`Max` want to push some new changes to one of the repositories but we don't want people to push
+directly to `master` branch, since that would be the final version of the code. It should always
+only have content that has been reviewed and approved. We cannot just allow everyone to directly
+push to the master branch. So, let's do it the right way as discussed below:
 
-1. SSH into `storage server` as user `max` / `Max_pass123`. An already cloned repo sits in max's
-   home. Max has written his story about The Fox and Grapes and pushed it to the Gitea branch
-   `story/fox-and-grapes`.
-2. Check the contents of the cloned repo. Confirm you can see the story and the commit history
-   with `git log`, and validate the author info, commit message and so on.
-3. His story is not in `master` yet. Open a Pull Request to merge `story/fox-and-grapes` into
-   `master`, using the Gitea UI (login `max` / `Max_pass123`).
-   - PR title: `Added fox-and-grapes story`
-   - Pull from (source): `story/fox-and-grapes`
-   - Merge into (destination): `master`
-4. Add `tom` as a reviewer on the PR.
-5. Log out, log in as `tom` / `Tom_pass123`, then review, approve and merge the PR.
+SSH into `storage server` using user `max`, password `Max_pass123`. There you can find an already
+cloned repo under `Max` user's home.
 
-> **Note:** For scenarios requiring web UI changes, take screenshots so you can share them for
-> review in case the task is marked incomplete.
+Max has written his story about The Fox and Grapes
+
+Max has already pushed his story to remote git repository hosted on `Gitea` branch
+`story/fox-and-grapes`
+
+Check the contents of the cloned repository. Confirm that you can see Sarah's story and history of
+commits by running `git log` and validate author info, commit message etc.
+
+Max has pushed his story, but his story is still not in the `master` branch. Let's create a Pull
+Request(PR) to merge Max's `story/fox-and-grapes` branch into the `master` branch
+
+Click on the `Gitea UI` button on the top bar. You should be able to access the `Gitea` page.
+
+UI login info:
+
+- Username: `max`
+- Password: `Max_pass123`
+
+PR title : `Added fox-and-grapes story`
+
+PR pull from branch: `story/fox-and-grapes` (source)
+
+PR merge into branch: `master` (destination)
+
+Before we can add our story to the `master` branch, it has to be reviewed. So, let's ask `tom` to
+review our PR by assigning him as a reviewer
+
+Add tom as reviewer through the Git Portal UI
+
+- Go to the newly created PR
+- Click on Reviewers on the right
+- Add tom as a reviewer to the PR
+
+Now let's review and approve the PR as user `Tom`
+
+Login to the portal with the user `tom`
+
+Logout of `Git Portal UI` if logged in as `max`
+
+UI login info:
+
+- Username: `tom`
+- Password: `Tom_pass123`
+
+PR title : `Added fox-and-grapes story`
+
+Review and merge it.
+
+> `Note:` For these kind of scenarios requiring changes to be done in a web UI, please take
+> screenshots so that you can share it with us for review in case your task is marked incomplete.
+> You may also consider using a screen recording software such as loom.com to record and share
+> your work.
 
 ## Solution
 

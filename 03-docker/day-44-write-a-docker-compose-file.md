@@ -2,14 +2,20 @@
 
 ## Question
 
-The Nautilus application development team needs to host existing static website content with an
-`httpd` container. Complete the following task on `App Server 2` in `Stratos DC`:
+The Nautilus application development team shared static website content that needs to be hosted on
+the `httpd` web server using a containerised platform. The team has shared details with the DevOps
+team, and we need to set up an environment according to those guidelines. Below are the details:
 
-1. Create `/opt/docker/docker-compose.yml` using that exact filename.
-2. Use the `httpd:latest` image and name the container `httpd`. The service name can be anything.
-3. Map host port `8088` to container port `80`.
-4. Bind mount the existing host directory `/opt/sysops` at
-   `/usr/local/apache2/htdocs` inside the container. Do not modify the existing content.
+a. On `App Server 2` in `Stratos DC` create a container named `httpd` using a docker compose file
+`/opt/docker/docker-compose.yml` (please use the exact name for file).
+
+b. Use `httpd` (preferably `latest` tag) image for container and make sure container is named as
+`httpd`; you can use any name for service.
+
+c. Map `80` number port of container with port `8088` of docker host.
+
+d. Map container's `/usr/local/apache2/htdocs` volume with `/opt/sysops` volume of docker host
+which is already there. (please do not modify any data within these locations).
 
 ## Solution
 

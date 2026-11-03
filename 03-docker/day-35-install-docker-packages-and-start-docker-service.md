@@ -2,11 +2,11 @@
 
 ## Question
 
-The Nautilus DevOps team aims to containerize various applications following a recent meeting
-with the application development team. They intend to conduct testing with the following steps:
+The Nautilus DevOps team aims to containerize various applications following a recent meeting with
+the application development team. They intend to conduct testing with the following steps:
 
-1. Install `docker-ce` and Docker Compose packages on `App Server 2`.
-2. Start the `docker` service.
+1. Install `docker-ce` and `docker compose` packages on `App Server 2`.
+2. Initiate the `docker` service.
 
 ## Solution
 

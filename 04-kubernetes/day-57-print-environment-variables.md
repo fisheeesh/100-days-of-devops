@@ -2,15 +2,26 @@
 
 ## Question
 
-Create a one-time Pod that prints a greeting assembled from environment variables:
+The Nautilus DevOps team is working on to setup some pre-requisites for an application that will
+send the greetings to different users. There is a sample deployment, that needs to be tested.
+Below is a scenario which needs to be configured on Kubernetes cluster. Please find below more
+details about it.
 
-1. Name the Pod `print-envars-greeting` and its container `print-env-container`.
-2. Use the `bash` image.
-3. Set `GREETING=Welcome to`, `COMPANY=xFusionCorp`, and `GROUP=Industries`.
-4. Use the exact command `['/bin/sh', '-c', 'echo "$(GREETING) $(COMPANY) $(GROUP)"']`.
-5. Set the Pod restart policy to `Never` and read the output through Pod logs.
+1. Create a `pod` named `print-envars-greeting`.
+2. Configure spec as, the container name should be `print-env-container` and use `bash` image.
+3. Create three environment variables:
 
-> `kubectl` on the jump host is already configured to communicate with the Kubernetes cluster.
+   a. `GREETING` and its value should be `Welcome to`
+
+   b. `COMPANY` and its value should be `xFusionCorp`
+
+   c. `GROUP` and its value should be `Industries`
+4. Use command `["/bin/sh", "-c", 'echo "$(GREETING) $(COMPANY) $(GROUP)"']` (please use this exact
+   command), also set its `restartPolicy` policy to `Never` to avoid crash loop back.
+5. You can check the output using `kubectl logs -f print-envars-greeting` command.
+
+> `Note:` The `kubectl` utility on the `jump-host` has been configured to work with the Kubernetes
+> cluster.
 
 ## Solution
 

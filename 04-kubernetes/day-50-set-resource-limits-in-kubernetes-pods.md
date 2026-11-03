@@ -2,15 +2,19 @@
 
 ## Question
 
-The Nautilus DevOps team needs to limit resource use for an HTTPD pod. Create a pod with the
-following configuration:
+The Nautilus DevOps team has noticed performance issues in some Kubernetes-hosted applications due
+to resource constraints. To address this, they plan to set limits on resource utilization. Here
+are the details:
 
-1. Name the pod `httpd-pod` and its container `httpd-container`.
-2. Use the exact image `httpd:latest`.
-3. Set requests to `100m` CPU and `15Mi` memory.
-4. Set limits to `100m` CPU and `20Mi` memory.
+Create a pod name `httpd-pod` with a container name `httpd-container`. Use the `httpd` image with
+the `latest` tag (specify as `httpd:latest`). Set the following resource limits:
 
-> `kubectl` on the jump host is already configured to communicate with the Kubernetes cluster.
+Requests: Memory: `15Mi`, CPPU: `100m`
+
+Limits: Memory: `20Mi`, CPU: `100m`
+
+> `Notes:` The `kubectl` utility on `jump_host` is configured to operate with the Kubernetes
+> cluster.
 
 ## Solution
 

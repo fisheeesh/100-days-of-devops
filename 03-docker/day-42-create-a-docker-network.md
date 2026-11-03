@@ -2,12 +2,15 @@
 
 ## Question
 
-The Nautilus DevOps team needs Docker environments for several applications. Complete the
-following network setup on `App Server 2` in `Stratos DC`:
+The Nautilus DevOps team needs to set up several docker environments for different applications.
+One of the team members has been assigned a ticket where he has been asked to create some docker
+networks to be used later. Complete the task based on the following ticket description:
 
-1. Create a Docker network named `blog`.
-2. Use the `macvlan` driver.
-3. Configure subnet `192.168.0.0/24` and IP range `192.168.0.0/24`.
+a. Create a docker network named as `blog` on App Server `2` in `Stratos DC`.
+
+b. Configure it to use `macvlan` drivers.
+
+c. Set it to use subnet `192.168.0.0/24` and iprange `192.168.0.0/24`.
 
 ## Solution
 

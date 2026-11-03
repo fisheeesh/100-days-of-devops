@@ -11,8 +11,8 @@ is named `nginx-deployment`.
 
 Ensure all pods are operational post-update.
 
-> **Note:** The `kubectl` utility on the `jump-host` has been configured to work with the
-> Kubernetes cluster.
+> `Note:` The `kubectl` utility on the `jump-host` has been configured to work with the Kubernetes
+> cluster.
 
 ## Solution
 
