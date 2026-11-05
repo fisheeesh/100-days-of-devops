@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██████████████████████████░░░░░░░░░░░░░░`  **64 / 100**
+`██████████████████████████░░░░░░░░░░░░░░`  **65 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -89,6 +89,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 62 | Mount a generic Secret in a Pod | [notes](./04-kubernetes/day-62-manage-secrets-in-kubernetes.md) |
 | 63 | Deploy Iron Gallery with its database | [notes](./04-kubernetes/day-63-deploy-iron-gallery-app-on-kubernetes.md) |
 | 64 | Fix a broken python app deployment | [notes](./04-kubernetes/day-64-fix-python-app-deployed-on-kubernetes.md) |
+| 65 | Redis deployment with a ConfigMap volume | [notes](./04-kubernetes/day-65-deploy-redis-deployment-on-kubernetes.md) |
 
 ## Roadmap
 
@@ -158,7 +159,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (17/20)</summary>
+<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (18/20)</summary>
 
 - [x] **Day 48** [Deploy Pods in Kubernetes Cluster](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) `2026-10-19`
 - [x] **Day 49** [Deploy Applications with Kubernetes Deployments](./04-kubernetes/day-49-deploy-applications-with-kubernetes-deployments.md) `2026-10-20`
@@ -177,7 +178,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 62** [Manage Secrets in Kubernetes](./04-kubernetes/day-62-manage-secrets-in-kubernetes.md) `2026-11-02`
 - [x] **Day 63** [Deploy Iron Gallery App on Kubernetes](./04-kubernetes/day-63-deploy-iron-gallery-app-on-kubernetes.md) `2026-11-03`
 - [x] **Day 64** [Fix Python App Deployed on Kubernetes Cluster](./04-kubernetes/day-64-fix-python-app-deployed-on-kubernetes.md) `2026-11-04`
-- [ ] **Day 65** Deploy Redis Deployment on Kubernetes
+- [x] **Day 65** [Deploy Redis Deployment on Kubernetes](./04-kubernetes/day-65-deploy-redis-deployment-on-kubernetes.md) `2026-11-05`
 - [ ] **Day 66** Deploy MySQL on Kubernetes
 - [ ] **Day 67** Deploy Guest Book App on Kubernetes
 
