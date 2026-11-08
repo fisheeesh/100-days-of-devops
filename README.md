@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██████████████████████████░░░░░░░░░░░░░░`  **66 / 100**
+`███████████████████████████░░░░░░░░░░░░░`  **67 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -91,6 +91,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 64 | Fix a broken python app deployment | [notes](./04-kubernetes/day-64-fix-python-app-deployed-on-kubernetes.md) |
 | 65 | Redis deployment with a ConfigMap volume | [notes](./04-kubernetes/day-65-deploy-redis-deployment-on-kubernetes.md) |
 | 66 | MySQL with PV, PVC and secrets | [notes](./04-kubernetes/day-66-deploy-mysql-on-kubernetes.md) |
+| 67 | Guestbook app: redis tiers and frontend | [notes](./04-kubernetes/day-67-deploy-guest-book-app-on-kubernetes.md) |
 
 ## Roadmap
 
@@ -160,7 +161,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (19/20)</summary>
+<summary><b>Kubernetes</b> &nbsp; days 48 to 67 &nbsp; (20/20)</summary>
 
 - [x] **Day 48** [Deploy Pods in Kubernetes Cluster](./04-kubernetes/day-48-deploy-pods-in-kubernetes-cluster.md) `2026-10-19`
 - [x] **Day 49** [Deploy Applications with Kubernetes Deployments](./04-kubernetes/day-49-deploy-applications-with-kubernetes-deployments.md) `2026-10-20`
@@ -181,7 +182,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 64** [Fix Python App Deployed on Kubernetes Cluster](./04-kubernetes/day-64-fix-python-app-deployed-on-kubernetes.md) `2026-11-04`
 - [x] **Day 65** [Deploy Redis Deployment on Kubernetes](./04-kubernetes/day-65-deploy-redis-deployment-on-kubernetes.md) `2026-11-05`
 - [x] **Day 66** [Deploy MySQL on Kubernetes](./04-kubernetes/day-66-deploy-mysql-on-kubernetes.md) `2026-11-08`
-- [ ] **Day 67** Deploy Guest Book App on Kubernetes
+- [x] **Day 67** [Deploy Guest Book App on Kubernetes](./04-kubernetes/day-67-deploy-guest-book-app-on-kubernetes.md) `2026-11-09`
 
 </details>
 
