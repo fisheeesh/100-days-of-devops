@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`███████████████████████████░░░░░░░░░░░░░`  **68 / 100**
+`████████████████████████████░░░░░░░░░░░░`  **69 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -93,6 +93,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 66 | MySQL with PV, PVC and secrets | [notes](./04-kubernetes/day-66-deploy-mysql-on-kubernetes.md) |
 | 67 | Guestbook app: redis tiers and frontend | [notes](./04-kubernetes/day-67-deploy-guest-book-app-on-kubernetes.md) |
 | 68 | Install Jenkins and create the admin user | [notes](./05-jenkins/day-68-set-up-jenkins-server.md) |
+| 69 | Install the Git and GitLab plugins | [notes](./05-jenkins/day-69-install-jenkins-plugins.md) |
 
 ## Roadmap
 
@@ -188,10 +189,10 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Jenkins</b> &nbsp; days 68 to 81 &nbsp; (1/14)</summary>
+<summary><b>Jenkins</b> &nbsp; days 68 to 81 &nbsp; (2/14)</summary>
 
 - [x] **Day 68** [Set Up Jenkins Server](./05-jenkins/day-68-set-up-jenkins-server.md) `2026-11-09`
-- [ ] **Day 69** Install Jenkins Plugins
+- [x] **Day 69** [Install Jenkins Plugins](./05-jenkins/day-69-install-jenkins-plugins.md) `2026-11-10`
 - [ ] **Day 70** Configure Jenkins User Access
 - [ ] **Day 71** Configure Jenkins Job for Package Installation
 - [ ] **Day 72** Jenkins Parameterized Builds
