@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`████████████████████████████░░░░░░░░░░░░`  **71 / 100**
+`█████████████████████████████░░░░░░░░░░░`  **72 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -96,6 +96,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 69 | Install the Git and GitLab plugins | [notes](./05-jenkins/day-69-install-jenkins-plugins.md) |
 | 70 | Matrix authorization and per-job access | [notes](./05-jenkins/day-70-configure-jenkins-user-access.md) |
 | 71 | Parameterised job installing a package over SSH | [notes](./05-jenkins/day-71-configure-jenkins-job-for-package-installation.md) |
+| 72 | String and choice parameters in a build | [notes](./05-jenkins/day-72-jenkins-parameterized-builds.md) |
 
 ## Roadmap
 
@@ -191,13 +192,13 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Jenkins</b> &nbsp; days 68 to 81 &nbsp; (4/14)</summary>
+<summary><b>Jenkins</b> &nbsp; days 68 to 81 &nbsp; (5/14)</summary>
 
 - [x] **Day 68** [Set Up Jenkins Server](./05-jenkins/day-68-set-up-jenkins-server.md) `2026-11-09`
 - [x] **Day 69** [Install Jenkins Plugins](./05-jenkins/day-69-install-jenkins-plugins.md) `2026-11-10`
 - [x] **Day 70** [Configure Jenkins User Access](./05-jenkins/day-70-configure-jenkins-user-access.md) `2026-11-11`
 - [x] **Day 71** [Configure Jenkins Job for Package Installation](./05-jenkins/day-71-configure-jenkins-job-for-package-installation.md) `2026-11-12`
-- [ ] **Day 72** Jenkins Parameterized Builds
+- [x] **Day 72** [Jenkins Parameterized Builds](./05-jenkins/day-72-jenkins-parameterized-builds.md) `2026-11-13`
 - [ ] **Day 73** Jenkins Scheduled Jobs
 - [ ] **Day 74** Jenkins Database Backup Job
 - [ ] **Day 75** Jenkins Slave Nodes
