@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██████████████████████████████░░░░░░░░░░`  **74 / 100**
+`██████████████████████████████░░░░░░░░░░`  **75 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -99,6 +99,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 72 | String and choice parameters in a build | [notes](./05-jenkins/day-72-jenkins-parameterized-builds.md) |
 | 73 | Scheduled job copying Apache logs over SSH | [notes](./05-jenkins/day-73-jenkins-scheduled-jobs.md) |
 | 74 | Scheduled database dump copied to storage | [notes](./05-jenkins/day-74-jenkins-database-backup-job.md) |
+| 75 | Add app servers as SSH build agents | [notes](./05-jenkins/day-75-jenkins-slave-nodes.md) |
 
 ## Roadmap
 
@@ -194,7 +195,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Jenkins</b> &nbsp; days 68 to 81 &nbsp; (7/14)</summary>
+<summary><b>Jenkins</b> &nbsp; days 68 to 81 &nbsp; (8/14)</summary>
 
 - [x] **Day 68** [Set Up Jenkins Server](./05-jenkins/day-68-set-up-jenkins-server.md) `2026-11-09`
 - [x] **Day 69** [Install Jenkins Plugins](./05-jenkins/day-69-install-jenkins-plugins.md) `2026-11-10`
@@ -203,7 +204,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 72** [Jenkins Parameterized Builds](./05-jenkins/day-72-jenkins-parameterized-builds.md) `2026-11-13`
 - [x] **Day 73** [Jenkins Scheduled Jobs](./05-jenkins/day-73-jenkins-scheduled-jobs.md) `2026-11-15`
 - [x] **Day 74** [Jenkins Database Backup Job](./05-jenkins/day-74-jenkins-database-backup-job.md) `2026-11-16`
-- [ ] **Day 75** Jenkins Slave Nodes
+- [x] **Day 75** [Jenkins Slave Nodes](./05-jenkins/day-75-jenkins-slave-nodes.md) `2026-11-16`
 - [ ] **Day 76** Jenkins Project Security
 - [ ] **Day 77** Jenkins Deploy Pipeline
 - [ ] **Day 78** Jenkins Conditional Pipeline
