@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`████████████████████████████████░░░░░░░░`  **79 / 100**
+`████████████████████████████████░░░░░░░░`  **80 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -104,6 +104,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 77 | Pipeline job deploying to an inbound agent | [notes](./05-jenkins/day-77-jenkins-deploy-pipeline.md) |
 | 78 | Conditional pipeline on a BRANCH parameter | [notes](./05-jenkins/day-78-jenkins-conditional-pipeline.md) |
 | 79 | Auto-deploy on push with Poll SCM | [notes](./05-jenkins/day-79-jenkins-deployment-job.md) |
+| 80 | Upstream and downstream chained jobs | [notes](./05-jenkins/day-80-jenkins-chained-builds.md) |
 
 ## Roadmap
 
@@ -199,7 +200,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Jenkins</b> &nbsp; days 68 to 81 &nbsp; (12/14)</summary>
+<summary><b>Jenkins</b> &nbsp; days 68 to 81 &nbsp; (13/14)</summary>
 
 - [x] **Day 68** [Set Up Jenkins Server](./05-jenkins/day-68-set-up-jenkins-server.md) `2026-11-09`
 - [x] **Day 69** [Install Jenkins Plugins](./05-jenkins/day-69-install-jenkins-plugins.md) `2026-11-10`
@@ -213,7 +214,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 - [x] **Day 77** [Jenkins Deploy Pipeline](./05-jenkins/day-77-jenkins-deploy-pipeline.md) `2026-11-18`
 - [x] **Day 78** [Jenkins Conditional Pipeline](./05-jenkins/day-78-jenkins-conditional-pipeline.md) `2026-11-19`
 - [x] **Day 79** [Jenkins Deployment Job](./05-jenkins/day-79-jenkins-deployment-job.md) `2026-11-21`
-- [ ] **Day 80** Jenkins Chained Builds
+- [x] **Day 80** [Jenkins Chained Builds](./05-jenkins/day-80-jenkins-chained-builds.md) `2026-11-22`
 - [ ] **Day 81** Jenkins Multistage Pipeline
 
 </details>
