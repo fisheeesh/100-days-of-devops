@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`████████████████████████████████░░░░░░░░`  **81 / 100**
+`█████████████████████████████████░░░░░░░`  **82 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -106,6 +106,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 79 | Auto-deploy on push with Poll SCM | [notes](./05-jenkins/day-79-jenkins-deployment-job.md) |
 | 80 | Upstream and downstream chained jobs | [notes](./05-jenkins/day-80-jenkins-chained-builds.md) |
 | 81 | Two-stage pipeline with a deploy test | [notes](./05-jenkins/day-81-jenkins-multistage-pipeline.md) |
+| 82 | Build an ini inventory for one app server | [notes](./06-ansible/day-82-create-ansible-inventory.md) |
 
 ## Roadmap
 
@@ -221,9 +222,9 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Ansible</b> &nbsp; days 82 to 93 &nbsp; (0/12)</summary>
+<summary><b>Ansible</b> &nbsp; days 82 to 93 &nbsp; (1/12)</summary>
 
-- [ ] **Day 82** Create Ansible Inventory for App Server Testing
+- [x] **Day 82** [Create Ansible Inventory for App Server Testing](./06-ansible/day-82-create-ansible-inventory.md) `2026-11-23`
 - [ ] **Day 83** Troubleshoot and Create Ansible Playbook
 - [ ] **Day 84** Copy Data to App Servers using Ansible
 - [ ] **Day 85** Create Files on App Servers using Ansible
