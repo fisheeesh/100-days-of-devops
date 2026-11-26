@@ -21,7 +21,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 
 ## Progress
 
-`██████████████████████████████████░░░░░░`  **84 / 100**
+`██████████████████████████████████░░░░░░`  **85 / 100**
 
 | Day | Topic | Notes |
 |:---:|:--|:--|
@@ -109,6 +109,7 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 | 82 | Build an ini inventory for one app server | [notes](./06-ansible/day-82-create-ansible-inventory.md) |
 | 83 | Fix an inventory and write a first playbook | [notes](./06-ansible/day-83-troubleshoot-and-create-ansible-playbook.md) |
 | 84 | Copy a file to all app servers | [notes](./06-ansible/day-84-copy-data-to-app-servers.md) |
+| 85 | Create a file with per-host ownership | [notes](./06-ansible/day-85-create-files-on-app-servers.md) |
 
 ## Roadmap
 
@@ -224,12 +225,12 @@ Reference: [Nautilus infrastructure details](https://kodekloudhub.github.io/kode
 </details>
 
 <details>
-<summary><b>Ansible</b> &nbsp; days 82 to 93 &nbsp; (3/12)</summary>
+<summary><b>Ansible</b> &nbsp; days 82 to 93 &nbsp; (4/12)</summary>
 
 - [x] **Day 82** [Create Ansible Inventory for App Server Testing](./06-ansible/day-82-create-ansible-inventory.md) `2026-11-23`
 - [x] **Day 83** [Troubleshoot and Create Ansible Playbook](./06-ansible/day-83-troubleshoot-and-create-ansible-playbook.md) `2026-11-24`
 - [x] **Day 84** [Copy Data to App Servers using Ansible](./06-ansible/day-84-copy-data-to-app-servers.md) `2026-11-25`
-- [ ] **Day 85** Create Files on App Servers using Ansible
+- [x] **Day 85** [Create Files on App Servers using Ansible](./06-ansible/day-85-create-files-on-app-servers.md) `2026-11-26`
 - [ ] **Day 86** Ansible Ping Module Usage
 - [ ] **Day 87** Ansible Install Package
 - [ ] **Day 88** Ansible Blockinfile Module
